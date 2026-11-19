@@ -15,6 +15,14 @@ public record GeoPoint(double lat, double lon) {
 		return 2 * earthRadius * Math.asin(Math.sqrt(a));
 	}
 
+	/** Пеший маршрут через точки в Яндекс Картах (rtext — «широта,долгота» через «~», rtt=pd — пешком). */
+	public static String yandexWalkingRouteUrl(java.util.List<GeoPoint> points) {
+		String route = points.stream()
+				.map(point -> String.format(Locale.ROOT, "%.6f,%.6f", point.lat, point.lon))
+				.collect(java.util.stream.Collectors.joining("~"));
+		return "https://yandex.ru/maps/?rtext=" + route + "&rtt=pd";
+	}
+
 	/** Ссылка на точку в Яндекс Картах. */
 	public String yandexMapsUrl() {
 		return String.format(Locale.ROOT, "https://yandex.ru/maps/?pt=%.6f,%.6f&z=16&l=map", lon, lat);
