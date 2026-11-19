@@ -31,13 +31,15 @@ public class CityGuideService {
 	private final SightsService sights;
 	private final RestaurantsService restaurants;
 	private final CityDirectory directory;
+	private final NearbyPlacesService nearby;
 
 	public CityGuideService(CityLocator locator, SightsService sights, RestaurantsService restaurants,
-			CityDirectory directory) {
+			CityDirectory directory, NearbyPlacesService nearby) {
 		this.locator = locator;
 		this.sights = sights;
 		this.restaurants = restaurants;
 		this.directory = directory;
+		this.nearby = nearby;
 	}
 
 	/** 🏛 Главные достопримечательности с кнопками «Статья» и «На карте». */
@@ -68,6 +70,7 @@ public class CityGuideService {
 				buttons.add(List.of(new Link("📖 %d. %s".formatted(i + 1, sight.title()), sight.articleUrl()),
 						new Link("🗺 Карта", sight.point().yandexMapsUrl())));
 			}
+			appendNearby(text, buttons, nearby.forCity(trip.getDestination(), center.get()));
 			text.append("\nОписания — из Википедии, порядок — по известности места.");
 			return BotReply.withLinks(text.toString(), buttons);
 		} catch (WikiException e) {
@@ -144,6 +147,26 @@ public class CityGuideService {
 				Для этого города у меня нет готовой ссылки. Откройте Трипстер и найдите «%s» в поиске."""
 				.formatted(city, city),
 				List.of(List.of(new Link("🎟 Трипстер", "https://experience.tripster.ru/"))));
+	}
+
+	/** «🚗 Рядом, на день: Зеленоградск (~26 км): Променад, …» и кнопки на статьи о местах. */
+	static void appendNearby(StringBuilder text, List<List<Link>> buttons,
+			List<NearbyPlacesService.NearbyPlace> places) {
+		if (places.isEmpty()) {
+			return;
+		}
+		text.append("\n🚗 Рядом, на день:\n");
+		List<Link> row = new ArrayList<>();
+		for (NearbyPlacesService.NearbyPlace place : places) {
+			text.append("• ").append(place.name()).append(" (~").append(place.distanceKm()).append(" км)");
+			if (!place.sights().isEmpty()) {
+				text.append(": ").append(place.sights().stream().map(Sight::title)
+						.collect(java.util.stream.Collectors.joining(", ")));
+			}
+			text.append('\n');
+			row.add(new Link("🚗 " + place.name(), place.articleUrl()));
+		}
+		buttons.add(row);
 	}
 
 	static String shorten(String text) {

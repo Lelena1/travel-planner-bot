@@ -26,6 +26,7 @@ class CityGuideServiceTest {
 	private CityLocator locator;
 	private SightsService sights;
 	private RestaurantsService restaurants;
+	private NearbyPlacesService nearby;
 	private CityGuideService guide;
 
 	@BeforeEach
@@ -33,7 +34,8 @@ class CityGuideServiceTest {
 		locator = mock(CityLocator.class);
 		sights = mock(SightsService.class);
 		restaurants = mock(RestaurantsService.class);
-		guide = new CityGuideService(locator, sights, restaurants, new CityDirectory());
+		nearby = mock(NearbyPlacesService.class);
+		guide = new CityGuideService(locator, sights, restaurants, new CityDirectory(), nearby);
 		when(locator.cityName(any())).thenAnswer(call -> {
 			String destination = call.getArgument(0);
 			return destination.contains(",") ? destination.substring(destination.lastIndexOf(',') + 1).trim() : destination;
@@ -129,5 +131,26 @@ class CityGuideServiceTest {
 		assertThat(reply.text()).contains("не загрузился");
 		assertThat(((Keyboard.Links) reply.keyboard()).rows()).extracting(row -> row.get(0).text())
 				.containsExactly("🍽 Все рестораны рядом на Яндекс Картах", "☕ Кафе рядом на Яндекс Картах");
+	}
+
+	@Test
+	void sightsIncludeDayTripsNearby() {
+		when(sights.topSights("Калининград", CENTER)).thenReturn(List.of(
+				new Sight("Кёнигсбергский собор", null, null, new GeoPoint(54.7062, 20.5112), "https://ru.wikipedia.org/wiki/x", 32)));
+		when(nearby.forCity("Калининград", CENTER)).thenReturn(List.of(
+				new NearbyPlacesService.NearbyPlace("Зеленоградск", "https://ru.wikipedia.org/wiki/z", new GeoPoint(54.95, 20.48), 26,
+						List.of(new Sight("Зеленоградский променад", null, null, new GeoPoint(54.96, 20.47), "u", 5),
+								new Sight("Кирха Святого Адальберта", null, null, new GeoPoint(54.95, 20.48), "u", 4))),
+				new NearbyPlacesService.NearbyPlace("Светлогорск", "https://ru.wikipedia.org/wiki/s", new GeoPoint(54.94, 20.16), 23,
+						List.of())));
+
+		BotReply reply = guide.sights(trip("Калининград"));
+
+		assertThat(reply.text()).contains("""
+				🚗 Рядом, на день:
+				• Зеленоградск (~26 км): Зеленоградский променад, Кирха Святого Адальберта
+				• Светлогорск (~23 км)""");
+		List<List<Keyboard.Link>> rows = ((Keyboard.Links) reply.keyboard()).rows();
+		assertThat(rows.get(rows.size() - 1)).extracting(Keyboard.Link::text).containsExactly("🚗 Зеленоградск", "🚗 Светлогорск");
 	}
 }
