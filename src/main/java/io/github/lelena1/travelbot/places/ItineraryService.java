@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -42,13 +43,15 @@ public class ItineraryService {
 	private final SightsService sights;
 	private final RestaurantsService restaurants;
 	private final ItineraryPlanner planner;
+	private final NearbyPlacesService nearby;
 
 	public ItineraryService(CityLocator locator, SightsService sights, RestaurantsService restaurants,
-			ItineraryPlanner planner) {
+			ItineraryPlanner planner, NearbyPlacesService nearby) {
 		this.locator = locator;
 		this.sights = sights;
 		this.restaurants = restaurants;
 		this.planner = planner;
+		this.nearby = nearby;
 	}
 
 	public BotReply forTrip(Trip trip) {
@@ -71,9 +74,13 @@ public class ItineraryService {
 
 		int tripDays = (int) trip.nights() + 1;
 		int days = Math.min(tripDays, MAX_DAYS);
-		List<DayPlan> plan = planner.plan(places, days);
+		List<NearbyPlacesService.NearbyPlace> dayTrips = days >= MIN_DAYS_FOR_DAY_TRIP
+				? nearby.forCity(trip.getDestination(), center.get())
+				: List.of();
+		List<Day> schedule = schedule(planner, places, dayTrips, days);
 		List<Restaurant> lunchOptions = lunchOptions(city, center.get());
-		log.info("План: {} — {} дн., мест {}, вариантов обеда {}", city, days, places.size(), lunchOptions.size());
+		log.info("План: {} — {} дн., мест {}, поездок рядом {}, вариантов обеда {}", city, days, places.size(),
+				dayTrips.size(), lunchOptions.size());
 
 		StringBuilder text = new StringBuilder("🗓 План поездки: ").append(city).append('\n')
 				.append(TripFormatter.summaryDates(trip)).append(" · ")
@@ -84,9 +91,16 @@ public class ItineraryService {
 
 		List<List<Link>> buttons = new ArrayList<>();
 		Set<String> usedLunch = new HashSet<>();
-		for (DayPlan day : plan) {
-			LocalDate date = trip.getDateFrom().plusDays(day.number() - 1L);
-			text.append("\nДень ").append(day.number()).append(" · ").append(date.format(DAY)).append('\n');
+		for (int index = 0; index < schedule.size(); index++) {
+			Day entry = schedule.get(index);
+			int number = index + 1;
+			LocalDate date = trip.getDateFrom().plusDays(index);
+			text.append("\nДень ").append(number).append(" · ").append(date.format(DAY)).append('\n');
+			if (entry instanceof DayTrip dayTrip) {
+				appendDayTrip(text, buttons, number, dayTrip.place());
+				continue;
+			}
+			DayPlan day = ((CityDay) entry).plan();
 			if (day.isFree()) {
 				text.append("🌿 Свободный день: прогулки, музеи по интересам или поездка за город.\n");
 				continue;
@@ -100,11 +114,62 @@ public class ItineraryService {
 			}
 			nearestLunch(day, lunchOptions, usedLunch).ifPresent(place -> text.append("🍽 Обед рядом: ")
 					.append(place.name()).append(place.cuisine() == null ? "" : " — " + place.cuisine()).append('\n'));
-			buttons.add(List.of(new Link("🗺 Маршрут дня " + day.number(), routeUrl(day))));
+			buttons.add(List.of(new Link("🗺 Маршрут дня " + number, routeUrl(day))));
 		}
 		text.append("\nМеста — самые известные в городе (по Википедии), сгруппированы по близости. ")
 				.append("Подробности — в «🏛 Места», экскурсии — в «🎟 Экскурсии».");
 		return BotReply.withLinks(text.toString(), buttons);
+	}
+
+	/** Поездка за город — только в поездке от трёх дней: первый и последний дни уходят на дорогу. */
+	static final int MIN_DAYS_FOR_DAY_TRIP = 3;
+
+	/**
+	 * Расписание: каждый третий день, начиная со второго, — поездка за город (но не в день отъезда),
+	 * остальные дни — город. Если для города не хватает мест, свободные дни тоже занимают поездки.
+	 */
+	static List<Day> schedule(ItineraryPlanner planner, List<Sight> places,
+			List<NearbyPlacesService.NearbyPlace> dayTrips, int days) {
+		int tripSlots = Math.min(dayTrips.size(), days / MIN_DAYS_FOR_DAY_TRIP);
+		Iterator<DayPlan> cityDays = planner.plan(places, days - tripSlots).iterator();
+		Iterator<NearbyPlacesService.NearbyPlace> trips = dayTrips.iterator();
+		List<Day> schedule = new ArrayList<>();
+		int tripsUsed = 0;
+		for (int number = 1; number <= days; number++) {
+			boolean tripSlot = tripsUsed < tripSlots && number % MIN_DAYS_FOR_DAY_TRIP == 2 && number < days;
+			if (tripSlot) {
+				schedule.add(new DayTrip(trips.next()));
+				tripsUsed++;
+				continue;
+			}
+			DayPlan city = cityDays.next();
+			schedule.add(city.isFree() && trips.hasNext() ? new DayTrip(trips.next()) : new CityDay(city));
+		}
+		return schedule;
+	}
+
+	private static void appendDayTrip(StringBuilder text, List<List<Link>> buttons, int number,
+			NearbyPlacesService.NearbyPlace place) {
+		text.append("🚗 Поездка: ").append(place.name()).append(" (~").append(place.distanceKm()).append(" км)\n");
+		List<Sight> stops = ItineraryPlanner.walkingOrder(place.sights());
+		stops.forEach(sight -> text.append("🏛 ").append(sight.title()).append('\n'));
+		if (stops.isEmpty()) {
+			text.append("🚶 Прогулка по городу\n");
+		}
+		String url = stops.size() > 1
+				? GeoPoint.yandexWalkingRouteUrl(stops.stream().map(Sight::point).toList())
+				: place.point().yandexMapsUrl();
+		buttons.add(List.of(new Link("🗺 Маршрут дня %d · %s".formatted(number, place.name()), url)));
+	}
+
+	/** День расписания: в городе или поездка за город. */
+	sealed interface Day permits CityDay, DayTrip {
+	}
+
+	record CityDay(DayPlan plan) implements Day {
+	}
+
+	record DayTrip(NearbyPlacesService.NearbyPlace place) implements Day {
 	}
 
 	/** Рестораны для обеда; если OpenStreetMap не отвечает, план всё равно строится — просто без обедов. */

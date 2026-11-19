@@ -30,6 +30,7 @@ class ItineraryServiceTest {
 	private CityLocator locator;
 	private SightsService sights;
 	private RestaurantsService restaurants;
+	private NearbyPlacesService nearby;
 	private ItineraryService service;
 
 	@BeforeEach
@@ -37,7 +38,8 @@ class ItineraryServiceTest {
 		locator = mock(CityLocator.class);
 		sights = mock(SightsService.class);
 		restaurants = mock(RestaurantsService.class);
-		service = new ItineraryService(locator, sights, restaurants, new ItineraryPlanner());
+		nearby = mock(NearbyPlacesService.class);
+		service = new ItineraryService(locator, sights, restaurants, new ItineraryPlanner(), nearby);
 		when(locator.cityName(any())).thenReturn("Калининград");
 		when(locator.locate("Калининград")).thenReturn(Optional.of(CENTER));
 		when(sights.topSights("Калининград", CENTER)).thenReturn(List.of(CATHEDRAL, ZOO, CASTLE));
@@ -92,4 +94,43 @@ class ItineraryServiceTest {
 		trip.setDates(from, to);
 		return trip;
 	}
+
+	@Test
+	void threeDayTripGetsDayTripInTheMiddle() {
+		when(nearby.forCity(any(), any())).thenReturn(List.of(ZELENOGRADSK, SVETLOGORSK));
+
+		BotReply reply = service.forTrip(trip(LocalDate.of(2026, 11, 27), LocalDate.of(2026, 11, 29)));
+
+		assertThat(reply.text())
+				.contains("День 2 · сб, 28 ноября\n🚗 Поездка: Зеленоградск (~26 км)\n🏛 Променад")
+				.doesNotContain("Светлогорск");
+		assertThat(((Keyboard.Links) reply.keyboard()).rows()).extracting(row -> row.get(0).text())
+				.contains("🗺 Маршрут дня 2 · Зеленоградск");
+	}
+
+	@Test
+	void freeDaysAreFilledWithDayTrips() {
+		List<ItineraryService.Day> schedule = ItineraryService.schedule(new ItineraryPlanner(), List.of(CATHEDRAL),
+				List.of(ZELENOGRADSK, SVETLOGORSK), 4);
+
+		assertThat(schedule).hasSize(4);
+		assertThat(schedule.get(0)).isInstanceOf(ItineraryService.CityDay.class);
+		assertThat(schedule.get(1)).isEqualTo(new ItineraryService.DayTrip(ZELENOGRADSK));
+		assertThat(schedule.get(2)).isEqualTo(new ItineraryService.DayTrip(SVETLOGORSK));
+		assertThat(((ItineraryService.CityDay) schedule.get(3)).plan().isFree()).isTrue();
+	}
+
+	@Test
+	void shortTripHasNoDayTrips() {
+		when(nearby.forCity(any(), any())).thenReturn(List.of(ZELENOGRADSK));
+
+		assertThat(service.forTrip(trip(LocalDate.of(2026, 11, 27), LocalDate.of(2026, 11, 28))).text())
+				.doesNotContain("Поездка");
+	}
+
+	private static final NearbyPlacesService.NearbyPlace ZELENOGRADSK = new NearbyPlacesService.NearbyPlace(
+			"Зеленоградск", "https://ru.wikipedia.org/wiki/z", new GeoPoint(54.95, 20.48), 26,
+			List.of(sight("Променад", 54.96, 20.47)));
+	private static final NearbyPlacesService.NearbyPlace SVETLOGORSK = new NearbyPlacesService.NearbyPlace(
+			"Светлогорск", "https://ru.wikipedia.org/wiki/s", new GeoPoint(54.94, 20.16), 23, List.of());
 }
