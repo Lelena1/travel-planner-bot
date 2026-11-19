@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import io.github.lelena1.travelbot.city.KnownCity;
 import io.github.lelena1.travelbot.lodging.LodgingLink.Filter;
 
 /**
@@ -23,7 +24,7 @@ public class OstrovokSite implements LodgingSite {
 
 	@Override
 	public Optional<LodgingLink> link(LodgingRequest request) {
-		return request.city().flatMap(LodgingCity::ostrovokPath).map(path -> new LodgingLink("Островок",
+		return request.city().flatMap(KnownCity::ostrovokPath).map(path -> new LodgingLink("Островок",
 				"https://ostrovok.ru/hotel/%s/?search=yes&dates=%s-%s&guests=%s".formatted(path,
 						request.checkIn().format(DATE), request.checkOut().format(DATE), guests(request)),
 				EnumSet.of(Filter.DATES, Filter.GUESTS)));

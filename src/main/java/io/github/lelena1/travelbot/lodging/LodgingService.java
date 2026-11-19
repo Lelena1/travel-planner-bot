@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import io.github.lelena1.travelbot.bot.BotReply;
 import io.github.lelena1.travelbot.bot.Keyboard.Link;
+import io.github.lelena1.travelbot.city.CityDirectory;
+import io.github.lelena1.travelbot.city.KnownCity;
 import io.github.lelena1.travelbot.lodging.LodgingLink.Filter;
 import io.github.lelena1.travelbot.trip.Budget;
 import io.github.lelena1.travelbot.trip.Trip;
@@ -25,17 +27,17 @@ public class LodgingService {
 
 	private static final Logger log = LoggerFactory.getLogger(LodgingService.class);
 
-	private final LodgingCityDirectory directory;
+	private final CityDirectory directory;
 	private final List<LodgingSite> sites;
 
 	/** Сайты приходят в порядке {@code @Order}: сначала те, где больше фильтров в ссылке. */
-	public LodgingService(LodgingCityDirectory directory, List<LodgingSite> sites) {
+	public LodgingService(CityDirectory directory, List<LodgingSite> sites) {
 		this.directory = directory;
 		this.sites = List.copyOf(sites);
 	}
 
 	public BotReply forTrip(Trip trip) {
-		Optional<LodgingCity> city = directory.find(trip.getDestination());
+		Optional<KnownCity> city = directory.find(trip.getDestination());
 		LodgingRequest request = LodgingRequest.of(trip, city);
 		List<LodgingLink> links = sites.stream()
 				.map(site -> site.link(request))

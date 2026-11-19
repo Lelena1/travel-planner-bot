@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import io.github.lelena1.travelbot.bot.BotReply;
 import io.github.lelena1.travelbot.bot.Keyboard;
+import io.github.lelena1.travelbot.city.CityDirectory;
 import io.github.lelena1.travelbot.trip.Budget;
 import io.github.lelena1.travelbot.trip.Pets;
 import io.github.lelena1.travelbot.trip.Trip;
@@ -16,7 +17,7 @@ import io.github.lelena1.travelbot.trip.Trip;
 /** С настоящим справочником городов и всеми сайтами. */
 class LodgingServiceTest {
 
-	private final LodgingService service = new LodgingService(new LodgingCityDirectory(),
+	private final LodgingService service = new LodgingService(new CityDirectory(),
 			List.of(new OstrovokSite(), new SutochnoSite(), new AvitoSite(), new CianSite()));
 
 	@Test

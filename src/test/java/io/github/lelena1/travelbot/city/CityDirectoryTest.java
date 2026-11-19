@@ -1,4 +1,4 @@
-package io.github.lelena1.travelbot.lodging;
+package io.github.lelena1.travelbot.city;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class LodgingCityDirectoryTest {
+class CityDirectoryTest {
 
-	/** Настоящий файл lodging-cities.yml. */
-	private final LodgingCityDirectory directory = new LodgingCityDirectory();
+	/** Настоящий файл cities.yml. */
+	private final CityDirectory directory = new CityDirectory();
 
 	@ParameterizedTest(name = "«{0}» → {1}")
 	@CsvSource(delimiter = '|', value = {
@@ -27,7 +27,7 @@ class LodgingCityDirectoryTest {
 			"Алма-Ата               | Алматы"
 	})
 	void findsCityByNameOrAlias(String destination, String expected) {
-		assertThat(directory.find(destination)).get().extracting(LodgingCity::name).isEqualTo(expected);
+		assertThat(directory.find(destination)).get().extracting(KnownCity::name).isEqualTo(expected);
 	}
 
 	@Test
@@ -39,7 +39,7 @@ class LodgingCityDirectoryTest {
 	@Test
 	void fileIsLoadedCompletely() {
 		assertThat(directory.size()).isGreaterThanOrEqualTo(40);
-		LodgingCity kazan = directory.find("Казань").orElseThrow();
+		KnownCity kazan = directory.find("Казань").orElseThrow();
 		assertThat(kazan.ostrovokPath()).contains("russia/kazan");
 		assertThat(kazan.avitoCity()).contains("kazan");
 		assertThat(kazan.cianSubdomain()).contains("kazan");
@@ -48,7 +48,7 @@ class LodgingCityDirectoryTest {
 
 	@Test
 	void foreignCitiesHaveNoRussianListingSites() {
-		LodgingCity rome = directory.find("Рим").orElseThrow();
+		KnownCity rome = directory.find("Рим").orElseThrow();
 
 		assertThat(rome.ostrovokPath()).contains("italy/rome");
 		assertThat(rome.avitoCity()).isEmpty();
@@ -57,16 +57,16 @@ class LodgingCityDirectoryTest {
 
 	@Test
 	void everyCityHasOstrovokPath() {
-		assertThat(LodgingCityDirectory.load(LodgingCityDirectory.RESOURCE))
+		assertThat(CityDirectory.load(CityDirectory.RESOURCE))
 				.allSatisfy(city -> assertThat(city.ostrovokPath()).as(city.name()).isPresent());
 	}
 
 	@Test
 	void duplicateNamesAreRejected() {
-		LodgingCity one = new LodgingCity("Сочи", List.of(), "russia/sochi", null, null, true);
-		LodgingCity two = new LodgingCity("Адлер", List.of("Сочи"), "russia/adler", null, null, true);
+		KnownCity one = new KnownCity("Сочи", List.of(), "russia/sochi", null, null, true);
+		KnownCity two = new KnownCity("Адлер", List.of("Сочи"), "russia/adler", null, null, true);
 
-		assertThatThrownBy(() -> new LodgingCityDirectory(List.of(one, two)))
+		assertThatThrownBy(() -> new CityDirectory(List.of(one, two)))
 				.hasMessageContaining("встречается у двух городов");
 	}
 }

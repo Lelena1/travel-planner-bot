@@ -8,14 +8,15 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import io.github.lelena1.travelbot.city.KnownCity;
 import io.github.lelena1.travelbot.lodging.LodgingLink.Filter;
 import io.github.lelena1.travelbot.trip.Budget;
 import io.github.lelena1.travelbot.trip.Pets;
 
 class LodgingSitesTest {
 
-	private static final LodgingCity KAZAN = new LodgingCity("Казань", List.of(), "russia/kazan", "kazan", "kazan", true);
-	private static final LodgingCity ROME = new LodgingCity("Рим", List.of(), "italy/rome", null, null, false);
+	private static final KnownCity KAZAN = new KnownCity("Казань", List.of(), "russia/kazan", "kazan", "kazan", true);
+	private static final KnownCity ROME = new KnownCity("Рим", List.of(), "italy/rome", null, null, false);
 	private static final LocalDate IN = LocalDate.of(2027, 5, 12);
 	private static final LocalDate OUT = LocalDate.of(2027, 5, 18);
 
@@ -78,7 +79,7 @@ class LodgingSitesTest {
 		assertThat(new AvitoSite().link(request(KAZAN, 2, List.of(), Pets.DOG)).orElseThrow().applied()).isEmpty();
 	}
 
-	private static LodgingRequest request(LodgingCity city, int adults, List<Integer> ages, Pets pets) {
+	private static LodgingRequest request(KnownCity city, int adults, List<Integer> ages, Pets pets) {
 		return new LodgingRequest(city.name(), Optional.of(city), IN, OUT, adults, ages, pets, Budget.ANY);
 	}
 

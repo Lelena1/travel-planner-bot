@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import io.github.lelena1.travelbot.city.KnownCity;
 import io.github.lelena1.travelbot.lodging.LodgingLink.Filter;
 
 /**
@@ -22,7 +23,7 @@ public class SutochnoSite implements LodgingSite {
 
 	@Override
 	public Optional<LodgingLink> link(LodgingRequest request) {
-		boolean known = request.city().map(LodgingCity::sutochno).orElse(true);
+		boolean known = request.city().map(KnownCity::sutochno).orElse(true);
 		if (!known) {
 			return Optional.empty();
 		}
