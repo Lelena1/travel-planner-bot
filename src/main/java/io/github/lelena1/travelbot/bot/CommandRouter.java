@@ -42,6 +42,8 @@ public class CommandRouter {
 			/deny <ID> — забрать доступ
 			/users — список пользователей""";
 
+	static final String QUESTIONNAIRE_CLOSED = "ℹ️ Незаконченная анкета новой поездки закрыта.\n\n";
+
 	private final AccessService access;
 	private final NewTripDialog newTripDialog;
 	private final TripService tripService;
@@ -72,6 +74,27 @@ public class CommandRouter {
 		}
 
 		long userId = message.userId();
+		Optional<MainMenu> menuItem = MainMenu.byLabel(text);
+
+		// Ушёл из анкеты в другой раздел — закрываем её, чтобы следующий обычный текст
+		// не попал в анкету как ответ на давно забытый вопрос.
+		if (leavesQuestionnaire(command, menuItem) && newTripDialog.isActive(userId)) {
+			newTripDialog.close(userId);
+			BotReply reply = route(message, userId, text, command, menuItem);
+			return new BotReply(QUESTIONNAIRE_CLOSED + reply.text(), reply.keyboard());
+		}
+		return route(message, userId, text, command, menuItem);
+	}
+
+	private static boolean leavesQuestionnaire(String command, Optional<MainMenu> menuItem) {
+		if (command.equals("/cancel") || command.equals("/newtrip")) {
+			return false; // эти команды сами решают, что делать с анкетой
+		}
+		return !command.isEmpty() || menuItem.filter(item -> item != MainMenu.NEW_TRIP).isPresent();
+	}
+
+	private BotReply route(IncomingMessage message, long userId, String text, String command,
+			Optional<MainMenu> menuItem) {
 		boolean admin = access.isAdmin(userId);
 
 		switch (command) {
@@ -98,13 +121,11 @@ public class CommandRouter {
 				break;
 		}
 
-		Optional<MainMenu> menuItem = MainMenu.byLabel(text);
 		if (menuItem.isPresent() && menuItem.get() == MainMenu.NEW_TRIP) {
 			return newTripDialog.start(userId);
 		}
 
 		// Пользователь заполняет анкету: обычный текст — это ответ на вопрос.
-		// Команды и кнопки главного меню обрабатываются как обычно, анкета при этом сохраняется.
 		if (command.isEmpty() && menuItem.isEmpty() && newTripDialog.isActive(userId)) {
 			return newTripDialog.handle(userId, text);
 		}

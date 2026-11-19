@@ -150,11 +150,42 @@ class CommandRouterTest {
 	}
 
 	@Test
-	void commandsStillWorkDuringQuestionnaire() {
+	void commandDuringQuestionnaireClosesItAndStillWorks() {
 		when(dialog.isActive(USER)).thenReturn(true);
 
-		assertThat(send(USER, "/help").text()).contains("Что я умею");
+		String text = send(USER, "/help").text();
+
+		assertThat(text).startsWith(CommandRouter.QUESTIONNAIRE_CLOSED).contains("Что я умею");
+		verify(dialog).close(USER);
 		verify(dialog, never()).handle(USER, "/help");
+	}
+
+	@Test
+	void menuButtonDuringQuestionnaireClosesIt() {
+		when(dialog.isActive(USER)).thenReturn(true);
+
+		BotReply reply = send(USER, MainMenu.FLIGHTS.label());
+
+		assertThat(reply.text()).startsWith(CommandRouter.QUESTIONNAIRE_CLOSED).contains("Авиабилеты");
+		assertThat(reply.showsMainMenu()).isTrue();
+		verify(dialog).close(USER);
+	}
+
+	@Test
+	void cancelAndNewTripDoNotTriggerSilentClose() {
+		when(dialog.isActive(USER)).thenReturn(true);
+		when(dialog.cancel(USER)).thenReturn(BotReply.withMenu("отменено"));
+		when(dialog.start(USER)).thenReturn(BotReply.text("Куда едем?"));
+
+		assertThat(send(USER, "/cancel").text()).isEqualTo("отменено");
+		assertThat(send(USER, MainMenu.NEW_TRIP.label()).text()).isEqualTo("Куда едем?");
+		verify(dialog, never()).close(USER);
+	}
+
+	@Test
+	void commandWithoutQuestionnaireHasNoNotice() {
+		assertThat(send(USER, "/help").text()).doesNotContain("анкета");
+		verify(dialog, never()).close(USER);
 	}
 
 	@Test

@@ -71,6 +71,13 @@ public class NewTripDialog {
 		return BotReply.withMenu("Хорошо, создание поездки отменено.");
 	}
 
+	/** Молча закрывает анкету, когда пользователь ушёл в другой раздел. */
+	@Transactional
+	public void close(long userId) {
+		discardDraft(userId);
+		log.info("Анкета: пользователь {} перешёл в другой раздел, анкета закрыта", userId);
+	}
+
 	@Transactional
 	public BotReply handle(long userId, String rawText) {
 		String text = rawText == null ? "" : rawText.trim();
