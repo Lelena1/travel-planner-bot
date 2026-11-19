@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import io.github.lelena1.travelbot.config.AccessProperties;
+import io.github.lelena1.travelbot.util.RussianPlural;
 
 /**
  * Белый список: решает, кому можно пользоваться ботом.
@@ -42,7 +43,8 @@ public class AccessService {
 				repository.save(new AppUser(id, Role.USER));
 			}
 		}
-		log.info("Белый список загружен: {} пользователей", repository.count());
+		log.info("Белый список загружен: {}",
+				RussianPlural.format(repository.count(), "пользователь", "пользователя", "пользователей"));
 	}
 
 	@Transactional(readOnly = true)
