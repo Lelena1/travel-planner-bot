@@ -50,4 +50,25 @@ class RestaurantsServiceTest {
 		all.put("amenity", amenity);
 		return new OsmPlace(name, amenity, P, all);
 	}
+
+	@Test
+	void equallyDescribedPlacesCloserToCentreComeFirst() {
+		OverpassClient overpass = mock(OverpassClient.class);
+		GeoPoint far = new GeoPoint(54.73, 20.5);
+		GeoPoint near = new GeoPoint(54.701, 20.5);
+		when(overpass.restaurantsAndCafes(any(), anyInt())).thenReturn(List.of(
+				new OsmPlace("Amedeo", "restaurant", far, Map.of("cuisine", "italian")),
+				new OsmPlace("Zucca", "restaurant", near, Map.of("cuisine", "italian"))));
+
+		assertThat(new RestaurantsService(overpass).top("Калининград", P)).extracting(Restaurant::name)
+				.containsExactly("Zucca", "Amedeo");
+	}
+
+	@Test
+	void openingHoursInRussian() {
+		assertThat(RestaurantsService.openingHours("Mo-Su 12:00-23:00")).isEqualTo("Пн-Вс 12:00-23:00");
+		assertThat(RestaurantsService.openingHours("Tu-Sa 12:45-22:45; Su off")).isEqualTo("Вт-Сб 12:45-22:45; Вс выходной");
+		assertThat(RestaurantsService.openingHours("24/7")).isEqualTo("круглосуточно");
+		assertThat(RestaurantsService.openingHours(null)).isNull();
+	}
 }

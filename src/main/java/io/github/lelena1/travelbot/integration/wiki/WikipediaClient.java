@@ -68,12 +68,33 @@ public class WikipediaClient {
 		for (int i = 0; i < titles.size(); i += MAX_EXTRACTS) {
 			List<String> batch = titles.subList(i, Math.min(titles.size(), i + MAX_EXTRACTS));
 			Response response = get(Map.of("prop", "extracts", "exintro", "1", "explaintext", "1",
-					"exsentences", "2", "exlimit", String.valueOf(MAX_EXTRACTS), "titles", String.join("|", batch)));
+					"exsentences", "3", "exlimit", String.valueOf(MAX_EXTRACTS), "titles", String.join("|", batch)));
 			pages(response).stream()
 					.filter(page -> page.extract() != null && !page.extract().isBlank())
-					.forEach(page -> result.put(page.title(), page.extract().strip()));
+					.forEach(page -> result.put(page.title(), cleanIntro(page.extract())));
 		}
 		return result;
+	}
+
+	/**
+	 * Делает начало статьи пригодным для короткого сообщения: убирает знаки ударения
+	 * («Колизе́й» → «Колизей») и скобки с переводами и датами («(лат. Colosseum)»).
+	 * Википедия режет текст по «предложениям» и иногда ошибается на сокращениях вроде «лат.»,
+	 * оставляя незакрытую скобку, — такой хвост отбрасываем.
+	 */
+	static String cleanIntro(String extract) {
+		String text = extract.replace("́", "").strip();
+		String previous;
+		do {
+			previous = text;
+			text = text.replaceAll("\\s*\\([^()]*\\)", "");
+		} while (!text.equals(previous));
+		int unclosed = text.indexOf('(');
+		if (unclosed > 0) {
+			text = text.substring(0, unclosed).strip();
+			text = text.endsWith(".") ? text : text + "…";
+		}
+		return text.replaceAll("\\s+([,.;:])", "$1").replaceAll("\\s{2,}", " ").strip();
 	}
 
 	/** Адрес статьи на сайте. */

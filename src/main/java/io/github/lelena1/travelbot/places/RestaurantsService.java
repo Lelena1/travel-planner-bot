@@ -62,7 +62,7 @@ public class RestaurantsService {
 		List<Restaurant> best = places.stream()
 				.sorted(Comparator.comparingInt(RestaurantsService::infoScore).reversed()
 						.thenComparing(place -> "restaurant".equals(place.amenity()) ? 0 : 1)
-						.thenComparing(OsmPlace::name))
+						.thenComparingDouble(place -> place.point().distanceTo(center)))
 				.limit(TOP)
 				.map(RestaurantsService::toRestaurant)
 				.toList();
@@ -76,7 +76,25 @@ public class RestaurantsService {
 
 	static Restaurant toRestaurant(OsmPlace place) {
 		return new Restaurant(place.name(), "cafe".equals(place.amenity()), cuisine(place.tag("cuisine")),
-				place.tag("opening_hours"), place.website(), place.point());
+				openingHours(place.tag("opening_hours")), place.website(), place.point());
+	}
+
+	private static final Map<String, String> DAYS = Map.of("Mo", "Пн", "Tu", "Вт", "We", "Ср", "Th", "Чт",
+			"Fr", "Пт", "Sa", "Сб", "Su", "Вс", "PH", "праздники");
+
+	/** «Mo-Su 12:00-24:00; Sa off» → «Пн-Вс 12:00-24:00; Сб выходной». */
+	static String openingHours(String osmValue) {
+		if (osmValue == null) {
+			return null;
+		}
+		String result = osmValue.strip();
+		if (result.equals("24/7")) {
+			return "круглосуточно";
+		}
+		for (Map.Entry<String, String> day : DAYS.entrySet()) {
+			result = result.replaceAll("\\b" + day.getKey() + "\\b", day.getValue());
+		}
+		return result.replaceAll("\\boff\\b", "выходной").replaceAll("\\bclosed\\b", "закрыто");
 	}
 
 	/** «georgian;grill» → «грузинская, гриль»; незнакомые значения пропускаем. */

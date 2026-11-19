@@ -88,4 +88,14 @@ class WikipediaClientTest {
 	private static org.springframework.test.web.client.ResponseCreator json(String resource) {
 		return withSuccess(new ClassPathResource(resource), MediaType.APPLICATION_JSON);
 	}
+
+	@Test
+	void introWithoutStressMarksAndTranslations() {
+		// так Википедия на самом деле режет начало статьи «Колизей»: «лат.» принимается за конец предложения
+		String raw = "Колизе́й (лат. Colosseus, colosseum — исполинский), или амфитеатр Флавиев (лат.";
+
+		assertThat(WikipediaClient.cleanIntro(raw)).isEqualTo("Колизей, или амфитеатр Флавиев…");
+		assertThat(WikipediaClient.cleanIntro("Кёнигсбергский замок (нем. Königsberger Schloss) — замок Тевтонского ордена."))
+				.isEqualTo("Кёнигсбергский замок — замок Тевтонского ордена.");
+	}
 }
