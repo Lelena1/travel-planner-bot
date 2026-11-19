@@ -1,0 +1,10 @@
+package io.github.lelena1.travelbot.trip;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TripRepository extends JpaRepository<Trip, Long> {
+
+	List<Trip> findByUserIdAndStatusOrderByDateFromAsc(long userId, TripStatus status);
+}
