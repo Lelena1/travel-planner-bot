@@ -1,5 +1,7 @@
 package io.github.lelena1.travelbot.trip;
 
+import java.time.Clock;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,15 +17,26 @@ public class TripService {
 	private static final Logger log = LoggerFactory.getLogger(TripService.class);
 
 	private final TripRepository trips;
+	private final Clock clock;
 
-	public TripService(TripRepository trips) {
+	public TripService(TripRepository trips, Clock clock) {
 		this.trips = trips;
+		this.clock = clock;
 	}
 
 	/** Сохранённые поездки по дате начала; номер в списке = индекс + 1. */
 	@Transactional(readOnly = true)
 	public List<Trip> activeTrips(long userId) {
 		return trips.findByUserIdAndStatusOrderByDateFromAsc(userId, TripStatus.ACTIVE);
+	}
+
+	/** Поездки, которые ещё не начались: только для них имеет смысл искать билеты. */
+	@Transactional(readOnly = true)
+	public List<Trip> upcomingTrips(long userId) {
+		LocalDate today = LocalDate.now(clock);
+		return activeTrips(userId).stream()
+				.filter(trip -> !trip.getDateFrom().isBefore(today))
+				.toList();
 	}
 
 	/**

@@ -30,6 +30,7 @@ class CommandRouterTest {
 	private AccessService access;
 	private NewTripDialog dialog;
 	private TripService tripService;
+	private FlightsCommand flights;
 	private CommandRouter router;
 
 	@BeforeEach
@@ -40,7 +41,9 @@ class CommandRouterTest {
 		when(access.isAdmin(ADMIN)).thenReturn(true);
 		dialog = mock(NewTripDialog.class);
 		tripService = mock(TripService.class);
-		router = new CommandRouter(access, dialog, tripService, new BotProperties("token", "travel_bot"));
+		flights = mock(FlightsCommand.class);
+		when(flights.parseChoice(org.mockito.ArgumentMatchers.anyString())).thenReturn(Optional.empty());
+		router = new CommandRouter(access, dialog, tripService, flights, new BotProperties("token", "travel_bot"));
 	}
 
 	private BotReply send(long userId, String text) {
@@ -86,9 +89,9 @@ class CommandRouterTest {
 
 	@Test
 	void menuButtonReportsStageInProgress() {
-		BotReply reply = send(USER, MainMenu.FLIGHTS.label());
+		BotReply reply = send(USER, MainMenu.LODGING.label());
 
-		assertThat(reply.text()).contains("Авиабилеты").contains("этап 3");
+		assertThat(reply.text()).contains("Жильё").contains("этап 5");
 		assertThat(reply.showsMainMenu()).isTrue();
 	}
 
@@ -164,9 +167,9 @@ class CommandRouterTest {
 	void menuButtonDuringQuestionnaireClosesIt() {
 		when(dialog.isActive(USER)).thenReturn(true);
 
-		BotReply reply = send(USER, MainMenu.FLIGHTS.label());
+		BotReply reply = send(USER, MainMenu.LODGING.label());
 
-		assertThat(reply.text()).startsWith(CommandRouter.QUESTIONNAIRE_CLOSED).contains("Авиабилеты");
+		assertThat(reply.text()).startsWith(CommandRouter.QUESTIONNAIRE_CLOSED).contains("Жильё");
 		assertThat(reply.showsMainMenu()).isTrue();
 		verify(dialog).close(USER);
 	}
@@ -236,5 +239,24 @@ class CommandRouterTest {
 
 		assertThat(send(USER, "/deletetrip 7").text()).contains("нет");
 		assertThat(send(USER, "/deletetrip").text()).contains("Укажите номер");
+	}
+
+	@Test
+	void flightsButtonOpensFlightsSection() {
+		BotReply menu = BotReply.text("Для какой поездки?");
+		when(flights.menu(USER)).thenReturn(menu);
+
+		assertThat(send(USER, MainMenu.FLIGHTS.label())).isSameAs(menu);
+		assertThat(send(USER, "/flights")).isSameAs(menu);
+	}
+
+	@Test
+	void flightsWithNumberAndTripChoiceButton() {
+		BotReply result = BotReply.text("✈️ Москва → Рим");
+		when(flights.forNumber(USER, 2)).thenReturn(result);
+		when(flights.parseChoice("✈️ 2. Рим · 12 мая")).thenReturn(Optional.of(2));
+
+		assertThat(send(USER, "/flights 2")).isSameAs(result);
+		assertThat(send(USER, "✈️ 2. Рим · 12 мая")).isSameAs(result);
 	}
 }

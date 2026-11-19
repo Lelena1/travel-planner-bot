@@ -29,6 +29,7 @@ public class CommandRouter {
 			/newtrip — новая поездка
 			/mytrips — мои поездки
 			/deletetrip <номер> — удалить поездку
+			/flights — авиабилеты для поездки
 			/cancel — отменить заполнение анкеты
 			/help — эта подсказка
 			/myid — показать ваш Telegram ID
@@ -47,13 +48,15 @@ public class CommandRouter {
 	private final AccessService access;
 	private final NewTripDialog newTripDialog;
 	private final TripService tripService;
+	private final FlightsCommand flights;
 	private final String botUsername;
 
 	public CommandRouter(AccessService access, NewTripDialog newTripDialog, TripService tripService,
-			BotProperties botProperties) {
+			FlightsCommand flights, BotProperties botProperties) {
 		this.access = access;
 		this.newTripDialog = newTripDialog;
 		this.tripService = tripService;
+		this.flights = flights;
 		this.botUsername = botProperties.username() == null ? "" : botProperties.username();
 	}
 
@@ -100,6 +103,11 @@ public class CommandRouter {
 		switch (command) {
 			case "/newtrip":
 				return newTripDialog.start(userId);
+			case "/flights":
+				return parseId(text)
+						.filter(number -> number <= Integer.MAX_VALUE)
+						.map(number -> flights.forNumber(userId, number.intValue()))
+						.orElseGet(() -> flights.menu(userId));
 			case "/mytrips":
 				return myTrips(userId);
 			case "/deletetrip":
@@ -124,10 +132,17 @@ public class CommandRouter {
 		if (menuItem.isPresent() && menuItem.get() == MainMenu.NEW_TRIP) {
 			return newTripDialog.start(userId);
 		}
+		if (menuItem.isPresent() && menuItem.get() == MainMenu.FLIGHTS) {
+			return flights.menu(userId);
+		}
 
 		// Пользователь заполняет анкету: обычный текст — это ответ на вопрос.
 		if (command.isEmpty() && menuItem.isEmpty() && newTripDialog.isActive(userId)) {
 			return newTripDialog.handle(userId, text);
+		}
+		Optional<Integer> flightChoice = flights.parseChoice(text);
+		if (flightChoice.isPresent()) {
+			return flights.forNumber(userId, flightChoice.get());
 		}
 		if (text.equals(NewTripDialog.CANCEL)) {
 			return BotReply.withMenu("Хорошо.");

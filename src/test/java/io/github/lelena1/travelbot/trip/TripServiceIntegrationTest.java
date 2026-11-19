@@ -45,6 +45,16 @@ class TripServiceIntegrationTest {
 		assertThat(service.activeTrips(OTHER_USER)).extracting(Trip::getDestination).containsExactly("Париж");
 	}
 
+	@Test
+	void upcomingTripsSkipPastOnes() {
+		long user = 20_003;
+		access.allow(user);
+		saveActive(user, "Прошлогодняя", LocalDate.of(2020, 1, 1));
+		saveActive(user, "Будущая", LocalDate.now().plusYears(1));
+
+		assertThat(service.upcomingTrips(user)).extracting(Trip::getDestination).containsExactly("Будущая");
+	}
+
 	private void saveActive(long userId, String destination, LocalDate from) {
 		Trip trip = Trip.draftFor(userId);
 		trip.setDestination(destination);
