@@ -1,0 +1,3342 @@
+{
+ "entities": {
+  "Q1829": {
+   "type": "item",
+   "id": "Q1829",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 12134916,
+         "id": "Q12134916"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 7930989,
+         "id": "Q7930989"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 1549591,
+         "id": "Q1549591"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 56580425,
+         "id": "Q56580425"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 138411346,
+         "id": "Q138411346"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ],
+    "P1082": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "afwiki": {
+     "site": "afwiki"
+    },
+    "amwiki": {
+     "site": "amwiki"
+    },
+    "angwiki": {
+     "site": "angwiki"
+    },
+    "arwiki": {
+     "site": "arwiki"
+    },
+    "arzwiki": {
+     "site": "arzwiki"
+    },
+    "astwiki": {
+     "site": "astwiki"
+    },
+    "azbwiki": {
+     "site": "azbwiki"
+    },
+    "azwiki": {
+     "site": "azwiki"
+    },
+    "banwiki": {
+     "site": "banwiki"
+    },
+    "bat_smgwiki": {
+     "site": "bat_smgwiki"
+    },
+    "bawiki": {
+     "site": "bawiki"
+    },
+    "be_x_oldwiki": {
+     "site": "be_x_oldwiki"
+    },
+    "bewiki": {
+     "site": "bewiki"
+    },
+    "bgwiki": {
+     "site": "bgwiki"
+    },
+    "bnwiki": {
+     "site": "bnwiki"
+    },
+    "brwiki": {
+     "site": "brwiki"
+    },
+    "bswiki": {
+     "site": "bswiki"
+    },
+    "bxrwiki": {
+     "site": "bxrwiki"
+    },
+    "cawiki": {
+     "site": "cawiki"
+    },
+    "cbk_zamwiki": {
+     "site": "cbk_zamwiki"
+    },
+    "cebwiki": {
+     "site": "cebwiki"
+    },
+    "cewiki": {
+     "site": "cewiki"
+    },
+    "ckbwiki": {
+     "site": "ckbwiki"
+    },
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "crhwiki": {
+     "site": "crhwiki"
+    },
+    "csbwiki": {
+     "site": "csbwiki"
+    },
+    "cswiki": {
+     "site": "cswiki"
+    },
+    "cuwiki": {
+     "site": "cuwiki"
+    },
+    "cvwiki": {
+     "site": "cvwiki"
+    },
+    "cywiki": {
+     "site": "cywiki"
+    },
+    "dawiki": {
+     "site": "dawiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "dewikinews": {
+     "site": "dewikinews"
+    },
+    "dewikivoyage": {
+     "site": "dewikivoyage"
+    },
+    "diqwiki": {
+     "site": "diqwiki"
+    },
+    "dsbwiki": {
+     "site": "dsbwiki"
+    },
+    "elwiki": {
+     "site": "elwiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "enwikivoyage": {
+     "site": "enwikivoyage"
+    },
+    "eowiki": {
+     "site": "eowiki"
+    },
+    "eswiki": {
+     "site": "eswiki"
+    },
+    "eswikivoyage": {
+     "site": "eswikivoyage"
+    },
+    "etwiki": {
+     "site": "etwiki"
+    },
+    "euwiki": {
+     "site": "euwiki"
+    },
+    "fawiki": {
+     "site": "fawiki"
+    },
+    "fawikivoyage": {
+     "site": "fawikivoyage"
+    },
+    "fiwiki": {
+     "site": "fiwiki"
+    },
+    "fiwikivoyage": {
+     "site": "fiwikivoyage"
+    },
+    "fowiki": {
+     "site": "fowiki"
+    },
+    "frrwiki": {
+     "site": "frrwiki"
+    },
+    "frwiki": {
+     "site": "frwiki"
+    },
+    "frwikivoyage": {
+     "site": "frwikivoyage"
+    },
+    "fywiki": {
+     "site": "fywiki"
+    },
+    "gawiki": {
+     "site": "gawiki"
+    },
+    "glwiki": {
+     "site": "glwiki"
+    },
+    "gnwiki": {
+     "site": "gnwiki"
+    },
+    "hawiki": {
+     "site": "hawiki"
+    },
+    "hewiki": {
+     "site": "hewiki"
+    },
+    "hewikivoyage": {
+     "site": "hewikivoyage"
+    },
+    "hiwiki": {
+     "site": "hiwiki"
+    },
+    "hrwiki": {
+     "site": "hrwiki"
+    },
+    "hsbwiki": {
+     "site": "hsbwiki"
+    },
+    "huwiki": {
+     "site": "huwiki"
+    },
+    "hywiki": {
+     "site": "hywiki"
+    },
+    "idwiki": {
+     "site": "idwiki"
+    },
+    "idwikivoyage": {
+     "site": "idwikivoyage"
+    },
+    "iewiki": {
+     "site": "iewiki"
+    },
+    "iowiki": {
+     "site": "iowiki"
+    },
+    "isvwiki": {
+     "site": "isvwiki"
+    },
+    "iswiki": {
+     "site": "iswiki"
+    },
+    "itwiki": {
+     "site": "itwiki"
+    },
+    "itwikivoyage": {
+     "site": "itwikivoyage"
+    },
+    "jawiki": {
+     "site": "jawiki"
+    },
+    "jvwiki": {
+     "site": "jvwiki"
+    },
+    "kaawiki": {
+     "site": "kaawiki"
+    },
+    "kawiki": {
+     "site": "kawiki"
+    },
+    "kgewiki": {
+     "site": "kgewiki"
+    },
+    "kkwiki": {
+     "site": "kkwiki"
+    },
+    "knwiki": {
+     "site": "knwiki"
+    },
+    "koiwiki": {
+     "site": "koiwiki"
+    },
+    "kowiki": {
+     "site": "kowiki"
+    },
+    "kywiki": {
+     "site": "kywiki"
+    },
+    "ladwiki": {
+     "site": "ladwiki"
+    },
+    "lawiki": {
+     "site": "lawiki"
+    },
+    "lijwiki": {
+     "site": "lijwiki"
+    },
+    "liwiki": {
+     "site": "liwiki"
+    },
+    "lldwiki": {
+     "site": "lldwiki"
+    },
+    "ltwiki": {
+     "site": "ltwiki"
+    },
+    "lvwiki": {
+     "site": "lvwiki"
+    },
+    "mhrwiki": {
+     "site": "mhrwiki"
+    },
+    "miwiki": {
+     "site": "miwiki"
+    },
+    "mkwiki": {
+     "site": "mkwiki"
+    },
+    "mlwiki": {
+     "site": "mlwiki"
+    },
+    "mnwiki": {
+     "site": "mnwiki"
+    },
+    "mrwiki": {
+     "site": "mrwiki"
+    },
+    "mswiki": {
+     "site": "mswiki"
+    },
+    "myvwiki": {
+     "site": "myvwiki"
+    },
+    "mywiki": {
+     "site": "mywiki"
+    },
+    "mznwiki": {
+     "site": "mznwiki"
+    },
+    "ndswiki": {
+     "site": "ndswiki"
+    },
+    "nlwiki": {
+     "site": "nlwiki"
+    },
+    "nlwikinews": {
+     "site": "nlwikinews"
+    },
+    "nlwikivoyage": {
+     "site": "nlwikivoyage"
+    },
+    "nnwiki": {
+     "site": "nnwiki"
+    },
+    "nowiki": {
+     "site": "nowiki"
+    },
+    "ocwiki": {
+     "site": "ocwiki"
+    },
+    "oswiki": {
+     "site": "oswiki"
+    },
+    "plwiki": {
+     "site": "plwiki"
+    },
+    "plwikiquote": {
+     "site": "plwikiquote"
+    },
+    "plwikivoyage": {
+     "site": "plwikivoyage"
+    },
+    "pmswiki": {
+     "site": "pmswiki"
+    },
+    "pnbwiki": {
+     "site": "pnbwiki"
+    },
+    "pswiki": {
+     "site": "pswiki"
+    },
+    "ptwiki": {
+     "site": "ptwiki"
+    },
+    "ptwikinews": {
+     "site": "ptwikinews"
+    },
+    "quwiki": {
+     "site": "quwiki"
+    },
+    "rowiki": {
+     "site": "rowiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    },
+    "ruwikinews": {
+     "site": "ruwikinews"
+    },
+    "ruwikiquote": {
+     "site": "ruwikiquote"
+    },
+    "ruwikivoyage": {
+     "site": "ruwikivoyage"
+    },
+    "scnwiki": {
+     "site": "scnwiki"
+    },
+    "scowiki": {
+     "site": "scowiki"
+    },
+    "scwiki": {
+     "site": "scwiki"
+    },
+    "shwiki": {
+     "site": "shwiki"
+    },
+    "simplewiki": {
+     "site": "simplewiki"
+    },
+    "skwiki": {
+     "site": "skwiki"
+    },
+    "slwiki": {
+     "site": "slwiki"
+    },
+    "sqwiki": {
+     "site": "sqwiki"
+    },
+    "srwiki": {
+     "site": "srwiki"
+    },
+    "srwikinews": {
+     "site": "srwikinews"
+    },
+    "svwiki": {
+     "site": "svwiki"
+    },
+    "svwikivoyage": {
+     "site": "svwikivoyage"
+    },
+    "swwiki": {
+     "site": "swwiki"
+    },
+    "szlwiki": {
+     "site": "szlwiki"
+    },
+    "tawiki": {
+     "site": "tawiki"
+    },
+    "thwiki": {
+     "site": "thwiki"
+    },
+    "tlywiki": {
+     "site": "tlywiki"
+    },
+    "trwiki": {
+     "site": "trwiki"
+    },
+    "ttwiki": {
+     "site": "ttwiki"
+    },
+    "udmwiki": {
+     "site": "udmwiki"
+    },
+    "ukwiki": {
+     "site": "ukwiki"
+    },
+    "urwiki": {
+     "site": "urwiki"
+    },
+    "uzwiki": {
+     "site": "uzwiki"
+    },
+    "vepwiki": {
+     "site": "vepwiki"
+    },
+    "viwiki": {
+     "site": "viwiki"
+    },
+    "viwikivoyage": {
+     "site": "viwikivoyage"
+    },
+    "warwiki": {
+     "site": "warwiki"
+    },
+    "wowiki": {
+     "site": "wowiki"
+    },
+    "wuuwiki": {
+     "site": "wuuwiki"
+    },
+    "xalwiki": {
+     "site": "xalwiki"
+    },
+    "xmfwiki": {
+     "site": "xmfwiki"
+    },
+    "yiwiki": {
+     "site": "yiwiki"
+    },
+    "zh_min_nanwiki": {
+     "site": "zh_min_nanwiki"
+    },
+    "zh_yuewiki": {
+     "site": "zh_yuewiki"
+    },
+    "zhwiki": {
+     "site": "zhwiki"
+    },
+    "zhwikivoyage": {
+     "site": "zhwikivoyage"
+    }
+   }
+  },
+  "Q103801": {
+   "type": "item",
+   "id": "Q103801",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 574299,
+         "id": "Q574299"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ],
+    "P1082": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "afwiki": {
+     "site": "afwiki"
+    },
+    "arwiki": {
+     "site": "arwiki"
+    },
+    "azwiki": {
+     "site": "azwiki"
+    },
+    "bawiki": {
+     "site": "bawiki"
+    },
+    "be_x_oldwiki": {
+     "site": "be_x_oldwiki"
+    },
+    "bewiki": {
+     "site": "bewiki"
+    },
+    "bgwiki": {
+     "site": "bgwiki"
+    },
+    "brwiki": {
+     "site": "brwiki"
+    },
+    "cawiki": {
+     "site": "cawiki"
+    },
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "csbwiki": {
+     "site": "csbwiki"
+    },
+    "cswiki": {
+     "site": "cswiki"
+    },
+    "dawiki": {
+     "site": "dawiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "dewikisource": {
+     "site": "dewikisource"
+    },
+    "diqwiki": {
+     "site": "diqwiki"
+    },
+    "elwiki": {
+     "site": "elwiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "eowiki": {
+     "site": "eowiki"
+    },
+    "eswiki": {
+     "site": "eswiki"
+    },
+    "etwiki": {
+     "site": "etwiki"
+    },
+    "euwiki": {
+     "site": "euwiki"
+    },
+    "fawiki": {
+     "site": "fawiki"
+    },
+    "fiwiki": {
+     "site": "fiwiki"
+    },
+    "frrwiki": {
+     "site": "frrwiki"
+    },
+    "frwiki": {
+     "site": "frwiki"
+    },
+    "fywiki": {
+     "site": "fywiki"
+    },
+    "glwiki": {
+     "site": "glwiki"
+    },
+    "hewiki": {
+     "site": "hewiki"
+    },
+    "hrwiki": {
+     "site": "hrwiki"
+    },
+    "huwiki": {
+     "site": "huwiki"
+    },
+    "idwiki": {
+     "site": "idwiki"
+    },
+    "iowiki": {
+     "site": "iowiki"
+    },
+    "iswiki": {
+     "site": "iswiki"
+    },
+    "itwiki": {
+     "site": "itwiki"
+    },
+    "jawiki": {
+     "site": "jawiki"
+    },
+    "kawiki": {
+     "site": "kawiki"
+    },
+    "kowiki": {
+     "site": "kowiki"
+    },
+    "lawiki": {
+     "site": "lawiki"
+    },
+    "ltwiki": {
+     "site": "ltwiki"
+    },
+    "lvwiki": {
+     "site": "lvwiki"
+    },
+    "mgwiki": {
+     "site": "mgwiki"
+    },
+    "mkwiki": {
+     "site": "mkwiki"
+    },
+    "mswiki": {
+     "site": "mswiki"
+    },
+    "ndswiki": {
+     "site": "ndswiki"
+    },
+    "nlwiki": {
+     "site": "nlwiki"
+    },
+    "nnwiki": {
+     "site": "nnwiki"
+    },
+    "nowiki": {
+     "site": "nowiki"
+    },
+    "ocwiki": {
+     "site": "ocwiki"
+    },
+    "plwiki": {
+     "site": "plwiki"
+    },
+    "pswiki": {
+     "site": "pswiki"
+    },
+    "ptwiki": {
+     "site": "ptwiki"
+    },
+    "rowiki": {
+     "site": "rowiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    },
+    "ruwikisource": {
+     "site": "ruwikisource"
+    },
+    "shwiki": {
+     "site": "shwiki"
+    },
+    "simplewiki": {
+     "site": "simplewiki"
+    },
+    "skwiki": {
+     "site": "skwiki"
+    },
+    "slwiki": {
+     "site": "slwiki"
+    },
+    "srwiki": {
+     "site": "srwiki"
+    },
+    "svwiki": {
+     "site": "svwiki"
+    },
+    "swwiki": {
+     "site": "swwiki"
+    },
+    "thwiki": {
+     "site": "thwiki"
+    },
+    "tlwiki": {
+     "site": "tlwiki"
+    },
+    "trwiki": {
+     "site": "trwiki"
+    },
+    "ttwiki": {
+     "site": "ttwiki"
+    },
+    "ukwiki": {
+     "site": "ukwiki"
+    },
+    "viwiki": {
+     "site": "viwiki"
+    },
+    "wuuwiki": {
+     "site": "wuuwiki"
+    },
+    "zh_yuewiki": {
+     "site": "zh_yuewiki"
+    },
+    "zhwiki": {
+     "site": "zhwiki"
+    }
+   }
+  },
+  "Q571409": {
+   "type": "item",
+   "id": "Q571409",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 23413,
+         "id": "Q23413"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 19860854,
+         "id": "Q19860854"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 839954,
+         "id": "Q839954"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 365216,
+         "id": "Q365216"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "arwiki": {
+     "site": "arwiki"
+    },
+    "arzwiki": {
+     "site": "arzwiki"
+    },
+    "bgwiki": {
+     "site": "bgwiki"
+    },
+    "cawiki": {
+     "site": "cawiki"
+    },
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "cswiki": {
+     "site": "cswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "eswiki": {
+     "site": "eswiki"
+    },
+    "euwiki": {
+     "site": "euwiki"
+    },
+    "fiwiki": {
+     "site": "fiwiki"
+    },
+    "frwiki": {
+     "site": "frwiki"
+    },
+    "huwiki": {
+     "site": "huwiki"
+    },
+    "idwiki": {
+     "site": "idwiki"
+    },
+    "itwiki": {
+     "site": "itwiki"
+    },
+    "jawiki": {
+     "site": "jawiki"
+    },
+    "ltwiki": {
+     "site": "ltwiki"
+    },
+    "lvwiki": {
+     "site": "lvwiki"
+    },
+    "mswiki": {
+     "site": "mswiki"
+    },
+    "nlwiki": {
+     "site": "nlwiki"
+    },
+    "plwiki": {
+     "site": "plwiki"
+    },
+    "ptwiki": {
+     "site": "ptwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    },
+    "svwiki": {
+     "site": "svwiki"
+    },
+    "thwiki": {
+     "site": "thwiki"
+    },
+    "viwiki": {
+     "site": "viwiki"
+    },
+    "zhwiki": {
+     "site": "zhwiki"
+    }
+   }
+  },
+  "Q4120832": {
+   "type": "item",
+   "id": "Q4120832",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 515,
+         "id": "Q515"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 839954,
+         "id": "Q839954"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 707813,
+         "id": "Q707813"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 22674925,
+         "id": "Q22674925"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 707813,
+         "id": "Q707813"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 1620908,
+         "id": "Q1620908"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 138411346,
+         "id": "Q138411346"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "afwiki": {
+     "site": "afwiki"
+    },
+    "arwiki": {
+     "site": "arwiki"
+    },
+    "arzwiki": {
+     "site": "arzwiki"
+    },
+    "astwiki": {
+     "site": "astwiki"
+    },
+    "avwiki": {
+     "site": "avwiki"
+    },
+    "azwiki": {
+     "site": "azwiki"
+    },
+    "bawiki": {
+     "site": "bawiki"
+    },
+    "bgwiki": {
+     "site": "bgwiki"
+    },
+    "bswiki": {
+     "site": "bswiki"
+    },
+    "cawiki": {
+     "site": "cawiki"
+    },
+    "cywiki": {
+     "site": "cywiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "dewikiquote": {
+     "site": "dewikiquote"
+    },
+    "dewikisource": {
+     "site": "dewikisource"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "eowiki": {
+     "site": "eowiki"
+    },
+    "eswiki": {
+     "site": "eswiki"
+    },
+    "euwiki": {
+     "site": "euwiki"
+    },
+    "fawiki": {
+     "site": "fawiki"
+    },
+    "fiwiki": {
+     "site": "fiwiki"
+    },
+    "frwiki": {
+     "site": "frwiki"
+    },
+    "gdwiki": {
+     "site": "gdwiki"
+    },
+    "gvwiki": {
+     "site": "gvwiki"
+    },
+    "huwiki": {
+     "site": "huwiki"
+    },
+    "hywiki": {
+     "site": "hywiki"
+    },
+    "idwiki": {
+     "site": "idwiki"
+    },
+    "itwiki": {
+     "site": "itwiki"
+    },
+    "jawiki": {
+     "site": "jawiki"
+    },
+    "kawiki": {
+     "site": "kawiki"
+    },
+    "kowiki": {
+     "site": "kowiki"
+    },
+    "ltwiki": {
+     "site": "ltwiki"
+    },
+    "mgwiki": {
+     "site": "mgwiki"
+    },
+    "mswiki": {
+     "site": "mswiki"
+    },
+    "nlwiki": {
+     "site": "nlwiki"
+    },
+    "nnwiki": {
+     "site": "nnwiki"
+    },
+    "nowiki": {
+     "site": "nowiki"
+    },
+    "ocwiki": {
+     "site": "ocwiki"
+    },
+    "oswiki": {
+     "site": "oswiki"
+    },
+    "pnbwiki": {
+     "site": "pnbwiki"
+    },
+    "ptwiki": {
+     "site": "ptwiki"
+    },
+    "rowiki": {
+     "site": "rowiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    },
+    "srwiki": {
+     "site": "srwiki"
+    },
+    "svwiki": {
+     "site": "svwiki"
+    },
+    "thwiki": {
+     "site": "thwiki"
+    },
+    "tlwiki": {
+     "site": "tlwiki"
+    },
+    "trwiki": {
+     "site": "trwiki"
+    },
+    "ttwiki": {
+     "site": "ttwiki"
+    },
+    "ukwiki": {
+     "site": "ukwiki"
+    },
+    "urwiki": {
+     "site": "urwiki"
+    },
+    "viwiki": {
+     "site": "viwiki"
+    },
+    "vlswiki": {
+     "site": "vlswiki"
+    },
+    "xmfwiki": {
+     "site": "xmfwiki"
+    },
+    "zhwiki": {
+     "site": "zhwiki"
+    }
+   }
+  },
+  "Q1193386": {
+   "type": "item",
+   "id": "Q1193386",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 43501,
+         "id": "Q43501"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 2319498,
+         "id": "Q2319498"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "arzwiki": {
+     "site": "arzwiki"
+    },
+    "bgwiki": {
+     "site": "bgwiki"
+    },
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "eswiki": {
+     "site": "eswiki"
+    },
+    "frwiki": {
+     "site": "frwiki"
+    },
+    "itwiki": {
+     "site": "itwiki"
+    },
+    "kowiki": {
+     "site": "kowiki"
+    },
+    "ltwiki": {
+     "site": "ltwiki"
+    },
+    "lvwiki": {
+     "site": "lvwiki"
+    },
+    "nlwiki": {
+     "site": "nlwiki"
+    },
+    "plwiki": {
+     "site": "plwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    },
+    "ruwikinews": {
+     "site": "ruwikinews"
+    },
+    "srwiki": {
+     "site": "srwiki"
+    },
+    "svwiki": {
+     "site": "svwiki"
+    }
+   }
+  },
+  "Q652280": {
+   "type": "item",
+   "id": "Q652280",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 3918,
+         "id": "Q3918"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "arwiki": {
+     "site": "arwiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "hywiki": {
+     "site": "hywiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q1077954": {
+   "type": "item",
+   "id": "Q1077954",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 56242225,
+         "id": "Q56242225"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "arzwiki": {
+     "site": "arzwiki"
+    },
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "cswiki": {
+     "site": "cswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "eswiki": {
+     "site": "eswiki"
+    },
+    "frwiki": {
+     "site": "frwiki"
+    },
+    "fywiki": {
+     "site": "fywiki"
+    },
+    "itwiki": {
+     "site": "itwiki"
+    },
+    "jawiki": {
+     "site": "jawiki"
+    },
+    "nlwiki": {
+     "site": "nlwiki"
+    },
+    "plwiki": {
+     "site": "plwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    },
+    "skwiki": {
+     "site": "skwiki"
+    },
+    "svwiki": {
+     "site": "svwiki"
+    },
+    "ukwiki": {
+     "site": "ukwiki"
+    },
+    "zhwiki": {
+     "site": "zhwiki"
+    }
+   }
+  },
+  "Q672420": {
+   "type": "item",
+   "id": "Q672420",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 3918,
+         "id": "Q3918"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "arwiki": {
+     "site": "arwiki"
+    },
+    "arzwiki": {
+     "site": "arzwiki"
+    },
+    "azbwiki": {
+     "site": "azbwiki"
+    },
+    "azwiki": {
+     "site": "azwiki"
+    },
+    "bewiki": {
+     "site": "bewiki"
+    },
+    "bgwiki": {
+     "site": "bgwiki"
+    },
+    "bnwiki": {
+     "site": "bnwiki"
+    },
+    "cawiki": {
+     "site": "cawiki"
+    },
+    "cswiki": {
+     "site": "cswiki"
+    },
+    "dawiki": {
+     "site": "dawiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "eowiki": {
+     "site": "eowiki"
+    },
+    "eswiki": {
+     "site": "eswiki"
+    },
+    "etwiki": {
+     "site": "etwiki"
+    },
+    "euwiki": {
+     "site": "euwiki"
+    },
+    "fawiki": {
+     "site": "fawiki"
+    },
+    "fiwiki": {
+     "site": "fiwiki"
+    },
+    "frwiki": {
+     "site": "frwiki"
+    },
+    "hewiki": {
+     "site": "hewiki"
+    },
+    "hiwiki": {
+     "site": "hiwiki"
+    },
+    "huwiki": {
+     "site": "huwiki"
+    },
+    "idwiki": {
+     "site": "idwiki"
+    },
+    "itwiki": {
+     "site": "itwiki"
+    },
+    "jawiki": {
+     "site": "jawiki"
+    },
+    "kawiki": {
+     "site": "kawiki"
+    },
+    "kowiki": {
+     "site": "kowiki"
+    },
+    "lawiki": {
+     "site": "lawiki"
+    },
+    "ltwiki": {
+     "site": "ltwiki"
+    },
+    "lvwiki": {
+     "site": "lvwiki"
+    },
+    "mnwiki": {
+     "site": "mnwiki"
+    },
+    "nlwiki": {
+     "site": "nlwiki"
+    },
+    "nowiki": {
+     "site": "nowiki"
+    },
+    "plwiki": {
+     "site": "plwiki"
+    },
+    "ptwiki": {
+     "site": "ptwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    },
+    "sqwiki": {
+     "site": "sqwiki"
+    },
+    "svwiki": {
+     "site": "svwiki"
+    },
+    "ukwiki": {
+     "site": "ukwiki"
+    },
+    "uzwiki": {
+     "site": "uzwiki"
+    },
+    "zhwiki": {
+     "site": "zhwiki"
+    }
+   }
+  },
+  "Q4342989": {
+   "type": "item",
+   "id": "Q4342989",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 5003624,
+         "id": "Q5003624"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 1081138,
+         "id": "Q1081138"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "kawiki": {
+     "site": "kawiki"
+    },
+    "nlwiki": {
+     "site": "nlwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q4178907": {
+   "type": "item",
+   "id": "Q4178907",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 53060,
+         "id": "Q53060"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 2319498,
+         "id": "Q2319498"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "hywiki": {
+     "site": "hywiki"
+    },
+    "nlwiki": {
+     "site": "nlwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    },
+    "ukwiki": {
+     "site": "ukwiki"
+    }
+   }
+  },
+  "Q778457": {
+   "type": "item",
+   "id": "Q778457",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 53060,
+         "id": "Q53060"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 2319498,
+         "id": "Q2319498"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "hywiki": {
+     "site": "hywiki"
+    },
+    "kawiki": {
+     "site": "kawiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q2448005": {
+   "type": "item",
+   "id": "Q2448005",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 53060,
+         "id": "Q53060"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q2340338": {
+   "type": "item",
+   "id": "Q2340338",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 82117,
+         "id": "Q82117"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q445853": {
+   "type": "item",
+   "id": "Q445853",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 16970,
+         "id": "Q16970"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 19860854,
+         "id": "Q19860854"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "nlwiki": {
+     "site": "nlwiki"
+    },
+    "plwiki": {
+     "site": "plwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q770550": {
+   "type": "item",
+   "id": "Q770550",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 16970,
+         "id": "Q16970"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 19860854,
+         "id": "Q19860854"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "arzwiki": {
+     "site": "arzwiki"
+    },
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q830344": {
+   "type": "item",
+   "id": "Q830344",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 3364296,
+         "id": "Q3364296"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 2319498,
+         "id": "Q2319498"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "hywiki": {
+     "site": "hywiki"
+    },
+    "kawiki": {
+     "site": "kawiki"
+    },
+    "nlwiki": {
+     "site": "nlwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    },
+    "ukwiki": {
+     "site": "ukwiki"
+    }
+   }
+  },
+  "Q644191": {
+   "type": "item",
+   "id": "Q644191",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 174782,
+         "id": "Q174782"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "arzwiki": {
+     "site": "arzwiki"
+    },
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "eowiki": {
+     "site": "eowiki"
+    },
+    "frwiki": {
+     "site": "frwiki"
+    },
+    "nlwiki": {
+     "site": "nlwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    },
+    "ruwikinews": {
+     "site": "ruwikinews"
+    }
+   }
+  },
+  "Q4304251": {
+   "type": "item",
+   "id": "Q4304251",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 907698,
+         "id": "Q907698"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    },
+    "ukwiki": {
+     "site": "ukwiki"
+    }
+   }
+  },
+  "Q4330375": {
+   "type": "item",
+   "id": "Q4330375",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 44539,
+         "id": "Q44539"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 2319498,
+         "id": "Q2319498"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q1397618": {
+   "type": "item",
+   "id": "Q1397618",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 811430,
+         "id": "Q811430"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 16970,
+         "id": "Q16970"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    },
+    "ukwiki": {
+     "site": "ukwiki"
+    }
+   }
+  },
+  "Q828025": {
+   "type": "item",
+   "id": "Q828025",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 16970,
+         "id": "Q16970"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 19860854,
+         "id": "Q19860854"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q1285035": {
+   "type": "item",
+   "id": "Q1285035",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 16970,
+         "id": "Q16970"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "eowiki": {
+     "site": "eowiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q1255657": {
+   "type": "item",
+   "id": "Q1255657",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 24354,
+         "id": "Q24354"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "arzwiki": {
+     "site": "arzwiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "eswiki": {
+     "site": "eswiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    },
+    "zhwiki": {
+     "site": "zhwiki"
+    }
+   }
+  },
+  "Q805726": {
+   "type": "item",
+   "id": "Q805726",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 1154710,
+         "id": "Q1154710"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 2319498,
+         "id": "Q2319498"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "eswiki": {
+     "site": "eswiki"
+    },
+    "fawiki": {
+     "site": "fawiki"
+    },
+    "frwiki": {
+     "site": "frwiki"
+    },
+    "hywiki": {
+     "site": "hywiki"
+    },
+    "nlwiki": {
+     "site": "nlwiki"
+    },
+    "plwiki": {
+     "site": "plwiki"
+    },
+    "ptwiki": {
+     "site": "ptwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q4538282": {
+   "type": "item",
+   "id": "Q4538282",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 4830453,
+         "id": "Q4830453"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 6881511,
+         "id": "Q6881511"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q4264374": {
+   "type": "item",
+   "id": "Q4264374",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 55488,
+         "id": "Q55488"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q4473211": {
+   "type": "item",
+   "id": "Q4473211",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 79007,
+         "id": "Q79007"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q380044": {
+   "type": "item",
+   "id": "Q380044",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 55488,
+         "id": "Q55488"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "eowiki": {
+     "site": "eowiki"
+    },
+    "frwiki": {
+     "site": "frwiki"
+    },
+    "nlwiki": {
+     "site": "nlwiki"
+    },
+    "plwiki": {
+     "site": "plwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q4313393": {
+   "type": "item",
+   "id": "Q4313393",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 22698,
+         "id": "Q22698"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q4471849": {
+   "type": "item",
+   "id": "Q4471849",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 79007,
+         "id": "Q79007"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q1727201": {
+   "type": "item",
+   "id": "Q1727201",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 860861,
+         "id": "Q860861"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 4989906,
+         "id": "Q4989906"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "hywiki": {
+     "site": "hywiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    },
+    "svwiki": {
+     "site": "svwiki"
+    }
+   }
+  },
+  "Q4471433": {
+   "type": "item",
+   "id": "Q4471433",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 79007,
+         "id": "Q79007"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q16684457": {
+   "type": "item",
+   "id": "Q16684457",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 4989906,
+         "id": "Q4989906"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "hywiki": {
+     "site": "hywiki"
+    },
+    "kawiki": {
+     "site": "kawiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q1499598": {
+   "type": "item",
+   "id": "Q1499598",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 39614,
+         "id": "Q39614"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "ptwiki": {
+     "site": "ptwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q16657356": {
+   "type": "item",
+   "id": "Q16657356",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 7075,
+         "id": "Q7075"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q18407366": {
+   "type": "item",
+   "id": "Q18407366",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 4989906,
+         "id": "Q4989906"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "hywiki": {
+     "site": "hywiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    },
+    "uzwiki": {
+     "site": "uzwiki"
+    }
+   }
+  },
+  "Q24934195": {
+   "type": "item",
+   "id": "Q24934195",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 159313,
+         "id": "Q159313"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ],
+    "P1082": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q1195888": {
+   "type": "item",
+   "id": "Q1195888",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 16970,
+         "id": "Q16970"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 15893266,
+         "id": "Q15893266"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "arzwiki": {
+     "site": "arzwiki"
+    },
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "elwiki": {
+     "site": "elwiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "frwiki": {
+     "site": "frwiki"
+    },
+    "hywiki": {
+     "site": "hywiki"
+    },
+    "itwiki": {
+     "site": "itwiki"
+    },
+    "plwiki": {
+     "site": "plwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    },
+    "ukwiki": {
+     "site": "ukwiki"
+    }
+   }
+  },
+  "Q1795200": {
+   "type": "item",
+   "id": "Q1795200",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 4989906,
+         "id": "Q4989906"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "hywiki": {
+     "site": "hywiki"
+    },
+    "kawiki": {
+     "site": "kawiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    },
+    "uzwiki": {
+     "site": "uzwiki"
+    }
+   }
+  },
+  "Q12671943": {
+   "type": "item",
+   "id": "Q12671943",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 2101791,
+         "id": "Q2101791"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 2319498,
+         "id": "Q2319498"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "hywiki": {
+     "site": "hywiki"
+    },
+    "ltwiki": {
+     "site": "ltwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q1796171": {
+   "type": "item",
+   "id": "Q1796171",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 3914,
+         "id": "Q3914"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 2319498,
+         "id": "Q2319498"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 19860854,
+         "id": "Q19860854"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "arzwiki": {
+     "site": "arzwiki"
+    },
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q2646606": {
+   "type": "item",
+   "id": "Q2646606",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 41253,
+         "id": "Q41253"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 19860854,
+         "id": "Q19860854"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q886573": {
+   "type": "item",
+   "id": "Q886573",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 213441,
+         "id": "Q213441"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 11707,
+         "id": "Q11707"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "huwiki": {
+     "site": "huwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    },
+    "ukwiki": {
+     "site": "ukwiki"
+    }
+   }
+  },
+  "Q1194853": {
+   "type": "item",
+   "id": "Q1194853",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 123705,
+         "id": "Q123705"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "plwiki": {
+     "site": "plwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q2324646": {
+   "type": "item",
+   "id": "Q2324646",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 1622062,
+         "id": "Q1622062"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 856234,
+         "id": "Q856234"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 1386438,
+         "id": "Q1386438"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "enwiki": {
+     "site": "enwiki"
+    },
+    "eswiki": {
+     "site": "eswiki"
+    },
+    "frwiki": {
+     "site": "frwiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    },
+    "ukwiki": {
+     "site": "ukwiki"
+    }
+   }
+  },
+  "Q103831611": {
+   "type": "item",
+   "id": "Q103831611",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 38723,
+         "id": "Q38723"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q4209557": {
+   "type": "item",
+   "id": "Q4209557",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 1664720,
+         "id": "Q1664720"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 2385804,
+         "id": "Q2385804"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     },
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 38723,
+         "id": "Q38723"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q15052089": {
+   "type": "item",
+   "id": "Q15052089",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 4989906,
+         "id": "Q4989906"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q127420504": {
+   "type": "item",
+   "id": "Q127420504",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 79007,
+         "id": "Q79007"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    }
+   }
+  },
+  "Q2139692": {
+   "type": "item",
+   "id": "Q2139692",
+   "claims": {
+    "P31": [
+     {
+      "mainsnak": {
+       "snaktype": "value",
+       "datavalue": {
+        "value": {
+         "entity-type": "item",
+         "numeric-id": 1474414,
+         "id": "Q1474414"
+        },
+        "type": "wikibase-entityid"
+       }
+      }
+     }
+    ]
+   },
+   "sitelinks": {
+    "commonswiki": {
+     "site": "commonswiki"
+    },
+    "dewiki": {
+     "site": "dewiki"
+    },
+    "ruwiki": {
+     "site": "ruwiki"
+    },
+    "svwiki": {
+     "site": "svwiki"
+    }
+   }
+  }
+ },
+ "success": 1
+}

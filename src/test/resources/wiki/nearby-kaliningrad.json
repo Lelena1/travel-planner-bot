@@ -1,0 +1,886 @@
+{
+ "batchcomplete": true,
+ "query": {
+  "pages": [
+   {
+    "pageid": 70,
+    "ns": 0,
+    "title": "Калининград",
+    "index": -1,
+    "coordinates": [
+     {
+      "lat": 54.71667,
+      "lon": 20.5,
+      "primary": true,
+      "type": "city"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q1829"
+    },
+    "description": "город и городской округ в России, административный центр Калининградской области",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 1412,
+    "ns": 0,
+    "title": "Восточная Пруссия",
+    "index": 0,
+    "coordinates": [
+     {
+      "lat": 54.71,
+      "lon": 20.51,
+      "primary": true,
+      "type": "adm2nd"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q103801"
+    },
+    "description": "прусская провинция",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 3001,
+    "ns": 0,
+    "title": "Кёнигсбергский замок",
+    "index": 1,
+    "coordinates": [
+     {
+      "lat": 54.71,
+      "lon": 20.51056,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q571409"
+    },
+    "description": "замок Тевтонского ордена в Кёнигсберге (Калининграде)",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 23992,
+    "ns": 0,
+    "title": "Кёнигсберг",
+    "index": 2,
+    "coordinates": [
+     {
+      "lat": 54.71667,
+      "lon": 20.5,
+      "primary": true
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q4120832"
+    },
+    "description": "город в Германии, административный центр Восточной Пруссии; с 1946 года - российский город Калининград",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 56873,
+    "ns": 0,
+    "title": "Калининградский зоопарк",
+    "index": 3,
+    "coordinates": [
+     {
+      "lat": 54.720444,
+      "lon": 20.487373,
+      "primary": true
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q1193386"
+    },
+    "description": "зоопарк",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 147401,
+    "ns": 0,
+    "title": "Калининградский государственный технический университет",
+    "index": 4,
+    "coordinates": [
+     {
+      "lat": 54.7206972,
+      "lon": 20.4986417,
+      "primary": true
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q652280"
+    },
+    "description": "университет в Калининграде, Россия",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 228737,
+    "ns": 0,
+    "title": "Собор Христа Спасителя (Калининград)",
+    "index": 5,
+    "coordinates": [
+     {
+      "lat": 54.72083333,
+      "lon": 20.50333333,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q1077954"
+    }
+   },
+   {
+    "pageid": 348548,
+    "ns": 0,
+    "title": "Кёнигсбергский университет",
+    "index": 6,
+    "coordinates": [
+     {
+      "lat": 54.71389,
+      "lon": 20.51,
+      "primary": true
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q672420"
+    },
+    "description": "старейший университет Пруссии",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 605645,
+    "ns": 0,
+    "title": "Памятник 1200 гвардейцам",
+    "index": 7,
+    "coordinates": [
+     {
+      "lat": 54.711178,
+      "lon": 20.490227,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q4342989"
+    }
+   },
+   {
+    "pageid": 706955,
+    "ns": 0,
+    "title": "Железнодорожные ворота (Калининград)",
+    "index": 8,
+    "coordinates": [
+     {
+      "lat": 54.7102,
+      "lon": 20.49069444,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q4178907"
+    }
+   },
+   {
+    "pageid": 707837,
+    "ns": 0,
+    "title": "Аусфальские ворота",
+    "index": 9,
+    "coordinates": [
+     {
+      "lat": 54.71218056,
+      "lon": 20.49088611,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q778457"
+    }
+   },
+   {
+    "pageid": 955690,
+    "ns": 0,
+    "title": "Трагхаймские ворота",
+    "index": 10,
+    "coordinates": [
+     {
+      "lat": 54.714956,
+      "lon": 20.506576,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q2448005"
+    }
+   },
+   {
+    "pageid": 955704,
+    "ns": 0,
+    "title": "Штайндаммские ворота",
+    "index": 11,
+    "coordinates": [
+     {
+      "lat": 54.719304,
+      "lon": 20.500942,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q2340338"
+    }
+   },
+   {
+    "pageid": 1035744,
+    "ns": 0,
+    "title": "Альтштадтская кирха",
+    "index": 12,
+    "coordinates": [
+     {
+      "lat": 54.7129583,
+      "lon": 20.5093861,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q445853"
+    }
+   },
+   {
+    "pageid": 1038229,
+    "ns": 0,
+    "title": "Штайндаммская кирха",
+    "index": 13,
+    "coordinates": [
+     {
+      "lat": 54.7165028,
+      "lon": 20.5053972,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q770550"
+    }
+   },
+   {
+    "pageid": 1111394,
+    "ns": 0,
+    "title": "Дом техники (Калининград)",
+    "index": 14,
+    "coordinates": [
+     {
+      "lat": 54.72138889,
+      "lon": 20.50888889,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q830344"
+    }
+   },
+   {
+    "pageid": 1111459,
+    "ns": 0,
+    "title": "Площадь Победы (Калининград)",
+    "index": 15,
+    "coordinates": [
+     {
+      "lat": 54.72007209,
+      "lon": 20.50072432,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q644191"
+    },
+    "description": "площадь в Калининграде",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 1189740,
+    "ns": 0,
+    "title": "Московский проспект (Калининград)",
+    "index": 16,
+    "coordinates": [
+     {
+      "lat": 54.71028,
+      "lon": 20.5,
+      "primary": true
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q4304251"
+    },
+    "description": "улица в городе Калининград",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 1224476,
+    "ns": 0,
+    "title": "Общинный дом в Трагхайме",
+    "index": 17,
+    "coordinates": [
+     {
+      "lat": 54.72,
+      "lon": 20.5054,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q4330375"
+    }
+   },
+   {
+    "pageid": 1253929,
+    "ns": 0,
+    "title": "Кирха Христа (Кёнигсберг)",
+    "index": 18,
+    "coordinates": [
+     {
+      "lat": 54.72167,
+      "lon": 20.51083,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q1397618"
+    }
+   },
+   {
+    "pageid": 1255095,
+    "ns": 0,
+    "title": "Новая Россгартенская кирха",
+    "index": 19,
+    "coordinates": [
+     {
+      "lat": 54.7129472,
+      "lon": 20.5029,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q828025"
+    }
+   },
+   {
+    "pageid": 1255761,
+    "ns": 0,
+    "title": "Трагхаймская кирха",
+    "index": 20,
+    "coordinates": [
+     {
+      "lat": 54.7178833,
+      "lon": 20.5079361,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q1285035"
+    }
+   },
+   {
+    "pageid": 1300964,
+    "ns": 0,
+    "title": "Калининградский областной драматический театр",
+    "index": 21,
+    "coordinates": [
+     {
+      "lat": 54.71944,
+      "lon": 20.49222,
+      "primary": true
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q1255657"
+    },
+    "description": "театр в Калининграде",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 1343613,
+    "ns": 0,
+    "title": "Балтика (стадион)",
+    "index": 22,
+    "coordinates": [
+     {
+      "lat": 54.717143,
+      "lon": 20.49018,
+      "primary": true
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q805726"
+    },
+    "description": "стадион",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 1402273,
+    "ns": 0,
+    "title": "Россети Янтарь",
+    "index": 23,
+    "coordinates": [
+     {
+      "lat": 54.7181,
+      "lon": 20.4981,
+      "primary": true
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q4538282"
+    }
+   },
+   {
+    "pageid": 1786871,
+    "ns": 0,
+    "title": "Лицентский вокзал",
+    "index": 24,
+    "coordinates": [
+     {
+      "lat": 54.708639,
+      "lon": 20.498278,
+      "primary": true,
+      "type": "railwaystation"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q4264374"
+    }
+   },
+   {
+    "pageid": 1832073,
+    "ns": 0,
+    "title": "Улица Михаила Галковского",
+    "index": 25,
+    "coordinates": [
+     {
+      "lat": 54.71861,
+      "lon": 20.506167,
+      "primary": true
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q4473211"
+    }
+   },
+   {
+    "pageid": 1861140,
+    "ns": 0,
+    "title": "Калининград-Северный",
+    "index": 26,
+    "coordinates": [
+     {
+      "lat": 54.720944,
+      "lon": 20.500194,
+      "primary": true,
+      "type": "railwaystation"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q380044"
+    },
+    "description": "станция в Калининграде, Россия",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 2079536,
+    "ns": 0,
+    "title": "Народный сад",
+    "index": 27,
+    "coordinates": [
+     {
+      "lat": 54.71333,
+      "lon": 20.49389,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q4313393"
+    },
+    "description": "парк в Калининграде",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 2507318,
+    "ns": 0,
+    "title": "Улица Генерала Соммера",
+    "index": 28,
+    "coordinates": [
+     {
+      "lat": 54.71611,
+      "lon": 20.50833,
+      "primary": true
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q4471849"
+    },
+    "description": "улица в Калининграде",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 2818298,
+    "ns": 0,
+    "title": "Борющиеся зубры",
+    "index": 29,
+    "coordinates": [
+     {
+      "lat": 54.72028,
+      "lon": 20.49722,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q1727201"
+    }
+   },
+   {
+    "pageid": 3682552,
+    "ns": 0,
+    "title": "Улица Бесселя (Калининград)",
+    "index": 30,
+    "coordinates": [
+     {
+      "lat": 54.713194,
+      "lon": 20.49722,
+      "primary": true
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q4471433"
+    }
+   },
+   {
+    "pageid": 4474891,
+    "ns": 0,
+    "title": "Памятник Канту (Калининград)",
+    "index": 31,
+    "coordinates": [
+     {
+      "lat": 54.71388889,
+      "lon": 20.51027778,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q16684457"
+    }
+   },
+   {
+    "pageid": 4819770,
+    "ns": 0,
+    "title": "Профессорское кладбище (Калининград)",
+    "index": 32,
+    "coordinates": [
+     {
+      "lat": 54.71028,
+      "lon": 20.49167,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q1499598"
+    }
+   },
+   {
+    "pageid": 4834792,
+    "ns": 0,
+    "title": "Калининградская областная научная библиотека",
+    "index": 33,
+    "coordinates": [
+     {
+      "lat": 54.71957,
+      "lon": 20.495199,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q16657356"
+    },
+    "description": "библиотека",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 5265651,
+    "ns": 0,
+    "title": "Памятник героям Первой мировой войны (Калининград)",
+    "index": 34,
+    "coordinates": [
+     {
+      "lat": 54.713,
+      "lon": 20.49046,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q18407366"
+    }
+   },
+   {
+    "pageid": 6285148,
+    "ns": 0,
+    "title": "Калининградская агломерация",
+    "index": 35,
+    "coordinates": [
+     {
+      "lat": 54.71667,
+      "lon": 20.5,
+      "primary": true,
+      "type": "city"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q24934195"
+    }
+   },
+   {
+    "pageid": 6429120,
+    "ns": 0,
+    "title": "Замковая церковь (Кёнигсберг)",
+    "index": 36,
+    "coordinates": [
+     {
+      "lat": 54.710218,
+      "lon": 20.510788,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q1195888"
+    }
+   },
+   {
+    "pageid": 6782020,
+    "ns": 0,
+    "title": "Памятник Шиллеру (Калининград)",
+    "index": 37,
+    "coordinates": [
+     {
+      "lat": 54.71955622,
+      "lon": 20.49395978,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q1795200"
+    }
+   },
+   {
+    "pageid": 6787401,
+    "ns": 0,
+    "title": "Здание полицейского президиума",
+    "index": 38,
+    "coordinates": [
+     {
+      "lat": 54.721519,
+      "lon": 20.498416,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q12671943"
+    },
+    "description": "историческое здание в Калининграде",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 6814779,
+    "ns": 0,
+    "title": "Хуфенская гимназия",
+    "index": 39,
+    "coordinates": [
+     {
+      "lat": 54.72083611,
+      "lon": 20.48688889,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q1796171"
+    }
+   },
+   {
+    "pageid": 7388166,
+    "ns": 0,
+    "title": "Альгамбра (кинотеатр)",
+    "index": 40,
+    "coordinates": [
+     {
+      "lat": 54.712082,
+      "lon": 20.506384,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q2646606"
+    },
+    "description": "кинотеатр в Кёнигсберге",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 7551209,
+    "ns": 0,
+    "title": "Кровавый суд",
+    "index": 41,
+    "coordinates": [
+     {
+      "lat": 54.71,
+      "lon": 20.51056,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q886573"
+    },
+    "description": "заведение (таверна или винный магазин) в Кёнигсберге",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 7579354,
+    "ns": 0,
+    "title": "Трагхайм",
+    "index": 42,
+    "coordinates": [
+     {
+      "lat": 54.71611,
+      "lon": 20.51222,
+      "primary": true
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q1194853"
+    }
+   },
+   {
+    "pageid": 8556482,
+    "ns": 0,
+    "title": "Университетская библиотека (Кёнигсберг)",
+    "index": 43,
+    "coordinates": [
+     {
+      "lat": 54.71722222,
+      "lon": 20.51333333,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q2324646"
+    }
+   },
+   {
+    "pageid": 8599393,
+    "ns": 0,
+    "title": "Калининградское высшее инженерное ордена Ленина Краснознамённое училище инженерных войск имени А. А. Жданова",
+    "index": 44,
+    "coordinates": [
+     {
+      "lat": 54.71667,
+      "lon": 20.5,
+      "primary": true
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q103831611"
+    },
+    "description": "советский вуз",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 8610388,
+    "ns": 0,
+    "title": "Калининградский юридический институт МВД России",
+    "index": 45,
+    "coordinates": [
+     {
+      "lat": 54.71667,
+      "lon": 20.5,
+      "primary": true
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q4209557"
+    },
+    "description": "российский вуз",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 8769729,
+    "ns": 0,
+    "title": "Памятник Фридриху Вильгельму Бесселю",
+    "index": 46,
+    "coordinates": [
+     {
+      "lat": 54.71305556,
+      "lon": 20.49444444,
+      "primary": true,
+      "type": "landmark"
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q15052089"
+    }
+   },
+   {
+    "pageid": 10674447,
+    "ns": 0,
+    "title": "Гвардейский проспект (Калининград)",
+    "index": 47,
+    "coordinates": [
+     {
+      "lat": 54.715228,
+      "lon": 20.493267,
+      "primary": true
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q127420504"
+    },
+    "description": "улица в Калининграде",
+    "descriptionsource": "central"
+   },
+   {
+    "pageid": 10944464,
+    "ns": 0,
+    "title": "Reichssender Königsberg",
+    "index": 48,
+    "coordinates": [
+     {
+      "lat": 54.71954167,
+      "lon": 20.49775833,
+      "primary": true
+     }
+    ],
+    "pageprops": {
+     "wikibase_item": "Q2139692"
+    }
+   }
+  ]
+ },
+ "limits": {
+  "coordinates": 500
+ }
+}

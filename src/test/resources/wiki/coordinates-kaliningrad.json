@@ -1,0 +1,20 @@
+{
+ "batchcomplete": true,
+ "query": {
+  "pages": [
+   {
+    "pageid": 70,
+    "ns": 0,
+    "title": "Калининград",
+    "coordinates": [
+     {
+      "lat": 54.71667,
+      "lon": 20.5,
+      "primary": true,
+      "globe": "earth"
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,650 @@
+{
+ "version": 0.6,
+ "generator": "Overpass API 0.7.62.11 87bfad18",
+ "osm3s": {
+  "timestamp_osm_base": "2026-11-19T17:39:25Z",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+ },
+ "elements": [
+  {
+   "type": "node",
+   "id": 1025168294,
+   "lat": 54.7096305,
+   "lon": 20.5191883,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Цезарь"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1025298784,
+   "lat": 54.7206538,
+   "lon": 20.4970055,
+   "tags": {
+    "amenity": "cafe",
+    "name": "У быков"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1231377302,
+   "lat": 54.7191908,
+   "lon": 20.4876768,
+   "tags": {
+    "addr:housenumber": "19-21",
+    "addr:postcode": "236022",
+    "addr:street": "проспект Мира",
+    "amenity": "restaurant",
+    "check_date": "2026-10-19",
+    "cuisine": "burger;italian;grill;steak_house",
+    "diet:vegetarian": "yes",
+    "internet_access": "wlan",
+    "name": "Угли",
+    "name:en": "Coals",
+    "name:ru": "Угли",
+    "opening_hours": "Mo-Su 12:00-24:00",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "+7 4012 615606",
+    "website": "https://ugli-rest.bitrix24site.ru/",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1415712767,
+   "lat": 54.7198009,
+   "lon": 20.4866097,
+   "tags": {
+    "addr:floor": "1",
+    "addr:housenumber": "23",
+    "addr:street": "проспект Мира",
+    "amenity": "cafe",
+    "check_date": "2026-10-02",
+    "contact:email": "info@kruassan.com",
+    "contact:phone": "+7 401 2303040",
+    "contact:website": "https://kruassanfamily.ru/kruassan-cafe/",
+    "level": "0",
+    "name": "Круассан",
+    "opening_hours": "08:00-21:00",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1419118456,
+   "lat": 54.7195815,
+   "lon": 20.5027914,
+   "tags": {
+    "amenity": "restaurant",
+    "check_date": "2026-08-29",
+    "contact:email": "marketing@bprest39.ru",
+    "contact:phone": "+7 401 2301010",
+    "contact:website": "https://britannicaproject.ru",
+    "cuisine": "bavarian;german;grill;international",
+    "name": "Хмель",
+    "opening_hours": "Fr-Sa 12:00-24:00; Mo-Th,Su 12:00-23:00"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1419136858,
+   "lat": 54.7209849,
+   "lon": 20.5174759,
+   "tags": {
+    "amenity": "cafe",
+    "check_date": "2026-08-31",
+    "name": "Шарк"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1419137351,
+   "lat": 54.7211988,
+   "lon": 20.5070993,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "japanese",
+    "name": "Кано"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1419137354,
+   "lat": 54.7208609,
+   "lon": 20.5060101,
+   "tags": {
+    "amenity": "restaurant",
+    "level": "0",
+    "name": "Бухара"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1422326160,
+   "lat": 54.7130176,
+   "lon": 20.5076562,
+   "tags": {
+    "amenity": "cafe",
+    "check_date": "2026-09-14",
+    "contact:email": "info@kruassan.com",
+    "contact:phone": "+7 401 2303040;+7 401 2389466",
+    "contact:website": "https://kruassanfamily.ru/kruassan-cafe/",
+    "cuisine": "breakfast;cake;coffee_shop",
+    "level": "1",
+    "name": "Круассан",
+    "opening_hours": "Mo-Fr 08:00-21:00; Sa-Su 09:00-21:00",
+    "operator": "Капучино",
+    "outdoor_seating": "no",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "smoking": "outside",
+    "takeaway": "yes",
+    "toilets": "yes",
+    "toilets:access": "permissive",
+    "toilets:wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1422337706,
+   "lat": 54.7138599,
+   "lon": 20.5054557,
+   "tags": {
+    "amenity": "restaurant",
+    "brand": "Якитория",
+    "brand:wikidata": "Q66088063",
+    "cuisine": "japanese;international",
+    "name": "Якитория"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1422339342,
+   "lat": 54.716802,
+   "lon": 20.5003299,
+   "tags": {
+    "addr:floor": "1",
+    "addr:housenumber": "21",
+    "addr:street": "Театральная улица",
+    "amenity": "restaurant",
+    "check_date": "2026-10-28",
+    "level": "0",
+    "name": "Лола",
+    "name:en": "Lola",
+    "opening_hours": "12:00-22:00",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "website": "http://chaihana.me",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1422344711,
+   "lat": 54.7190003,
+   "lon": 20.5002397,
+   "tags": {
+    "addr:floor": "1",
+    "addr:housenumber": "1",
+    "addr:street": "площадь Победы",
+    "amenity": "cafe",
+    "check_date": "2026-10-28",
+    "level": "0",
+    "name": "Кавказ",
+    "name:en": "Kavkaz",
+    "opening_hours": "Mo-Th,Su 12:00-23:00; Fr-Sa 12:00-24:00",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1463889648,
+   "lat": 54.7119657,
+   "lon": 20.5037581,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Угловой"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1523124081,
+   "lat": 54.7134787,
+   "lon": 20.5060468,
+   "tags": {
+    "addr:housenumber": "20",
+    "addr:street": "Ленинский проспект",
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Папаша Беппе",
+    "opening_hours": "10:00-23:00",
+    "phone": "+7 4012 312-312 p6",
+    "website": "https://www.pabeppe.ru/"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1523124088,
+   "lat": 54.7174929,
+   "lon": 20.5028387,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Старый город"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1621237949,
+   "lat": 54.7147826,
+   "lon": 20.5031723,
+   "tags": {
+    "amenity": "cafe",
+    "brand": "Штолле",
+    "brand:en": "Stolle",
+    "brand:wikidata": "Q62502236",
+    "check_date": "2026-08-08",
+    "cuisine": "coffee_shop",
+    "name": "Штолле",
+    "name:en": "Stolle",
+    "opening_hours": "Mo-Sa 08:00-21:00; Su 08:00-20:00",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "+7 (4012) 53-81-82",
+    "takeaway": "yes",
+    "website": "https://kaliningrad.stolle.ru/"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1621249660,
+   "lat": 54.7203746,
+   "lon": 20.5091896,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Минутка",
+    "opening_hours": "Mo-Su 08:00-18:45"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1623384429,
+   "lat": 54.7144847,
+   "lon": 20.4973962,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "pie",
+    "internet_access": "wlan",
+    "name": "Пироговая на Галицкого",
+    "opening_hours": "08:00-20:00",
+    "takeaway": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1694546008,
+   "lat": 54.7244605,
+   "lon": 20.4949678,
+   "tags": {
+    "amenity": "cafe",
+    "name": "7 футов"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1732701879,
+   "lat": 54.7195392,
+   "lon": 20.5070091,
+   "tags": {
+    "amenity": "restaurant",
+    "check_date": "2026-08-15",
+    "name": "Дикий Дюк",
+    "name:ru": "Дикий Дюк",
+    "opening_hours": "12:00-06:00",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 2064771840,
+   "lat": 54.7231829,
+   "lon": 20.500168,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Солянка",
+    "opening_hours": "09:00-22:00"
+   }
+  },
+  {
+   "type": "node",
+   "id": 2319274284,
+   "lat": 54.72433,
+   "lon": 20.4965783,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Blackberry",
+    "opening_hours": "Mo-Su 08:00-20:00"
+   }
+  },
+  {
+   "type": "node",
+   "id": 2429867727,
+   "lat": 54.7178403,
+   "lon": 20.4768975,
+   "tags": {
+    "addr:floor": "1",
+    "amenity": "cafe",
+    "check_date": "2026-10-29",
+    "level": "0",
+    "name": "Блинная"
+   }
+  },
+  {
+   "type": "node",
+   "id": 2905535038,
+   "lat": 54.7115416,
+   "lon": 20.5110146,
+   "tags": {
+    "addr:city": "Калининград",
+    "addr:country": "RU",
+    "addr:housenumber": "11a",
+    "addr:postcode": "236040",
+    "addr:street": "улица Шевченко",
+    "amenity": "restaurant",
+    "check_date": "2026-09-14",
+    "contact:email": "tf_feedback@vavilon39.ru",
+    "contact:phone": "+7 4012 387447",
+    "contact:vk": "tfisher",
+    "contact:website": "http://tetkafisher39.ru/",
+    "cuisine": "german",
+    "delivery": "no",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Тётка Фишер",
+    "name:de": "Tante Fischer",
+    "opening_hours": "10:00-24:00",
+    "payment:cash": "yes",
+    "payment:contactless": "yes",
+    "payment:maestro": "no",
+    "payment:mastercard": "no",
+    "payment:notes": "yes",
+    "payment:visa": "no",
+    "smoking": "outside",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "node",
+   "id": 2935039476,
+   "lat": 54.7196836,
+   "lon": 20.5049886,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Brasserie de Verres en Vers",
+    "phone": "+7 4012 593344"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3021723409,
+   "lat": 54.7195257,
+   "lon": 20.5195275,
+   "tags": {
+    "addr:housenumber": "14",
+    "addr:street": "улица Сергеева",
+    "amenity": "restaurant",
+    "cuisine": "international;russian",
+    "internet_access": "wlan",
+    "name": "Мушкино",
+    "opening_hours": "Mo-Su 12:00-24:00",
+    "phone": "+7 4012 525225",
+    "website": "http://restoran.mushkino.ru/"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3158992728,
+   "lat": 54.7218469,
+   "lon": 20.4960726,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Дредноут"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3159143838,
+   "lat": 54.7150649,
+   "lon": 20.5223656,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Горячие пончики"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3315242762,
+   "lat": 54.7039421,
+   "lon": 20.506205,
+   "tags": {
+    "amenity": "restaurant",
+    "check_date": "2026-05-29",
+    "cuisine": "asian",
+    "name": "Asado"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3315256525,
+   "lat": 54.7193224,
+   "lon": 20.5030475,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "ukrainian",
+    "name": "Борщ и Сало",
+    "opening_hours": "Su-Th 12:00-23:00; Fr-Sa 12:00-00:00",
+    "phone": "+74012357676;+74012777010",
+    "self_service": "no",
+    "smoking": "no",
+    "website": "https://borshsalo.ru/"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3500631437,
+   "lat": 54.7205737,
+   "lon": 20.5006757,
+   "tags": {
+    "addr:floor": "1",
+    "amenity": "cafe",
+    "check_date": "2026-11-07",
+    "contact:email": "info@kruassan.com",
+    "contact:phone": "+7 401 2303040",
+    "contact:website": "https://kruassanfamily.ru/kruassan-cafe/",
+    "level": "0",
+    "name": "Круассан кафе",
+    "opening_hours": "08:00-21:00",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "survey:date": "2022-04-17",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4132630096,
+   "lat": 54.7161207,
+   "lon": 20.4995321,
+   "tags": {
+    "addr:housenumber": "1",
+    "addr:street": "улица Генерала Галицкого",
+    "amenity": "cafe",
+    "cuisine": "cake;coffee_shop",
+    "name": "GS Coffeshop"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4180435789,
+   "lat": 54.7122515,
+   "lon": 20.5065272,
+   "tags": {
+    "amenity": "cafe",
+    "check_date": "2026-05-23",
+    "check_date:opening_hours": "2026-02-19",
+    "contact:email": "info@kruassan.com",
+    "contact:phone": "+7 401 2303040",
+    "contact:website": "https://kruassanfamily.ru/konigsbacker/",
+    "name": "Konigsbacker",
+    "opening_hours": "Mo-Fr 08:00-21:00; Sa-Su 09:00-21:00",
+    "shop": "bakery",
+    "takeaway": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4357662796,
+   "lat": 54.7184333,
+   "lon": 20.502171,
+   "tags": {
+    "addr:floor": "1",
+    "addr:housenumber": "1",
+    "addr:street": "Ленинский проспект",
+    "amenity": "restaurant",
+    "check_date": "2026-09-12",
+    "cuisine": "czech",
+    "internet_access": "wlan",
+    "level": "0",
+    "name": "У Гашека",
+    "opening_hours": "Su-Th 12:00-23:00; Fr-Sa 12:00-00:00",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "+74012919182",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4431510294,
+   "lat": 54.7210519,
+   "lon": 20.4820512,
+   "tags": {
+    "addr:floor": "1",
+    "addr:housenumber": "64А",
+    "addr:postcode": "236022",
+    "addr:street": "улица Космонавта Леонова",
+    "amenity": "cafe",
+    "check_date": "2026-10-27",
+    "email": "manager@tastylab.ru",
+    "level": "0",
+    "name": "tastylab",
+    "name:en": "TastyLab",
+    "opening_hours": "24/7",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "+7 921 712-89-92",
+    "website": "https://tastylab.ru/",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4757746492,
+   "lat": 54.7279856,
+   "lon": 20.5092819,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "lunch",
+    "name": "Шёпот",
+    "name:pl": "Szept",
+    "name:ru": "Шёпот",
+    "opening_hours": "Mo-Su 12:00-24:00",
+    "phone": "+7 4012 763342"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5471826868,
+   "lat": 54.7195742,
+   "lon": 20.4851754,
+   "tags": {
+    "addr:floor": "1",
+    "addr:housenumber": "31",
+    "addr:street": "проспект Мира",
+    "amenity": "cafe",
+    "check_date": "2026-10-09",
+    "entrance": "yes",
+    "level": "0",
+    "name": "Кофейня №3",
+    "opening_hours": "Mo-Fr 08:00-20:00; Sa-Su 09:00-20:00",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5795656953,
+   "lat": 54.7206751,
+   "lon": 20.479639,
+   "tags": {
+    "addr:floor": "1",
+    "amenity": "cafe",
+    "check_date": "2026-09-02",
+    "cuisine": "coffee_shop",
+    "level": "0",
+    "name": "Прачечная",
+    "opening_hours": "Mo-Fr 08:00-20:00; Sa,Su 09:00-20:00",
+    "outdoor_seating": "yes",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5844653105,
+   "lat": 54.7106296,
+   "lon": 20.5066453,
+   "tags": {
+    "amenity": "restaurant",
+    "check_date": "2026-05-23",
+    "contact:facebook": "steindamm99",
+    "cuisine": "russian",
+    "name": "Штайндамм 99",
+    "name:en": "Steindamm 99",
+    "opening_hours": "Mo-Fr 11:00-23:00; Sa-Su 12:00-23:00",
+    "phone": "84012388470",
+    "website": "https://tripadvisor.ru/11832482"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5844653112,
+   "lat": 54.723656,
+   "lon": 20.4969706,
+   "tags": {
+    "amenity": "cafe",
+    "contact:facebook": "https://www.facebook.com/coffeebusstationkld",
+    "cuisine": "coffee_shop",
+    "name": "Bus Station"
+   }
+  }
+ ]
+}
