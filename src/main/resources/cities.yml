@@ -6,29 +6,35 @@
 #            Авито и ЦИАН защищены от автоматических проверок, их адреса проверяются вручную
 #            (19.11.2026 открыты из бота для Калининграда: посуточная аренда в городе).
 # sutochno — есть ли город на Суточно.ру (город передаётся названием, адрес не нужен).
+# tripster — город в адресе experience.tripster.ru/experience/<город>/ (экскурсии).
+#            Проверено 19.11.2026: у всех городов открывается страница «Экскурсии в …».
 # aliases  — как ещё пишут название города.
 
 cities:
   # --- Россия ---
   - name: Москва
     ostrovok: russia/moscow
+    tripster: Moscow
     avito: moskva
     cian: www
     sutochno: true
   - name: Санкт-Петербург
     aliases: [Питер, СПб, Петербург, Санкт Петербург]
     ostrovok: russia/st._petersburg
+    tripster: Saint_Petersburg
     avito: sankt-peterburg
     cian: spb
     sutochno: true
   - name: Казань
     ostrovok: russia/kazan
+    tripster: Kazan
     avito: kazan
     cian: kazan
     sutochno: true
   - name: Сочи
     aliases: [Адлер]
     ostrovok: russia/sochi
+    tripster: Sochi
     avito: sochi
     cian: sochi
     sutochno: true
@@ -37,164 +43,206 @@ cities:
     sutochno: true
   - name: Калининград
     ostrovok: russia/kaliningrad
+    tripster: Kaliningrad
     avito: kaliningrad
     cian: kaliningrad
     sutochno: true
   - name: Нижний Новгород
     aliases: [Нижний]
     ostrovok: russia/nizhniy_novgorod
+    tripster: Nizhny_Novgorod
     avito: nizhniy_novgorod
     cian: nn
     sutochno: true
   - name: Екатеринбург
     aliases: [Екб]
     ostrovok: russia/yekaterinburg
+    tripster: Yekaterinburg
     avito: ekaterinburg
     cian: ekb
     sutochno: true
   - name: Новосибирск
     ostrovok: russia/novosibirsk
+    tripster: Novosibirsk
     avito: novosibirsk
     cian: novosibirsk
     sutochno: true
   - name: Краснодар
     ostrovok: russia/krasnodar
+    tripster: Krasnodar
     avito: krasnodar
     cian: krasnodar
     sutochno: true
   - name: Ростов-на-Дону
     aliases: [Ростов]
     ostrovok: russia/rostov-on-don
+    tripster: Rostov-on-Don
     avito: rostov-na-donu
     cian: rostov
     sutochno: true
   - name: Владивосток
     ostrovok: russia/vladivostok
+    tripster: Vladivostok
     avito: vladivostok
     cian: vladivostok
     sutochno: true
   - name: Самара
     ostrovok: russia/samara
+    tripster: Samara
     avito: samara
     cian: samara
     sutochno: true
   - name: Ярославль
     ostrovok: russia/yaroslavl
+    tripster: Yaroslavl
     avito: yaroslavl
     cian: yaroslavl
     sutochno: true
   - name: Анапа
     ostrovok: russia/anapa
+    tripster: Anapa
     avito: anapa
     sutochno: true
   - name: Геленджик
     ostrovok: russia/gelendzhik
+    tripster: Gelendzhik
     avito: gelendzhik
     sutochno: true
   - name: Кисловодск
     ostrovok: russia/kislovodsk
+    tripster: Kislovodsk
     avito: kislovodsk
     sutochno: true
   - name: Пятигорск
     ostrovok: russia/pyatigorsk
+    tripster: Pyatigorsk
     avito: pyatigorsk
     sutochno: true
   - name: Мурманск
     ostrovok: russia/murmansk
+    tripster: Murmansk
     avito: murmansk
     sutochno: true
   - name: Иркутск
     ostrovok: russia/irkutsk
+    tripster: Irkutsk
     avito: irkutsk
     cian: irkutsk
     sutochno: true
   - name: Великий Новгород
     ostrovok: russia/velikiy_novgorod
+    tripster: Veliky_Novgorod
     avito: velikiy_novgorod
     sutochno: true
   - name: Псков
     ostrovok: russia/pskov
+    tripster: Pskov
     avito: pskov
     sutochno: true
   - name: Суздаль
     ostrovok: russia/suzdal
+    tripster: Suzdal
     avito: suzdal
     sutochno: true
   - name: Владимир
     ostrovok: russia/vladimir
+    tripster: Vladimir
     avito: vladimir
     sutochno: true
   - name: Волгоград
     ostrovok: russia/volgograd
+    tripster: Volgograd
     avito: volgograd
     cian: volgograd
     sutochno: true
   - name: Тула
     ostrovok: russia/tula
+    tripster: Tula
     avito: tula
     sutochno: true
   - name: Кострома
     ostrovok: russia/kostroma
+    tripster: Kostroma
     avito: kostroma
     sutochno: true
   - name: Тверь
     ostrovok: russia/tver
+    tripster: Tver
     avito: tver
     sutochno: true
   - name: Петрозаводск
     ostrovok: russia/petrozavodsk
+    tripster: Petrozavodsk
     avito: petrozavodsk
     sutochno: true
   - name: Архангельск
     ostrovok: russia/arkhangelsk
+    tripster: Arkhangelsk
     avito: arhangelsk
     sutochno: true
 
   # --- За рубежом: только Островок (ЦИАН и Авито — российские сайты) ---
   - name: Рим
     ostrovok: italy/rome
+    tripster: Rome
   - name: Милан
     ostrovok: italy/milan
+    tripster: Milan
   - name: Париж
     ostrovok: france/paris
+    tripster: Paris
   - name: Барселона
     ostrovok: spain/barcelona
+    tripster: Barcelona
   - name: Стамбул
     ostrovok: turkey/istanbul
+    tripster: Istanbul
     sutochno: true
   - name: Анталья
     ostrovok: turkey/antalya
+    tripster: Antalya
     sutochno: true
   - name: Дубай
     ostrovok: united_arab_emirates/dubai
+    tripster: Dubai
     sutochno: true
   - name: Ереван
     ostrovok: armenia/yerevan
+    tripster: Yerevan
     sutochno: true
   - name: Тбилиси
     ostrovok: georgia/tbilisi
+    tripster: Tbilisi
     sutochno: true
   - name: Минск
     ostrovok: belarus/minsk
+    tripster: Minsk
     sutochno: true
   - name: Ташкент
     ostrovok: uzbekistan/tashkent
+    tripster: Tashkent
     sutochno: true
   - name: Алматы
     aliases: [Алма-Ата]
     ostrovok: kazakhstan/almaty
+    tripster: Almaty
     sutochno: true
   - name: Пхукет
     ostrovok: thailand/phuket
+    tripster: Phuket
     sutochno: true
   - name: Пекин
     ostrovok: china/beijing
+    tripster: Beijing
   - name: Шарм-эль-Шейх
     aliases: [Шарм]
     ostrovok: egypt/sharm_el_sheikh
+    tripster: Sharm_El_Sheikh
     sutochno: true
   - name: Хургада
     ostrovok: egypt/hurghada
+    tripster: Hurghada
     sutochno: true
   - name: Нячанг
     ostrovok: vietnam/nha_trang
+    tripster: Nha_Trang

@@ -44,6 +44,8 @@ class CityDirectoryTest {
 		assertThat(kazan.avitoCity()).contains("kazan");
 		assertThat(kazan.cianSubdomain()).contains("kazan");
 		assertThat(kazan.sutochno()).isTrue();
+		assertThat(kazan.tripsterCity()).contains("Kazan");
+		assertThat(directory.find("Сириус").orElseThrow().tripsterCity()).isEmpty();
 	}
 
 	@Test
@@ -63,8 +65,8 @@ class CityDirectoryTest {
 
 	@Test
 	void duplicateNamesAreRejected() {
-		KnownCity one = new KnownCity("Сочи", List.of(), "russia/sochi", null, null, true);
-		KnownCity two = new KnownCity("Адлер", List.of("Сочи"), "russia/adler", null, null, true);
+		KnownCity one = new KnownCity("Сочи", List.of(), "russia/sochi", null, null, true, null);
+		KnownCity two = new KnownCity("Адлер", List.of("Сочи"), "russia/adler", null, null, true, null);
 
 		assertThatThrownBy(() -> new CityDirectory(List.of(one, two)))
 				.hasMessageContaining("встречается у двух городов");
