@@ -7,12 +7,15 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import io.github.lelena1.travelbot.config.BotProperties;
 import io.github.lelena1.travelbot.dialog.NewTripDialog;
+import io.github.lelena1.travelbot.trip.Trip;
+import io.github.lelena1.travelbot.trip.TripService;
 import io.github.lelena1.travelbot.user.AccessService;
 import io.github.lelena1.travelbot.user.AccessService.DenyResult;
 import io.github.lelena1.travelbot.user.AppUser;
@@ -26,6 +29,7 @@ class CommandRouterTest {
 
 	private AccessService access;
 	private NewTripDialog dialog;
+	private TripService tripService;
 	private CommandRouter router;
 
 	@BeforeEach
@@ -35,7 +39,8 @@ class CommandRouterTest {
 		when(access.isAllowed(USER)).thenReturn(true);
 		when(access.isAdmin(ADMIN)).thenReturn(true);
 		dialog = mock(NewTripDialog.class);
-		router = new CommandRouter(access, dialog, new BotProperties("token", "travel_bot"));
+		tripService = mock(TripService.class);
+		router = new CommandRouter(access, dialog, tripService, new BotProperties("token", "travel_bot"));
 	}
 
 	private BotReply send(long userId, String text) {
@@ -163,5 +168,42 @@ class CommandRouterTest {
 		send(STRANGER, "/newtrip");
 
 		verify(dialog, never()).start(STRANGER);
+	}
+
+	@Test
+	void myTripsWhenEmptySuggestsCreatingOne() {
+		when(tripService.activeTrips(USER)).thenReturn(List.of());
+
+		assertThat(send(USER, "/mytrips").text()).contains("пока нет").contains("Новая поездка");
+	}
+
+	@Test
+	void myTripsListsNumberedTrips() {
+		Trip rome = Trip.draftFor(USER);
+		rome.setDestination("Рим");
+		Trip kazan = Trip.draftFor(USER);
+		kazan.setDestination("Казань");
+		when(tripService.activeTrips(USER)).thenReturn(List.of(rome, kazan));
+
+		String text = send(USER, "/mytrips").text();
+
+		assertThat(text).contains("2 поездки").contains("1. 📍 Рим").contains("2. 📍 Казань");
+	}
+
+	@Test
+	void deleteTripByNumber() {
+		Trip rome = Trip.draftFor(USER);
+		rome.setDestination("Рим");
+		when(tripService.deleteByNumber(USER, 1)).thenReturn(Optional.of(rome));
+
+		assertThat(send(USER, "/deletetrip 1").text()).contains("«Рим» удалена");
+	}
+
+	@Test
+	void deleteTripWithUnknownNumber() {
+		when(tripService.deleteByNumber(USER, 7)).thenReturn(Optional.empty());
+
+		assertThat(send(USER, "/deletetrip 7").text()).contains("нет");
+		assertThat(send(USER, "/deletetrip").text()).contains("Укажите номер");
 	}
 }

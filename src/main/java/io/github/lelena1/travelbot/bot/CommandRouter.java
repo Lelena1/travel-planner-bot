@@ -1,5 +1,6 @@
 package io.github.lelena1.travelbot.bot;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -8,8 +9,12 @@ import org.springframework.stereotype.Component;
 
 import io.github.lelena1.travelbot.config.BotProperties;
 import io.github.lelena1.travelbot.dialog.NewTripDialog;
+import io.github.lelena1.travelbot.trip.Trip;
+import io.github.lelena1.travelbot.trip.TripFormatter;
+import io.github.lelena1.travelbot.trip.TripService;
 import io.github.lelena1.travelbot.user.AccessService;
 import io.github.lelena1.travelbot.user.AppUser;
+import io.github.lelena1.travelbot.util.RussianPlural;
 
 /**
  * Разбирает входящее сообщение и решает, что ответить.
@@ -22,6 +27,8 @@ public class CommandRouter {
 			Что я умею:
 			/start — главное меню
 			/newtrip — новая поездка
+			/mytrips — мои поездки
+			/deletetrip <номер> — удалить поездку
 			/cancel — отменить заполнение анкеты
 			/help — эта подсказка
 			/myid — показать ваш Telegram ID
@@ -37,11 +44,14 @@ public class CommandRouter {
 
 	private final AccessService access;
 	private final NewTripDialog newTripDialog;
+	private final TripService tripService;
 	private final String botUsername;
 
-	public CommandRouter(AccessService access, NewTripDialog newTripDialog, BotProperties botProperties) {
+	public CommandRouter(AccessService access, NewTripDialog newTripDialog, TripService tripService,
+			BotProperties botProperties) {
 		this.access = access;
 		this.newTripDialog = newTripDialog;
+		this.tripService = tripService;
 		this.botUsername = botProperties.username() == null ? "" : botProperties.username();
 	}
 
@@ -67,6 +77,10 @@ public class CommandRouter {
 		switch (command) {
 			case "/newtrip":
 				return newTripDialog.start(userId);
+			case "/mytrips":
+				return myTrips(userId);
+			case "/deletetrip":
+				return deleteTrip(userId, text);
 			case "/cancel":
 				return newTripDialog.isActive(userId)
 						? newTripDialog.cancel(userId)
@@ -104,6 +118,31 @@ public class CommandRouter {
 		}
 
 		return BotReply.withMenu("Не понимаю 🤔 Выберите раздел в меню или наберите /help.");
+	}
+
+	private BotReply myTrips(long userId) {
+		List<Trip> trips = tripService.activeTrips(userId);
+		if (trips.isEmpty()) {
+			return BotReply.withMenu("Сохранённых поездок пока нет. Нажмите «%s», чтобы создать."
+					.formatted(MainMenu.NEW_TRIP.label()));
+		}
+		StringBuilder text = new StringBuilder("🧳 Ваши поездки (%s):"
+				.formatted(RussianPlural.format(trips.size(), "поездка", "поездки", "поездок")));
+		for (int i = 0; i < trips.size(); i++) {
+			text.append("\n\n").append(i + 1).append(". ").append(TripFormatter.summary(trips.get(i)));
+		}
+		text.append("\n\nУдалить поездку: /deletetrip <номер>");
+		return BotReply.withMenu(text.toString());
+	}
+
+	private BotReply deleteTrip(long userId, String text) {
+		Optional<Long> number = parseId(text);
+		if (number.isEmpty() || number.get() > Integer.MAX_VALUE) {
+			return BotReply.text("Укажите номер поездки из списка /mytrips, например: /deletetrip 1");
+		}
+		return tripService.deleteByNumber(userId, number.get().intValue())
+				.map(trip -> BotReply.withMenu("🗑 Поездка «%s» удалена.".formatted(trip.getDestination())))
+				.orElseGet(() -> BotReply.text("Поездки с таким номером нет. Посмотрите список: /mytrips"));
 	}
 
 	private BotReply handleAdmin(String command, String text) {
