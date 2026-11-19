@@ -35,11 +35,10 @@ public class CommandRouter {
 			/places — что посмотреть
 			/restaurants — где поесть
 			/tours — экскурсии
+			/plan — план поездки по дням
 			/cancel — отменить заполнение анкеты
 			/help — эта подсказка
-			/myid — показать ваш Telegram ID
-
-			Разделы меню появляются по мере разработки бота.""";
+			/myid — показать ваш Telegram ID""";
 
 	static final String ADMIN_HELP = """
 

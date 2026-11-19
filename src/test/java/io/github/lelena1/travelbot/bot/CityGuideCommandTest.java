@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import io.github.lelena1.travelbot.places.CityGuideService;
+import io.github.lelena1.travelbot.places.ItineraryService;
 import io.github.lelena1.travelbot.trip.Trip;
 import io.github.lelena1.travelbot.trip.TripService;
 
@@ -21,6 +22,7 @@ class CityGuideCommandTest {
 
 	private TripService trips;
 	private CityGuideService guide;
+	private ItineraryService itinerary;
 	private CityGuideCommand command;
 	private Trip rome;
 	private Trip kazan;
@@ -29,7 +31,9 @@ class CityGuideCommandTest {
 	void setUp() {
 		trips = mock(TripService.class);
 		guide = mock(CityGuideService.class);
-		command = new CityGuideCommand(new TripChooser(trips), guide);
+		itinerary = mock(ItineraryService.class);
+		command = new CityGuideCommand(new TripChooser(trips), guide, itinerary);
+		when(itinerary.forTrip(org.mockito.ArgumentMatchers.any())).thenReturn(BotReply.text("🗓 План"));
 		rome = trip("Рим", 5, 12);
 		kazan = trip("Казань", 7, 1);
 		when(guide.sights(rome)).thenReturn(BotReply.text("🏛 Рим"));
@@ -72,5 +76,13 @@ class CityGuideCommandTest {
 		LocalDate from = LocalDate.of(2027, month, day);
 		trip.setDates(from, from.plusDays(5));
 		return trip;
+	}
+
+	@Test
+	void planButtonAndCommand() {
+		when(trips.upcomingTrips(USER)).thenReturn(List.of(rome));
+
+		assertThat(command.menu(USER, MainMenu.ITINERARY)).get().extracting(BotReply::text).isEqualTo("🗓 План");
+		assertThat(command.command(USER, "/plan", Optional.empty())).get().extracting(BotReply::text).isEqualTo("🗓 План");
 	}
 }

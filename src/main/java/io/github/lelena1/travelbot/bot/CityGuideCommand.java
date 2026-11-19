@@ -7,9 +7,10 @@ import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 import io.github.lelena1.travelbot.places.CityGuideService;
+import io.github.lelena1.travelbot.places.ItineraryService;
 
 /**
- * Разделы путеводителя: «🏛 Места», «🍽 Рестораны», «🎟 Экскурсии».
+ * Разделы путеводителя: «🏛 Места», «🍽 Рестораны», «🎟 Экскурсии», «🗓 План».
  * Каждый раздел — кнопка меню, команда и выбор поездки со своим значком.
  */
 @Component
@@ -19,7 +20,7 @@ public class CityGuideCommand {
 	private final Map<MainMenu, TripChooser.Section> byMenu;
 	private final Map<String, TripChooser.Section> byCommand;
 
-	public CityGuideCommand(TripChooser chooser, CityGuideService guide) {
+	public CityGuideCommand(TripChooser chooser, CityGuideService guide, ItineraryService itinerary) {
 		this.chooser = chooser;
 		TripChooser.Section places = new TripChooser.Section("🏛", "Для какой поездки показать достопримечательности?",
 				MainMenu.PLACES, guide::sights);
@@ -27,8 +28,11 @@ public class CityGuideCommand {
 				MainMenu.RESTAURANTS, guide::restaurants);
 		TripChooser.Section tours = new TripChooser.Section("🎟", "Для какой поездки искать экскурсии?",
 				MainMenu.TOURS, guide::tours);
-		this.byMenu = Map.of(MainMenu.PLACES, places, MainMenu.RESTAURANTS, restaurants, MainMenu.TOURS, tours);
-		this.byCommand = Map.of("/places", places, "/restaurants", restaurants, "/tours", tours);
+		TripChooser.Section plan = new TripChooser.Section("🗓", "Для какой поездки составить план?",
+				MainMenu.ITINERARY, itinerary::forTrip);
+		this.byMenu = Map.of(MainMenu.PLACES, places, MainMenu.RESTAURANTS, restaurants, MainMenu.TOURS, tours,
+				MainMenu.ITINERARY, plan);
+		this.byCommand = Map.of("/places", places, "/restaurants", restaurants, "/tours", tours, "/plan", plan);
 	}
 
 	/** Кнопка главного меню одного из разделов. */

@@ -103,14 +103,6 @@ class CommandRouterTest {
 	}
 
 	@Test
-	void menuButtonReportsStageInProgress() {
-		BotReply reply = send(USER, MainMenu.ITINERARY.label());
-
-		assertThat(reply.text()).contains("План").contains("этап 7");
-		assertThat(reply.showsMainMenu()).isTrue();
-	}
-
-	@Test
 	void regularUserCannotAllowOthers() {
 		BotReply reply = send(USER, "/allow 42");
 
@@ -181,10 +173,11 @@ class CommandRouterTest {
 	@Test
 	void menuButtonDuringQuestionnaireClosesIt() {
 		when(dialog.isActive(USER)).thenReturn(true);
+		when(lodging.menu(USER)).thenReturn(BotReply.withMenu("🏨 Жильё"));
 
-		BotReply reply = send(USER, MainMenu.ITINERARY.label());
+		BotReply reply = send(USER, MainMenu.LODGING.label());
 
-		assertThat(reply.text()).startsWith(CommandRouter.QUESTIONNAIRE_CLOSED).contains("План");
+		assertThat(reply.text()).startsWith(CommandRouter.QUESTIONNAIRE_CLOSED).contains("Жильё");
 		assertThat(reply.showsMainMenu()).isTrue();
 		verify(dialog).close(USER);
 	}
