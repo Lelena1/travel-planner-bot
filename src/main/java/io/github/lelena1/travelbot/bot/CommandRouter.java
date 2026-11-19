@@ -31,6 +31,7 @@ public class CommandRouter {
 			/deletetrip <номер> — удалить поездку
 			/flights — авиабилеты для поездки
 			/subscriptions — мои подписки на цены
+			/lodging — жильё для поездки
 			/cancel — отменить заполнение анкеты
 			/help — эта подсказка
 			/myid — показать ваш Telegram ID
@@ -52,15 +53,17 @@ public class CommandRouter {
 	private final TripService tripService;
 	private final FlightsCommand flights;
 	private final PriceWatchCommand priceWatch;
+	private final LodgingCommand lodging;
 	private final String botUsername;
 
 	public CommandRouter(AccessService access, NewTripDialog newTripDialog, TripService tripService,
-			FlightsCommand flights, PriceWatchCommand priceWatch, BotProperties botProperties) {
+			FlightsCommand flights, PriceWatchCommand priceWatch, LodgingCommand lodging, BotProperties botProperties) {
 		this.access = access;
 		this.newTripDialog = newTripDialog;
 		this.tripService = tripService;
 		this.flights = flights;
 		this.priceWatch = priceWatch;
+		this.lodging = lodging;
 		this.botUsername = botProperties.username() == null ? "" : botProperties.username();
 	}
 
@@ -112,6 +115,11 @@ public class CommandRouter {
 						.filter(number -> number <= Integer.MAX_VALUE)
 						.map(number -> flights.forNumber(userId, number.intValue()))
 						.orElseGet(() -> flights.menu(userId));
+			case "/lodging":
+				return parseId(text)
+						.filter(number -> number <= Integer.MAX_VALUE)
+						.map(number -> lodging.forNumber(userId, number.intValue()))
+						.orElseGet(() -> lodging.menu(userId));
 			case "/subscriptions":
 				return priceWatch.list(userId);
 			case "/checkprices":
@@ -146,6 +154,9 @@ public class CommandRouter {
 		if (menuItem.isPresent() && menuItem.get() == MainMenu.SUBSCRIPTIONS) {
 			return priceWatch.list(userId);
 		}
+		if (menuItem.isPresent() && menuItem.get() == MainMenu.LODGING) {
+			return lodging.menu(userId);
+		}
 
 		// Кнопки под сообщениями («Следить за ценой», «Отписаться») — до анкеты,
 		// чтобы нажатие не попало в анкету как ответ.
@@ -161,6 +172,10 @@ public class CommandRouter {
 		Optional<Integer> flightChoice = flights.parseChoice(text);
 		if (flightChoice.isPresent()) {
 			return flights.forNumber(userId, flightChoice.get());
+		}
+		Optional<Integer> lodgingChoice = lodging.parseChoice(text);
+		if (lodgingChoice.isPresent()) {
+			return lodging.forNumber(userId, lodgingChoice.get());
 		}
 		if (text.equals(NewTripDialog.CANCEL)) {
 			return BotReply.withMenu("Хорошо.");

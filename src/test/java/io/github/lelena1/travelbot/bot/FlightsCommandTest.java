@@ -30,7 +30,7 @@ class FlightsCommandTest {
 	void setUp() {
 		trips = mock(TripService.class);
 		search = mock(FlightSearchService.class);
-		command = new FlightsCommand(trips, search);
+		command = new FlightsCommand(new TripChooser(trips), search);
 		when(search.search(any())).thenReturn(new FlightSearchService.Problem("результат поиска"));
 	}
 

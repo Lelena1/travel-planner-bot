@@ -34,6 +34,7 @@ class CommandRouterTest {
 	private TripService tripService;
 	private FlightsCommand flights;
 	private PriceWatchCommand priceWatch;
+	private LodgingCommand lodging;
 	private CommandRouter router;
 
 	@BeforeEach
@@ -48,7 +49,9 @@ class CommandRouterTest {
 		when(flights.parseChoice(anyString())).thenReturn(Optional.empty());
 		priceWatch = mock(PriceWatchCommand.class);
 		when(priceWatch.handleAction(anyLong(), anyLong(), anyString())).thenReturn(Optional.empty());
-		router = new CommandRouter(access, dialog, tripService, flights, priceWatch,
+		lodging = mock(LodgingCommand.class);
+		when(lodging.parseChoice(anyString())).thenReturn(Optional.empty());
+		router = new CommandRouter(access, dialog, tripService, flights, priceWatch, lodging,
 				new BotProperties("token", "travel_bot"));
 	}
 
@@ -95,9 +98,9 @@ class CommandRouterTest {
 
 	@Test
 	void menuButtonReportsStageInProgress() {
-		BotReply reply = send(USER, MainMenu.LODGING.label());
+		BotReply reply = send(USER, MainMenu.TOURS.label());
 
-		assertThat(reply.text()).contains("Жильё").contains("этап 5");
+		assertThat(reply.text()).contains("Экскурсии").contains("этап 6");
 		assertThat(reply.showsMainMenu()).isTrue();
 	}
 
@@ -173,9 +176,9 @@ class CommandRouterTest {
 	void menuButtonDuringQuestionnaireClosesIt() {
 		when(dialog.isActive(USER)).thenReturn(true);
 
-		BotReply reply = send(USER, MainMenu.LODGING.label());
+		BotReply reply = send(USER, MainMenu.TOURS.label());
 
-		assertThat(reply.text()).startsWith(CommandRouter.QUESTIONNAIRE_CLOSED).contains("Жильё");
+		assertThat(reply.text()).startsWith(CommandRouter.QUESTIONNAIRE_CLOSED).contains("Экскурсии");
 		assertThat(reply.showsMainMenu()).isTrue();
 		verify(dialog).close(USER);
 	}
@@ -291,5 +294,19 @@ class CommandRouterTest {
 
 		assertThat(send(USER, "/checkprices").text()).contains("только администратору");
 		assertThat(send(ADMIN, "/checkprices").text()).contains("Проверка цен завершена");
+	}
+
+	@Test
+	void lodgingButtonCommandAndChoice() {
+		BotReply menu = BotReply.text("Для какой поездки искать жильё?");
+		BotReply result = BotReply.text("🏨 Жильё: Казань");
+		when(lodging.menu(USER)).thenReturn(menu);
+		when(lodging.forNumber(USER, 2)).thenReturn(result);
+		when(lodging.parseChoice("🏨 2. Казань · 1 июля")).thenReturn(Optional.of(2));
+
+		assertThat(send(USER, MainMenu.LODGING.label())).isSameAs(menu);
+		assertThat(send(USER, "/lodging")).isSameAs(menu);
+		assertThat(send(USER, "/lodging 2")).isSameAs(result);
+		assertThat(send(USER, "🏨 2. Казань · 1 июля")).isSameAs(result);
 	}
 }
