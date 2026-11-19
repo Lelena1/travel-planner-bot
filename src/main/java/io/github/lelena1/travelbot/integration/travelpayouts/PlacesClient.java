@@ -2,10 +2,13 @@ package io.github.lelena1.travelbot.integration.travelpayouts;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
+
+import io.github.lelena1.travelbot.config.CacheConfig;
 
 /**
  * Справочник городов Travelpayouts: «Рим» → ROM. Работает без токена.
@@ -24,7 +27,8 @@ public class PlacesClient {
 		this.http = builder.baseUrl(properties.autocompleteUrl()).build();
 	}
 
-	/** Города и страны, подходящие под запрос; самые популярные — первыми. */
+	/** Города и страны, подходящие под запрос; самые популярные — первыми. Кешируется на неделю. */
+	@Cacheable(CacheConfig.PLACES)
 	public List<Place> search(String term) {
 		try {
 			List<Place> places = http.get()

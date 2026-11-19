@@ -2,12 +2,15 @@ package io.github.lelena1.travelbot.integration.travelpayouts;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import io.github.lelena1.travelbot.config.CacheConfig;
 
 /**
  * Цены на авиабилеты из Aviasales Data API (метод prices_for_dates).
@@ -25,7 +28,8 @@ public class AviasalesClient {
 		this.http = builder.baseUrl(properties.apiUrl()).build();
 	}
 
-	/** Самые дешёвые варианты, по возрастанию цены. */
+	/** Самые дешёвые варианты, по возрастанию цены. Кешируется на 30 минут. */
+	@Cacheable(CacheConfig.FLIGHT_PRICES)
 	public List<PriceOffer> cheapest(FlightQuery query, int limit) {
 		if (properties.token() == null || properties.token().isBlank()) {
 			throw new TravelpayoutsException("Не задан токен Travelpayouts (TRAVELPAYOUTS_TOKEN)");
