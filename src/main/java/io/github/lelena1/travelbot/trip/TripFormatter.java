@@ -54,7 +54,7 @@ public final class TripFormatter {
 		return from.format(DAY_MONTH) + " – " + to.format(DAY_MONTH_YEAR);
 	}
 
-	static String travelers(Trip trip) {
+	public static String travelers(Trip trip) {
 		String result = RussianPlural.format(trip.getAdults(), "взрослый", "взрослых", "взрослых");
 		int children = trip.getChildren() == null ? 0 : trip.getChildren();
 		if (children > 0) {
@@ -72,7 +72,7 @@ public final class TripFormatter {
 		return numbers + " " + RussianPlural.choose(last, "год", "года", "лет");
 	}
 
-	static String pets(Pets pets) {
+	public static String pets(Pets pets) {
 		return switch (pets) {
 			case NONE -> "Без животных";
 			case DOG -> "С собакой";
