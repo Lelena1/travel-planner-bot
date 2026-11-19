@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import io.github.lelena1.travelbot.config.BotProperties;
+import io.github.lelena1.travelbot.dialog.NewTripDialog;
 import io.github.lelena1.travelbot.user.AccessService;
 import io.github.lelena1.travelbot.user.AppUser;
 
@@ -20,6 +21,8 @@ public class CommandRouter {
 	static final String HELP = """
 			Что я умею:
 			/start — главное меню
+			/newtrip — новая поездка
+			/cancel — отменить заполнение анкеты
 			/help — эта подсказка
 			/myid — показать ваш Telegram ID
 
@@ -33,10 +36,12 @@ public class CommandRouter {
 			/users — список пользователей""";
 
 	private final AccessService access;
+	private final NewTripDialog newTripDialog;
 	private final String botUsername;
 
-	public CommandRouter(AccessService access, BotProperties botProperties) {
+	public CommandRouter(AccessService access, NewTripDialog newTripDialog, BotProperties botProperties) {
 		this.access = access;
+		this.newTripDialog = newTripDialog;
 		this.botUsername = botProperties.username() == null ? "" : botProperties.username();
 	}
 
@@ -56,9 +61,16 @@ public class CommandRouter {
 					.formatted(message.userId()));
 		}
 
-		boolean admin = access.isAdmin(message.userId());
+		long userId = message.userId();
+		boolean admin = access.isAdmin(userId);
 
 		switch (command) {
+			case "/newtrip":
+				return newTripDialog.start(userId);
+			case "/cancel":
+				return newTripDialog.isActive(userId)
+						? newTripDialog.cancel(userId)
+						: BotReply.withMenu("Сейчас нечего отменять.");
 			case "/start":
 				return BotReply.withMenu("Привет, %s! 👋\nЯ помогу спланировать поездку: билеты, жильё, экскурсии, рестораны и достопримечательности.\nВыберите раздел в меню."
 						.formatted(nameOrDefault(message.firstName())));
@@ -73,6 +85,19 @@ public class CommandRouter {
 		}
 
 		Optional<MainMenu> menuItem = MainMenu.byLabel(text);
+		if (menuItem.isPresent() && menuItem.get() == MainMenu.NEW_TRIP) {
+			return newTripDialog.start(userId);
+		}
+
+		// Пользователь заполняет анкету: обычный текст — это ответ на вопрос.
+		// Команды и кнопки главного меню обрабатываются как обычно, анкета при этом сохраняется.
+		if (command.isEmpty() && menuItem.isEmpty() && newTripDialog.isActive(userId)) {
+			return newTripDialog.handle(userId, text);
+		}
+		if (text.equals(NewTripDialog.CANCEL)) {
+			return BotReply.withMenu("Хорошо.");
+		}
+
 		if (menuItem.isPresent()) {
 			return BotReply.withMenu("Раздел «%s» ещё в разработке (этап %d). Скоро появится!"
 					.formatted(menuItem.get().label(), menuItem.get().stage()));

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import io.github.lelena1.travelbot.config.BotProperties;
+import io.github.lelena1.travelbot.dialog.NewTripDialog;
 import io.github.lelena1.travelbot.user.AccessService;
 import io.github.lelena1.travelbot.user.AccessService.DenyResult;
 import io.github.lelena1.travelbot.user.AppUser;
@@ -24,6 +25,7 @@ class CommandRouterTest {
 	private static final long STRANGER = 3L;
 
 	private AccessService access;
+	private NewTripDialog dialog;
 	private CommandRouter router;
 
 	@BeforeEach
@@ -32,7 +34,8 @@ class CommandRouterTest {
 		when(access.isAllowed(ADMIN)).thenReturn(true);
 		when(access.isAllowed(USER)).thenReturn(true);
 		when(access.isAdmin(ADMIN)).thenReturn(true);
-		router = new CommandRouter(access, new BotProperties("token", "travel_bot"));
+		dialog = mock(NewTripDialog.class);
+		router = new CommandRouter(access, dialog, new BotProperties("token", "travel_bot"));
 	}
 
 	private BotReply send(long userId, String text) {
@@ -121,5 +124,44 @@ class CommandRouterTest {
 	@Test
 	void unknownTextSuggestsHelp() {
 		assertThat(send(USER, "привет").text()).contains("/help");
+	}
+
+	@Test
+	void newTripButtonStartsQuestionnaire() {
+		BotReply question = BotReply.text("Куда едем?");
+		when(dialog.start(USER)).thenReturn(question);
+
+		assertThat(send(USER, MainMenu.NEW_TRIP.label())).isSameAs(question);
+		assertThat(send(USER, "/newtrip")).isSameAs(question);
+	}
+
+	@Test
+	void plainTextGoesToActiveQuestionnaire() {
+		BotReply answer = BotReply.text("Откуда?");
+		when(dialog.isActive(USER)).thenReturn(true);
+		when(dialog.handle(USER, "Рим")).thenReturn(answer);
+
+		assertThat(send(USER, "Рим")).isSameAs(answer);
+	}
+
+	@Test
+	void commandsStillWorkDuringQuestionnaire() {
+		when(dialog.isActive(USER)).thenReturn(true);
+
+		assertThat(send(USER, "/help").text()).contains("Что я умею");
+		verify(dialog, never()).handle(USER, "/help");
+	}
+
+	@Test
+	void cancelWithoutQuestionnaireIsHarmless() {
+		assertThat(send(USER, "/cancel").text()).contains("нечего отменять");
+		verify(dialog, never()).cancel(USER);
+	}
+
+	@Test
+	void strangerCannotStartQuestionnaire() {
+		send(STRANGER, "/newtrip");
+
+		verify(dialog, never()).start(STRANGER);
 	}
 }
