@@ -1,0 +1,199 @@
+# Справочник городов для поиска жилья: как каждый сайт называет город в адресе страницы.
+#
+# ostrovok — путь в адресе ostrovok.ru/hotel/<путь>/. Проверено 19.11.2026: все пути открываются.
+# avito    — город в адресе avito.ru/<город>/kvartiry/sdam/posutochno-…
+# cian     — поддомен <поддомен>.cian.ru (у Москвы — www).
+#            Авито и ЦИАН защищены от автоматических проверок, их адреса проверяются вручную.
+# sutochno — есть ли город на Суточно.ру (город передаётся названием, адрес не нужен).
+# aliases  — как ещё пишут название города.
+
+cities:
+  # --- Россия ---
+  - name: Москва
+    ostrovok: russia/moscow
+    avito: moskva
+    cian: www
+    sutochno: true
+  - name: Санкт-Петербург
+    aliases: [Питер, СПб, Петербург, Санкт Петербург]
+    ostrovok: russia/st._petersburg
+    avito: sankt-peterburg
+    cian: spb
+    sutochno: true
+  - name: Казань
+    ostrovok: russia/kazan
+    avito: kazan
+    cian: kazan
+    sutochno: true
+  - name: Сочи
+    aliases: [Адлер]
+    ostrovok: russia/sochi
+    avito: sochi
+    cian: sochi
+    sutochno: true
+  - name: Сириус
+    ostrovok: russia/sirius
+    sutochno: true
+  - name: Калининград
+    ostrovok: russia/kaliningrad
+    avito: kaliningrad
+    cian: kaliningrad
+    sutochno: true
+  - name: Нижний Новгород
+    aliases: [Нижний]
+    ostrovok: russia/nizhniy_novgorod
+    avito: nizhniy_novgorod
+    cian: nn
+    sutochno: true
+  - name: Екатеринбург
+    aliases: [Екб]
+    ostrovok: russia/yekaterinburg
+    avito: ekaterinburg
+    cian: ekb
+    sutochno: true
+  - name: Новосибирск
+    ostrovok: russia/novosibirsk
+    avito: novosibirsk
+    cian: novosibirsk
+    sutochno: true
+  - name: Краснодар
+    ostrovok: russia/krasnodar
+    avito: krasnodar
+    cian: krasnodar
+    sutochno: true
+  - name: Ростов-на-Дону
+    aliases: [Ростов]
+    ostrovok: russia/rostov-on-don
+    avito: rostov-na-donu
+    cian: rostov
+    sutochno: true
+  - name: Владивосток
+    ostrovok: russia/vladivostok
+    avito: vladivostok
+    cian: vladivostok
+    sutochno: true
+  - name: Самара
+    ostrovok: russia/samara
+    avito: samara
+    cian: samara
+    sutochno: true
+  - name: Ярославль
+    ostrovok: russia/yaroslavl
+    avito: yaroslavl
+    cian: yaroslavl
+    sutochno: true
+  - name: Анапа
+    ostrovok: russia/anapa
+    avito: anapa
+    sutochno: true
+  - name: Геленджик
+    ostrovok: russia/gelendzhik
+    avito: gelendzhik
+    sutochno: true
+  - name: Кисловодск
+    ostrovok: russia/kislovodsk
+    avito: kislovodsk
+    sutochno: true
+  - name: Пятигорск
+    ostrovok: russia/pyatigorsk
+    avito: pyatigorsk
+    sutochno: true
+  - name: Мурманск
+    ostrovok: russia/murmansk
+    avito: murmansk
+    sutochno: true
+  - name: Иркутск
+    ostrovok: russia/irkutsk
+    avito: irkutsk
+    cian: irkutsk
+    sutochno: true
+  - name: Великий Новгород
+    ostrovok: russia/velikiy_novgorod
+    avito: velikiy_novgorod
+    sutochno: true
+  - name: Псков
+    ostrovok: russia/pskov
+    avito: pskov
+    sutochno: true
+  - name: Суздаль
+    ostrovok: russia/suzdal
+    avito: suzdal
+    sutochno: true
+  - name: Владимир
+    ostrovok: russia/vladimir
+    avito: vladimir
+    sutochno: true
+  - name: Волгоград
+    ostrovok: russia/volgograd
+    avito: volgograd
+    cian: volgograd
+    sutochno: true
+  - name: Тула
+    ostrovok: russia/tula
+    avito: tula
+    sutochno: true
+  - name: Кострома
+    ostrovok: russia/kostroma
+    avito: kostroma
+    sutochno: true
+  - name: Тверь
+    ostrovok: russia/tver
+    avito: tver
+    sutochno: true
+  - name: Петрозаводск
+    ostrovok: russia/petrozavodsk
+    avito: petrozavodsk
+    sutochno: true
+  - name: Архангельск
+    ostrovok: russia/arkhangelsk
+    avito: arhangelsk
+    sutochno: true
+
+  # --- За рубежом: только Островок (ЦИАН и Авито — российские сайты) ---
+  - name: Рим
+    ostrovok: italy/rome
+  - name: Милан
+    ostrovok: italy/milan
+  - name: Париж
+    ostrovok: france/paris
+  - name: Барселона
+    ostrovok: spain/barcelona
+  - name: Стамбул
+    ostrovok: turkey/istanbul
+    sutochno: true
+  - name: Анталья
+    ostrovok: turkey/antalya
+    sutochno: true
+  - name: Дубай
+    ostrovok: united_arab_emirates/dubai
+    sutochno: true
+  - name: Ереван
+    ostrovok: armenia/yerevan
+    sutochno: true
+  - name: Тбилиси
+    ostrovok: georgia/tbilisi
+    sutochno: true
+  - name: Минск
+    ostrovok: belarus/minsk
+    sutochno: true
+  - name: Ташкент
+    ostrovok: uzbekistan/tashkent
+    sutochno: true
+  - name: Алматы
+    aliases: [Алма-Ата]
+    ostrovok: kazakhstan/almaty
+    sutochno: true
+  - name: Пхукет
+    ostrovok: thailand/phuket
+    sutochno: true
+  - name: Пекин
+    ostrovok: china/beijing
+  - name: Шарм-эль-Шейх
+    aliases: [Шарм]
+    ostrovok: egypt/sharm_el_sheikh
+    sutochno: true
+  - name: Хургада
+    ostrovok: egypt/hurghada
+    sutochno: true
+  - name: Нячанг
+    ostrovok: vietnam/nha_trang

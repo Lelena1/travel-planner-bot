@@ -1,16 +1,13 @@
 package io.github.lelena1.travelbot.flights;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import io.github.lelena1.travelbot.integration.travelpayouts.Place;
 import io.github.lelena1.travelbot.integration.travelpayouts.PlacesClient;
+import io.github.lelena1.travelbot.util.CityNames;
 
 /**
  * Превращает то, что пользователь написал в анкете («Италия, Рим», «Сочи»), в город с IATA-кодом.
@@ -28,11 +25,7 @@ public class CityResolver {
 	}
 
 	public Result resolve(String text) {
-		List<String> parts = new ArrayList<>(Arrays.stream(text.split(","))
-				.map(String::trim)
-				.filter(part -> !part.isEmpty())
-				.toList());
-		Collections.reverse(parts);
+		List<String> parts = CityNames.partsFromEnd(text);
 
 		Place country = null;
 		for (String part : parts) {
@@ -57,13 +50,8 @@ public class CityResolver {
 		return country != null ? new CountryOnly(country.name()) : new NotFound(text);
 	}
 
-	/** «Ростов-на-Дону» = «ростов на дону», «Орёл» = «Орел». */
 	static String normalize(String name) {
-		return name.toLowerCase(Locale.ROOT)
-				.replace('ё', 'е')
-				.replace('-', ' ')
-				.replaceAll("\\s+", " ")
-				.trim();
+		return CityNames.normalize(name);
 	}
 
 	public sealed interface Result permits Found, CountryOnly, NotFound {
