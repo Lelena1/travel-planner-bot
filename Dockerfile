@@ -10,7 +10,7 @@ RUN ./mvnw -q package -DskipTests
 # Этап 2: лёгкий образ только с JRE
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
-RUN addgroup -S bot && adduser -S bot -G bot
+RUN addgroup -S bot && adduser -S bot -G bot && mkdir -p /app/logs && chown bot:bot /app/logs
 USER bot
 COPY --from=build /app/target/travel-planner-bot-*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]

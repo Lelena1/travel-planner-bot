@@ -29,3 +29,14 @@ management:
 # Travelpayouts (данные Aviasales): токен из личного кабинета, раздел API token
 travelpayouts:
   token: ${TRAVELPAYOUTS_TOKEN:}
+
+# Журнал пишется и в консоль, и в файл. В Docker папка logs — отдельный том,
+# поэтому записи переживают пересборку контейнера. Хранятся 30 дней.
+logging:
+  file:
+    name: ${LOG_DIR:logs}/bot.log
+  logback:
+    rollingpolicy:
+      max-history: 30
+      max-file-size: 10MB
+      total-size-cap: 300MB

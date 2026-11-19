@@ -20,6 +20,9 @@ services:
     env_file: .env
     environment:
       DB_URL: jdbc:postgresql://db:5432/travelbot
+      LOG_DIR: /app/logs
+    volumes:
+      - bot-logs:/app/logs      # журнал бота переживает пересборку контейнера
     depends_on:
       db:
         condition: service_healthy
@@ -27,3 +30,4 @@ services:
 
 volumes:
   db-data:
+  bot-logs:

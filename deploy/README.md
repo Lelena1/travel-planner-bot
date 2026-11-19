@@ -53,6 +53,7 @@ crontab -e
 ```bash
 cd /opt/travel-planner-bot
 docker compose ps              # что запущено
-docker compose logs -f bot     # журнал бота
+docker compose logs -f bot     # журнал бота (текущий запуск)
+docker compose exec bot sh -c 'grep "отписался" /app/logs/bot.log*'   # журнал за 30 дней, даже после пересборок
 docker compose restart bot     # перезапуск
 ```
