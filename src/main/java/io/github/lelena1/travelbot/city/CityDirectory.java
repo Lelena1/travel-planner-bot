@@ -75,7 +75,8 @@ public class CityDirectory {
 							(String) city.get("avito"),
 							(String) city.get("cian"),
 							Boolean.TRUE.equals(city.get("sutochno")),
-							(String) city.get("tripster")))
+							(String) city.get("tripster"),
+							(List<String>) city.get("nearby")))
 					.toList();
 		} catch (IOException e) {
 			throw new UncheckedIOException("Не удалось прочитать " + resource, e);

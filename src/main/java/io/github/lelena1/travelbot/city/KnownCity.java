@@ -11,12 +11,14 @@ import java.util.Optional;
  * @param cian     поддомен cian.ru («kazan», у Москвы «www»); пусто — сайт не используется
  * @param sutochno есть ли город на Суточно.ру
  * @param tripster город в адресе experience.tripster.ru («Kazan»); пусто — экскурсий на Трипстере нет
+ * @param nearby   куда ездят на день: названия статей Википедии («Светлогорск (Калининградская область)»)
  */
 public record KnownCity(String name, List<String> aliases, String ostrovok, String avito, String cian,
-		boolean sutochno, String tripster) {
+		boolean sutochno, String tripster, List<String> nearby) {
 
 	public KnownCity {
 		aliases = aliases == null ? List.of() : List.copyOf(aliases);
+		nearby = nearby == null ? List.of() : List.copyOf(nearby);
 	}
 
 	public Optional<String> ostrovokPath() {

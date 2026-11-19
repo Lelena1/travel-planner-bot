@@ -15,8 +15,8 @@ import io.github.lelena1.travelbot.trip.Pets;
 
 class LodgingSitesTest {
 
-	private static final KnownCity KAZAN = new KnownCity("Казань", List.of(), "russia/kazan", "kazan", "kazan", true, null);
-	private static final KnownCity ROME = new KnownCity("Рим", List.of(), "italy/rome", null, null, false, null);
+	private static final KnownCity KAZAN = new KnownCity("Казань", List.of(), "russia/kazan", "kazan", "kazan", true, null, null);
+	private static final KnownCity ROME = new KnownCity("Рим", List.of(), "italy/rome", null, null, false, null, null);
 	private static final LocalDate IN = LocalDate.of(2027, 5, 12);
 	private static final LocalDate OUT = LocalDate.of(2027, 5, 18);
 
