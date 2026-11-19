@@ -1,5 +1,6 @@
 package io.github.lelena1.travelbot.dialog;
 
+import java.time.Duration;
 import java.time.Instant;
 
 import jakarta.persistence.Column;
@@ -35,15 +36,20 @@ public class Conversation {
 		// для JPA
 	}
 
-	public Conversation(long userId, long tripId) {
+	public Conversation(long userId, long tripId, Instant now) {
 		this.userId = userId;
 		this.tripId = tripId;
-		moveTo(DialogStep.DESTINATION);
+		moveTo(DialogStep.DESTINATION, now);
 	}
 
-	public void moveTo(DialogStep next) {
+	public void moveTo(DialogStep next, Instant now) {
 		this.step = next;
-		this.updatedAt = Instant.now();
+		this.updatedAt = now;
+	}
+
+	/** Пользователь не отвечал дольше {@code ttl}. */
+	public boolean isExpired(Instant now, Duration ttl) {
+		return updatedAt.plus(ttl).isBefore(now);
 	}
 
 	public Long getUserId() {

@@ -2,7 +2,7 @@ package io.github.lelena1.travelbot.dialog;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.time.Clock;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.util.List;
@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import io.github.lelena1.travelbot.MutableClock;
 import io.github.lelena1.travelbot.TestcontainersConfiguration;
 import io.github.lelena1.travelbot.bot.BotReply;
 import io.github.lelena1.travelbot.bot.Keyboard;
@@ -40,8 +41,8 @@ class NewTripDialogIntegrationTest {
 	static class FixedClock {
 		@Bean
 		@Primary
-		Clock fixedClock() {
-			return Clock.fixed(LocalDate.of(2026, 11, 19).atStartOfDay().toInstant(ZoneOffset.UTC), ZoneOffset.UTC);
+		MutableClock testClock() {
+			return new MutableClock(LocalDate.of(2026, 11, 19).atStartOfDay().toInstant(ZoneOffset.UTC));
 		}
 	}
 
@@ -53,6 +54,8 @@ class NewTripDialogIntegrationTest {
 	private ConversationRepository conversations;
 	@Autowired
 	private AccessService access;
+	@Autowired
+	private MutableClock clock;
 
 	private long user;
 
@@ -152,6 +155,41 @@ class NewTripDialogIntegrationTest {
 		BotReply question = dialog.start(user);
 
 		assertThat(question.keyboard()).isEqualTo(Keyboard.options(List.of(List.of(NewTripDialog.CANCEL))));
+	}
+
+	@Test
+	void answerAfterMoreThanDayClosesQuestionnaire() {
+		answer("Сочи");
+		clock.advance(Duration.ofHours(25));
+
+		BotReply reply = dialog.handle(user, "Москва");
+
+		assertThat(reply.text()).contains("прошло больше суток");
+		assertThat(reply.showsMainMenu()).isTrue();
+		assertThat(dialog.isActive(user)).isFalse();
+		assertThat(trips.findAll()).noneMatch(trip -> trip.getUserId() == user);
+	}
+
+	@Test
+	void answerWithinDayContinuesQuestionnaire() {
+		answer("Сочи");
+		clock.advance(Duration.ofHours(23));
+
+		assertThat(dialog.handle(user, "Москва").text()).contains("Когда");
+	}
+
+	@Test
+	void cleanerRemovesOnlyExpiredQuestionnaires() {
+		answer("Сочи");
+		clock.advance(Duration.ofHours(25));
+		long freshUser = NEXT_USER.incrementAndGet();
+		access.allow(freshUser);
+		dialog.start(freshUser);
+
+		assertThat(dialog.closeExpired()).isGreaterThanOrEqualTo(1);
+
+		assertThat(dialog.isActive(user)).isFalse();
+		assertThat(dialog.isActive(freshUser)).isTrue();
 	}
 
 	private void answer(String... answers) {

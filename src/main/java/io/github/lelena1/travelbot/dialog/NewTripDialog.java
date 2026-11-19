@@ -1,5 +1,7 @@
 package io.github.lelena1.travelbot.dialog;
 
+import java.time.Clock;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,16 +39,22 @@ public class NewTripDialog {
 	static final int MAX_CHILDREN = 10;
 	static final int MAX_CHILD_AGE = 17;
 
+	/** Сколько ждать ответа, прежде чем считать анкету брошенной. */
+	public static final Duration QUESTIONNAIRE_TTL = Duration.ofHours(24);
+
 	private static final List<String> CANCEL_ROW = List.of(CANCEL);
 
 	private final ConversationRepository conversations;
 	private final TripRepository trips;
 	private final DateRangeParser dateParser;
+	private final Clock clock;
 
-	public NewTripDialog(ConversationRepository conversations, TripRepository trips, DateRangeParser dateParser) {
+	public NewTripDialog(ConversationRepository conversations, TripRepository trips, DateRangeParser dateParser,
+			Clock clock) {
 		this.conversations = conversations;
 		this.trips = trips;
 		this.dateParser = dateParser;
+		this.clock = clock;
 	}
 
 	@Transactional(readOnly = true)
@@ -59,7 +67,7 @@ public class NewTripDialog {
 	public BotReply start(long userId) {
 		discardDraft(userId);
 		Trip draft = trips.save(Trip.draftFor(userId));
-		conversations.save(new Conversation(userId, draft.getId()));
+		conversations.save(new Conversation(userId, draft.getId(), clock.instant()));
 		log.info("Анкета: пользователь {} начал новую поездку (черновик #{})", userId, draft.getId());
 		return ask(DialogStep.DESTINATION, draft);
 	}
@@ -89,6 +97,13 @@ public class NewTripDialog {
 			return BotReply.withMenu("Анкета не найдена. Нажмите «🗺 Новая поездка», чтобы начать.");
 		}
 		Conversation conversation = found.get();
+		if (conversation.isExpired(clock.instant(), QUESTIONNAIRE_TTL)) {
+			discardDraft(userId);
+			log.info("Анкета: пользователь {} вернулся больше чем через сутки, анкета закрыта", userId);
+			return BotReply.withMenu("""
+					ℹ️ Незаконченная анкета закрыта: с последнего ответа прошло больше суток.
+					Чтобы начать заново, нажмите «🗺 Новая поездка».""");
+		}
 		Trip trip = trips.findById(conversation.getTripId()).orElseThrow();
 
 		return switch (conversation.getStep()) {
@@ -209,7 +224,7 @@ public class NewTripDialog {
 	// ---------- вопросы ----------
 
 	private BotReply next(Conversation conversation, DialogStep step, Trip trip) {
-		conversation.moveTo(step);
+		conversation.moveTo(step, clock.instant());
 		return ask(step, trip);
 	}
 
@@ -294,6 +309,18 @@ public class NewTripDialog {
 
 	private static List<String> labels(Budget[] values) {
 		return Arrays.stream(values).map(Budget::label).toList();
+	}
+
+	/**
+	 * Удаляет анкеты, на которые не отвечали дольше {@link #QUESTIONNAIRE_TTL}.
+	 *
+	 * @return сколько анкет удалено
+	 */
+	@Transactional
+	public int closeExpired() {
+		List<Conversation> expired = conversations.findByUpdatedAtBefore(clock.instant().minus(QUESTIONNAIRE_TTL));
+		expired.forEach(conversation -> discardDraft(conversation.getUserId()));
+		return expired.size();
 	}
 
 	private void discardDraft(long userId) {
