@@ -102,4 +102,25 @@ class TelegramSenderTest {
 		when(client.execute(any(SendMessage.class))).thenThrow(new TelegramApiException("blocked"));
 		assertThat(sender.send(42, BotReply.text("x"))).isFalse();
 	}
+
+	@Test
+	void networkTimeoutIsRetried() throws Exception {
+		TelegramClient client = mock(TelegramClient.class);
+		when(client.execute(any(SendMessage.class)))
+				.thenThrow(new TelegramApiException("Unable to execute sendmessage method",
+						new java.net.SocketTimeoutException("Read timed out")))
+				.thenReturn(null);
+
+		assertThat(new TelegramSender(client).send(42, BotReply.text("Места"))).isTrue();
+		verify(client, org.mockito.Mockito.times(2)).execute(any(SendMessage.class));
+	}
+
+	@Test
+	void telegramRejectionIsNotRetried() {
+		assertThat(TelegramSender.isNetworkError(
+				new org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException("Bad Request: BUTTON_URL_INVALID")))
+				.isFalse();
+		assertThat(TelegramSender.isNetworkError(
+				new TelegramApiException("x", new java.net.SocketTimeoutException("Read timed out")))).isTrue();
+	}
 }

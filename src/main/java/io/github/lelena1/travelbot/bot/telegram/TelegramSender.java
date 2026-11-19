@@ -11,6 +11,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardRow;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 import io.github.lelena1.travelbot.bot.BotReply;
@@ -45,12 +46,46 @@ public class TelegramSender implements Notifier {
 		if (markup != null) {
 			builder.replyMarkup(markup);
 		}
-		try {
-			client.execute(builder.build());
-			return true;
-		} catch (TelegramApiException e) {
-			log.error("Не удалось отправить сообщение в чат {}", chatId, e);
+		SendMessage message = builder.build();
+		for (int attempt = 1; ; attempt++) {
+			try {
+				client.execute(message);
+				return true;
+			} catch (TelegramApiException e) {
+				if (!isNetworkError(e) || attempt >= MAX_ATTEMPTS) {
+					log.error("Не удалось отправить сообщение в чат {} (попытка {})", chatId, attempt, e);
+					return false;
+				}
+				log.warn("Сбой сети при отправке в чат {}, повторяю (попытка {}): {}", chatId, attempt, e.getMessage());
+				pause(RETRY_PAUSE_MILLIS * attempt);
+			}
+		}
+	}
+
+	static final int MAX_ATTEMPTS = 3;
+	static final long RETRY_PAUSE_MILLIS = 1_000;
+
+	/**
+	 * Повторять имеет смысл только сбой сети (тайм-аут, обрыв соединения). Ошибку от самого Telegram
+	 * (например, 400 — неверная кнопка) повтор не исправит.
+	 */
+	static boolean isNetworkError(TelegramApiException e) {
+		if (e instanceof TelegramApiRequestException) {
 			return false;
+		}
+		for (Throwable cause = e.getCause(); cause != null; cause = cause.getCause()) {
+			if (cause instanceof java.io.IOException) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private static void pause(long millis) {
+		try {
+			Thread.sleep(millis);
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
 		}
 	}
 
