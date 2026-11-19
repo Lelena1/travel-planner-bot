@@ -44,7 +44,7 @@ class CommandRouterTest {
 		BotReply reply = send(STRANGER, "/start");
 
 		assertThat(reply.text()).contains("доступ закрыт").contains("3");
-		assertThat(reply.showMainMenu()).isFalse();
+		assertThat(reply.showsMainMenu()).isFalse();
 	}
 
 	@Test
@@ -57,7 +57,7 @@ class CommandRouterTest {
 		BotReply reply = send(USER, "/start");
 
 		assertThat(reply.text()).startsWith("Привет, Лена!");
-		assertThat(reply.showMainMenu()).isTrue();
+		assertThat(reply.showsMainMenu()).isTrue();
 	}
 
 	@Test
@@ -81,7 +81,7 @@ class CommandRouterTest {
 		BotReply reply = send(USER, MainMenu.FLIGHTS.label());
 
 		assertThat(reply.text()).contains("Авиабилеты").contains("этап 3");
-		assertThat(reply.showMainMenu()).isTrue();
+		assertThat(reply.showsMainMenu()).isTrue();
 	}
 
 	@Test

@@ -1,6 +1,5 @@
 package io.github.lelena1.travelbot.bot.telegram;
 
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +7,9 @@ import org.telegram.telegrambots.longpolling.util.LongPollingSingleThreadUpdateC
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
@@ -16,6 +17,7 @@ import org.telegram.telegrambots.meta.generics.TelegramClient;
 import io.github.lelena1.travelbot.bot.BotReply;
 import io.github.lelena1.travelbot.bot.CommandRouter;
 import io.github.lelena1.travelbot.bot.IncomingMessage;
+import io.github.lelena1.travelbot.bot.Keyboard;
 import io.github.lelena1.travelbot.bot.MainMenu;
 
 /**
@@ -65,8 +67,9 @@ public class TelegramUpdateConsumer implements LongPollingSingleThreadUpdateCons
 		SendMessage.SendMessageBuilder<?, ?> builder = SendMessage.builder()
 				.chatId(chatId)
 				.text(reply.text());
-		if (reply.showMainMenu()) {
-			builder.replyMarkup(MAIN_MENU);
+		ReplyKeyboard markup = toMarkup(reply.keyboard());
+		if (markup != null) {
+			builder.replyMarkup(markup);
 		}
 		try {
 			client.execute(builder.build());
@@ -75,8 +78,24 @@ public class TelegramUpdateConsumer implements LongPollingSingleThreadUpdateCons
 		}
 	}
 
-	/** Для тестов: какие кнопки увидит пользователь. */
-	static List<KeyboardRow> mainMenuRows() {
-		return MAIN_MENU.getKeyboard();
+	/** Превращает описание кнопок в объект Telegram API; null — клавиатуру не менять. */
+	static ReplyKeyboard toMarkup(Keyboard keyboard) {
+		if (keyboard instanceof Keyboard.MainMenuKeyboard) {
+			return MAIN_MENU;
+		}
+		if (keyboard instanceof Keyboard.Remove) {
+			return ReplyKeyboardRemove.builder().removeKeyboard(true).build();
+		}
+		if (keyboard instanceof Keyboard.Options options) {
+			return ReplyKeyboardMarkup.builder()
+					.keyboard(options.rows().stream()
+							.map(row -> new KeyboardRow(row.toArray(String[]::new)))
+							.toList())
+					.resizeKeyboard(true)
+					.oneTimeKeyboard(true)
+					.build();
+		}
+		return null; // Keyboard.Keep
 	}
+
 }
