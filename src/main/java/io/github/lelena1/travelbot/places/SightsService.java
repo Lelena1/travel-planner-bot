@@ -33,7 +33,8 @@ public class SightsService {
 
 	static final int RADIUS_METERS = 10_000;
 	static final int ARTICLES_TO_CHECK = 200;
-	static final int TOP = 7;
+	/** С запасом для плана поездки по дням; в разделе «Места» показываются первые {@link CityGuideService#SIGHTS_SHOWN}. */
+	static final int TOP = 12;
 	/** Статья хотя бы на двух языках — иначе это скорее местная мелочь. */
 	static final int MIN_FAME = 2;
 

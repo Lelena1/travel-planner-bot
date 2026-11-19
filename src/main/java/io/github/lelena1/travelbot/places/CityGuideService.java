@@ -24,6 +24,7 @@ public class CityGuideService {
 	private static final Logger log = LoggerFactory.getLogger(CityGuideService.class);
 
 	static final int INTRO_MAX_LENGTH = 220;
+	static final int SIGHTS_SHOWN = 7;
 	static final String TRIPSTER = "https://experience.tripster.ru/experience/";
 
 	private final CityLocator locator;
@@ -47,7 +48,7 @@ public class CityGuideService {
 			if (center.isEmpty()) {
 				return cityNotFound(city);
 			}
-			List<Sight> found = sights.topSights(city, center.get());
+			List<Sight> found = sights.topSights(city, center.get()).stream().limit(SIGHTS_SHOWN).toList();
 			if (found.isEmpty()) {
 				return BotReply.withMenu("🏛 В Википедии не нашлось известных достопримечательностей рядом с центром «%s»."
 						.formatted(city));
