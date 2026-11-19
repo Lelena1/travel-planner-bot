@@ -26,8 +26,7 @@ public final class TripFormatter {
 			lines.add("🛫 Откуда: " + trip.getOrigin());
 		}
 		if (trip.getDateFrom() != null) {
-			lines.add("🗓 " + dates(trip.getDateFrom(), trip.getDateTo())
-					+ " (" + RussianPlural.format(trip.nights(), "ночь", "ночи", "ночей") + ")");
+			lines.add("🗓 " + summaryDates(trip));
 		}
 		if (trip.getAdults() != null) {
 			lines.add("👥 " + travelers(trip));
@@ -39,6 +38,12 @@ public final class TripFormatter {
 			lines.add("💰 " + budget(trip.getBudget()));
 		}
 		return String.join("\n", lines);
+	}
+
+	/** «12 мая – 18 мая 2027 (6 ночей)». */
+	public static String summaryDates(Trip trip) {
+		return dates(trip.getDateFrom(), trip.getDateTo())
+				+ " (" + RussianPlural.format(trip.nights(), "ночь", "ночи", "ночей") + ")";
 	}
 
 	/** «12 – 18 мая 2027», но «28 декабря 2026 – 5 января 2027». */
