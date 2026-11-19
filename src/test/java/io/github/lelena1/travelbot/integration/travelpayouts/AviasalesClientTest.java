@@ -11,7 +11,6 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
 import java.time.YearMonth;
 import java.util.List;
 
@@ -58,7 +57,9 @@ class AviasalesClientTest {
 		assertThat(first.price()).isEqualTo(47948);
 		assertThat(first.originAirport()).isEqualTo("VKO");
 		assertThat(first.destinationAirport()).isEqualTo("FCO");
-		assertThat(first.departureAt()).isEqualTo(OffsetDateTime.parse("2027-05-12T20:50:00+03:00"));
+		// сравниваем именно местное время и часовой пояс, а не только момент времени
+		assertThat(first.departureAt().toString()).isEqualTo("2027-05-12T20:50+03:00");
+		assertThat(first.returnAt().toString()).isEqualTo("2027-05-18T11:55+02:00");
 		assertThat(first.isRoundTrip()).isTrue();
 		assertThat(first.isDirect()).isFalse();
 		assertThat(offers).extracting(PriceOffer::price).isSorted();

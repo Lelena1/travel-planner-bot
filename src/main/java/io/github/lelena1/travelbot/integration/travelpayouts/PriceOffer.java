@@ -2,6 +2,7 @@ package io.github.lelena1.travelbot.integration.travelpayouts;
 
 import java.time.OffsetDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -22,8 +23,9 @@ public record PriceOffer(
 		String destination,
 		@JsonProperty("origin_airport") String originAirport,
 		@JsonProperty("destination_airport") String destinationAirport,
-		@JsonProperty("departure_at") OffsetDateTime departureAt,
-		@JsonProperty("return_at") OffsetDateTime returnAt,
+		// время — местное для аэропорта вылета; не переводим в UTC, иначе «20:50» станет «17:50»
+		@JsonProperty("departure_at") @JsonFormat(without = JsonFormat.Feature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE) OffsetDateTime departureAt,
+		@JsonProperty("return_at") @JsonFormat(without = JsonFormat.Feature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE) OffsetDateTime returnAt,
 		String airline,
 		@JsonProperty("flight_number") String flightNumber,
 		int price,
