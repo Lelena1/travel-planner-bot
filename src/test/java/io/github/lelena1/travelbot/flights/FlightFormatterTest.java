@@ -13,7 +13,7 @@ import io.github.lelena1.travelbot.trip.Trip;
 
 class FlightFormatterTest {
 
-	private static final String SEARCH_URL = "https://www.aviasales.ru/search/MOW1205ROM1805210";
+	private static final String SEARCH_URL = "https://www.aviasales.ru/search/MOW1205ROM180521";
 
 	@Test
 	void roundTripOffersWithBuyButtons() {

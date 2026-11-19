@@ -39,4 +39,10 @@ class PassengersTest {
 		trip.setChildAges(childAges);
 		return trip;
 	}
+
+	@Test
+	void suffixMatchesAviasalesCanonicalForm() {
+		assertThat(new Passengers(2, 1, 0).aviasalesSuffix()).isEqualTo("21");
+		assertThat(new Passengers(2, 0, 1).aviasalesSuffix()).isEqualTo("201");
+	}
 }

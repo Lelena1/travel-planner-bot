@@ -34,11 +34,14 @@ public record Passengers(int adults, int children, int infants) {
 		return adults + children + infants;
 	}
 
-	/** Хвост адреса поиска Aviasales: «2» — двое взрослых, «210» — двое взрослых и ребёнок. */
+	/**
+	 * Хвост адреса поиска Aviasales — так сайт сам записывает пассажиров:
+	 * «2» — двое взрослых, «21» — и ребёнок, «211» — ещё и младенец, «201» — взрослые и младенец.
+	 */
 	String aviasalesSuffix() {
-		if (children == 0 && infants == 0) {
-			return String.valueOf(adults);
+		if (infants > 0) {
+			return "" + adults + children + infants;
 		}
-		return "" + adults + children + infants;
+		return children > 0 ? "" + adults + children : String.valueOf(adults);
 	}
 }

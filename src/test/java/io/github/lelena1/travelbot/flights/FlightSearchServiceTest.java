@@ -55,7 +55,7 @@ class FlightSearchServiceTest {
 
 		assertThat(found.exactDates()).isTrue();
 		assertThat(found.offers()).containsExactly(offer);
-		assertThat(found.searchUrl()).isEqualTo("https://www.aviasales.ru/search/MOW1205ROM1805210");
+		assertThat(found.searchUrl()).isEqualTo("https://www.aviasales.ru/search/MOW1205ROM180521");
 	}
 
 	@Test
