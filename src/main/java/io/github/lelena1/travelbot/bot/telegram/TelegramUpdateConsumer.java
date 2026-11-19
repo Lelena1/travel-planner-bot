@@ -1,6 +1,5 @@
 package io.github.lelena1.travelbot.bot.telegram;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.longpolling.util.LongPollingSingleThreadUpdateConsumer;
