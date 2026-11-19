@@ -13,6 +13,7 @@ services:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-travelbot} -d travelbot"]
       interval: 5s
       retries: 10
+    restart: unless-stopped   # поднимать базу после перезагрузки компьютера вместе с ботом
 
   bot:
     build: .
