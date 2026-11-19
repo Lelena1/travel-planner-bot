@@ -2,6 +2,7 @@ package io.github.lelena1.travelbot.places;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -27,8 +28,8 @@ class NearbyPlacesServiceTest {
 		SightsService sights = mock(SightsService.class);
 		when(locator.locate("Зеленоградск")).thenReturn(Optional.of(ZELENOGRADSK));
 		when(locator.locate("Светлогорск (Калининградская область)")).thenReturn(Optional.of(SVETLOGORSK));
-		when(locator.locate("Куршская коса")).thenThrow(new WikiException("timeout", null));
-		when(sights.topSights(anyString(), any())).thenReturn(List.of(
+		when(locator.locate("Танцующий лес")).thenThrow(new WikiException("timeout", null));
+		when(sights.topSights(anyString(), any(), anyInt())).thenReturn(List.of(
 				sight("A"), sight("B"), sight("C"), sight("D")));
 
 		List<NearbyPlacesService.NearbyPlace> places =
@@ -46,6 +47,25 @@ class NearbyPlacesServiceTest {
 	void cityWithoutDayTrips() {
 		assertThat(new NearbyPlacesService(new CityDirectory(), mock(CityLocator.class), mock(SightsService.class))
 				.forCity("Новосибирск", KALININGRAD)).isEmpty();
+	}
+
+	@Test
+	void nearbyPlacesAreSearchedInSmallRadius() {
+		CityLocator locator = mock(CityLocator.class);
+		SightsService sights = mock(SightsService.class);
+		when(locator.locate(anyString())).thenReturn(Optional.of(ZELENOGRADSK));
+
+		new NearbyPlacesService(new CityDirectory(), locator, sights).forCity("Калининград", KALININGRAD);
+
+		org.mockito.Mockito.verify(sights).topSights("Зеленоградск", ZELENOGRADSK, NearbyPlacesService.RADIUS_METERS);
+		org.mockito.Mockito.verify(sights).topSights("Танцующий лес", ZELENOGRADSK, NearbyPlacesService.RADIUS_METERS);
+	}
+
+	@Test
+	void displayNameAndArticleCanDiffer() {
+		assertThat(NearbyPlacesService.displayName("Куршская коса | Танцующий лес")).isEqualTo("Куршская коса");
+		assertThat(NearbyPlacesService.articleTitle("Куршская коса | Танцующий лес")).isEqualTo("Танцующий лес");
+		assertThat(NearbyPlacesService.articleTitle("Зеленоградск")).isEqualTo("Зеленоградск");
 	}
 
 	@Test

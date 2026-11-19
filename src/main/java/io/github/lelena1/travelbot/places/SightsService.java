@@ -45,7 +45,8 @@ public class SightsService {
 	/** Слова в названии или описании, которые выдают «не место для туриста». */
 	static final List<String> NOT_SIGHT_WORDS = List.of("улица", "район", "станция", "завод", "микрорайон",
 			"проспект", "переулок", "шоссе", "округ", "деревня", "село", "посёлок", "поселок", "квартал", "компания",
-			"школа", "больница", "университет", "институт", "колледж", "линия");
+			"школа", "больница", "университет", "институт", "колледж", "линия", "аэропорт", "аэродром", "река",
+			"ручей");
 
 	/** Исторические области и государства (Викиданные, P31). */
 	static final Set<String> NOT_SIGHT_KINDS = Set.of("Q1620908", "Q3024240", "Q19953632");
@@ -58,10 +59,19 @@ public class SightsService {
 		this.wikidata = wikidata;
 	}
 
-	/** Кешируется на неделю: достопримечательности не меняются, а запросов к Википедии несколько. */
-	@Cacheable(cacheNames = CacheConfig.SIGHTS, key = "#cityName")
+	/** Достопримечательности города в радиусе 10 км от центра. */
 	public List<Sight> topSights(String cityName, GeoPoint center) {
-		List<WikiArticle> articles = wikipedia.nearby(center, RADIUS_METERS, ARTICLES_TO_CHECK).stream()
+		return topSights(cityName, center, RADIUS_METERS);
+	}
+
+	/**
+	 * Кешируется на неделю: достопримечательности не меняются, а запросов к Википедии несколько.
+	 * Радиус меньше 10 км нужен для небольших городков: иначе в «достопримечательности»
+	 * Зеленоградска попадают аэропорт и реки вокруг.
+	 */
+	@Cacheable(cacheNames = CacheConfig.SIGHTS, key = "#cityName + '|' + #radiusMeters")
+	public List<Sight> topSights(String cityName, GeoPoint center, int radiusMeters) {
+		List<WikiArticle> articles = wikipedia.nearby(center, radiusMeters, ARTICLES_TO_CHECK).stream()
 				.filter(article -> looksLikeSight(article, cityName))
 				.toList();
 		Map<String, WikidataFacts> facts = wikidata.facts(articles.stream().map(WikiArticle::wikidataId).toList());

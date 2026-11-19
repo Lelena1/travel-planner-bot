@@ -25,6 +25,10 @@ public class NearbyPlacesService {
 	private static final Logger log = LoggerFactory.getLogger(NearbyPlacesService.class);
 
 	static final int SIGHTS_PER_PLACE = 3;
+	/** Места для поездки на день — небольшие городки: ищем в радиусе 4 км, а не 10, как для города. */
+	static final int RADIUS_METERS = 4_000;
+	/** «Куршская коса | Танцующий лес»: слева — как показывать, справа — статья, вокруг которой искать. */
+	static final String DISPLAY_SEPARATOR = " | ";
 
 	private final CityDirectory directory;
 	private final CityLocator locator;
@@ -39,14 +43,16 @@ public class NearbyPlacesService {
 	public List<NearbyPlace> forCity(String destination, GeoPoint cityCenter) {
 		List<String> titles = directory.find(destination).map(KnownCity::nearby).orElse(List.of());
 		List<NearbyPlace> result = new ArrayList<>();
-		for (String title : titles) {
+		for (String entry : titles) {
+			String title = articleTitle(entry);
 			try {
 				Optional<GeoPoint> point = locator.locate(title);
 				if (point.isEmpty()) {
 					continue;
 				}
-				List<Sight> top = sights.topSights(title, point.get()).stream().limit(SIGHTS_PER_PLACE).toList();
-				result.add(new NearbyPlace(displayName(title), WikipediaClient.articleUrl(title), point.get(),
+				List<Sight> top = sights.topSights(title, point.get(), RADIUS_METERS).stream()
+						.limit(SIGHTS_PER_PLACE).toList();
+				result.add(new NearbyPlace(displayName(entry), WikipediaClient.articleUrl(title), point.get(),
 						(int) Math.round(point.get().distanceTo(cityCenter) / 1000), top));
 			} catch (WikiException e) {
 				// одно недоступное место не должно лишать остальных
@@ -56,10 +62,20 @@ public class NearbyPlacesService {
 		return result;
 	}
 
-	/** «Светлогорск (Калининградская область)» → «Светлогорск». */
-	static String displayName(String articleTitle) {
-		int bracket = articleTitle.indexOf(" (");
-		return bracket > 0 ? articleTitle.substring(0, bracket) : articleTitle;
+	/** «Светлогорск (Калининградская область)» → «Светлогорск»; «Куршская коса | Танцующий лес» → «Куршская коса». */
+	static String displayName(String entry) {
+		int separator = entry.indexOf(DISPLAY_SEPARATOR);
+		if (separator > 0) {
+			return entry.substring(0, separator);
+		}
+		int bracket = entry.indexOf(" (");
+		return bracket > 0 ? entry.substring(0, bracket) : entry;
+	}
+
+	/** «Куршская коса | Танцующий лес» → «Танцующий лес»; иначе вся строка — название статьи. */
+	static String articleTitle(String entry) {
+		int separator = entry.indexOf(DISPLAY_SEPARATOR);
+		return separator > 0 ? entry.substring(separator + DISPLAY_SEPARATOR.length()) : entry;
 	}
 
 	/**

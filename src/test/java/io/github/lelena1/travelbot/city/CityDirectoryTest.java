@@ -46,7 +46,7 @@ class CityDirectoryTest {
 		assertThat(kazan.sutochno()).isTrue();
 		assertThat(kazan.tripsterCity()).contains("Kazan");
 		assertThat(directory.find("Калининград").orElseThrow().nearby())
-				.containsExactly("Зеленоградск", "Светлогорск (Калининградская область)", "Куршская коса");
+				.containsExactly("Зеленоградск", "Светлогорск (Калининградская область)", "Куршская коса | Танцующий лес");
 		assertThat(directory.find("Новосибирск").orElseThrow().nearby()).isEmpty();
 		assertThat(directory.find("Сириус").orElseThrow().tripsterCity()).isEmpty();
 	}
