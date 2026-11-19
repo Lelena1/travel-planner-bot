@@ -30,8 +30,13 @@ public class TelegramBotConfig {
 	}
 
 	@Bean
-	TelegramUpdateConsumer telegramUpdateConsumer(TelegramClient client, CommandRouter router) {
-		return new TelegramUpdateConsumer(client, router);
+	TelegramSender telegramSender(TelegramClient client) {
+		return new TelegramSender(client);
+	}
+
+	@Bean
+	TelegramUpdateConsumer telegramUpdateConsumer(TelegramClient client, TelegramSender sender, CommandRouter router) {
+		return new TelegramUpdateConsumer(client, sender, router);
 	}
 
 	@Bean(destroyMethod = "close")
