@@ -98,4 +98,28 @@ class WikipediaClientTest {
 		assertThat(WikipediaClient.cleanIntro("Кёнигсбергский замок (нем. Königsberger Schloss) — замок Тевтонского ордена."))
 				.isEqualTo("Кёнигсбергский замок — замок Тевтонского ордена.");
 	}
+
+	@Test
+	void busySearchIsRetriedInsteadOfReturningNothing() {
+		server.expect(requestTo(startsWith(WikipediaClient.API)))
+				.andRespond(withSuccess(BUSY, MediaType.APPLICATION_JSON));
+		server.expect(requestTo(startsWith(WikipediaClient.API)))
+				.andRespond(json("wiki/nearby-kaliningrad.json"));
+
+		assertThat(client.nearby(new GeoPoint(54.71, 20.51), 10_000, 50)).hasSize(50);
+		server.verify();
+	}
+
+	@Test
+	void persistentErrorIsNotTakenForEmptyResult() {
+		server.expect(org.springframework.test.web.client.ExpectedCount.times(WikipediaClient.MAX_ATTEMPTS),
+				requestTo(startsWith(WikipediaClient.API))).andRespond(withSuccess(BUSY, MediaType.APPLICATION_JSON));
+
+		assertThatThrownBy(() -> client.nearby(new GeoPoint(60, 29.77), 4_000, 200))
+				.isInstanceOf(WikiException.class).hasMessageContaining("too-busy");
+	}
+
+	/** Так Википедия на самом деле ответила на поиск вокруг Кронштадта — с кодом 200. */
+	private static final String BUSY = """
+			{"error":{"code":"cirrussearch-too-busy-error","info":"Search is currently too busy. Please try again later."}}""";
 }

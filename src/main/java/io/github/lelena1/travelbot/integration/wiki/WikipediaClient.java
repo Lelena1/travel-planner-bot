@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
@@ -22,6 +24,8 @@ import io.github.lelena1.travelbot.city.GeoPoint;
  */
 @Component
 public class WikipediaClient {
+
+	private static final Logger log = LoggerFactory.getLogger(WikipediaClient.class);
 
 	public static final String API = "https://ru.wikipedia.org/w/api.php";
 	/** Не больше 20 описаний за один запрос — ограничение API. */
@@ -103,18 +107,45 @@ public class WikipediaClient {
 				.encode(title.replace(' ', '_'), java.nio.charset.StandardCharsets.UTF_8);
 	}
 
+	static final int MAX_ATTEMPTS = 3;
+	static final long RETRY_PAUSE_MILLIS = 1_000;
+
+	/**
+	 * Запрос к API. Ошибку Википедия присылает в теле ответа с кодом 200 — например,
+	 * «cirrussearch-too-busy-error», когда поиск перегружен. Её нельзя принять за пустой результат:
+	 * пустота попала бы в кеш на неделю. Временные ошибки повторяем, остальные — исключение.
+	 */
 	private Response get(Map<String, String> params) {
+		for (int attempt = 1; ; attempt++) {
+			Response response;
+			try {
+				response = http.get()
+						.uri(uri -> {
+							uri.queryParam("action", "query").queryParam("format", "json").queryParam("formatversion", "2");
+							params.forEach(uri::queryParam);
+							return uri.build();
+						})
+						.retrieve()
+						.body(Response.class);
+			} catch (RestClientException e) {
+				throw new WikiException("Википедия не ответила", e);
+			}
+			if (response == null || response.error() == null) {
+				return response;
+			}
+			if (!response.error().isTemporary() || attempt >= MAX_ATTEMPTS) {
+				throw new WikiException("Википедия вернула ошибку: " + response.error().code(), null);
+			}
+			log.warn("Википедия: {}, повторяю (попытка {})", response.error().code(), attempt);
+			pause(RETRY_PAUSE_MILLIS * attempt);
+		}
+	}
+
+	private static void pause(long millis) {
 		try {
-			return http.get()
-					.uri(uri -> {
-						uri.queryParam("action", "query").queryParam("format", "json").queryParam("formatversion", "2");
-						params.forEach(uri::queryParam);
-						return uri.build();
-					})
-					.retrieve()
-					.body(Response.class);
-		} catch (RestClientException e) {
-			throw new WikiException("Википедия не ответила", e);
+			Thread.sleep(millis);
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
 		}
 	}
 
@@ -125,7 +156,16 @@ public class WikipediaClient {
 	}
 
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	record Response(Query query) {
+	record Response(Query query, ApiError error) {
+	}
+
+	@JsonIgnoreProperties(ignoreUnknown = true)
+	record ApiError(String code, String info) {
+
+		/** Перегрузка или задержка репликации — пройдёт через секунду-другую. */
+		boolean isTemporary() {
+			return code != null && (code.contains("too-busy") || code.equals("maxlag") || code.equals("ratelimited"));
+		}
 	}
 
 	@JsonIgnoreProperties(ignoreUnknown = true)

@@ -50,6 +50,9 @@ public class WikidataClient {
 			} catch (RestClientException e) {
 				throw new WikiException("Викиданные не ответили", e);
 			}
+			if (response != null && response.error() != null) {
+				throw new WikiException("Викиданные вернули ошибку: " + response.error().get("code"), null);
+			}
 			if (response != null && response.entities() != null) {
 				response.entities().forEach((id, entity) -> result.put(id, entity.toFacts()));
 			}
@@ -58,7 +61,7 @@ public class WikidataClient {
 	}
 
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	record Response(Map<String, Entity> entities) {
+	record Response(Map<String, Entity> entities, Map<String, Object> error) {
 	}
 
 	@JsonIgnoreProperties(ignoreUnknown = true)

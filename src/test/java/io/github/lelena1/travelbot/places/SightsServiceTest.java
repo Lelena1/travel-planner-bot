@@ -74,6 +74,7 @@ class SightsServiceTest {
 		assertThat(SightsService.isPlace(new WikidataFacts(34, Set.of("Q1620908"), Set.of("P31")))).isFalse();
 		assertThat(SightsService.isPlace(new WikidataFacts(54, Set.of("Q515"), Set.of("P31", "P1082")))).isFalse();
 		assertThat(SightsService.isPlace(new WikidataFacts(32, Set.of("Q2977"), Set.of("P31", "P571")))).isTrue();
+		assertThat(SightsService.isPlace(new WikidataFacts(12, Set.of("Q4022"), Set.of("P31")))).as("река").isFalse();
 	}
 
 	private static org.springframework.test.web.client.ResponseCreator json(String resource) {

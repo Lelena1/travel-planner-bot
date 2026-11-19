@@ -32,7 +32,8 @@ public class SightsService {
 	private static final Logger log = LoggerFactory.getLogger(SightsService.class);
 
 	static final int RADIUS_METERS = 10_000;
-	static final int ARTICLES_TO_CHECK = 200;
+	/** Максимум API. В плотном центре Петербурга 200 статей умещаются в 1,4 км — мимо Эрмитажа. */
+	static final int ARTICLES_TO_CHECK = 500;
 	/** С запасом для плана поездки по дням; в разделе «Места» показываются первые {@link CityGuideService#SIGHTS_SHOWN}. */
 	static final int TOP = 12;
 	/** Статья хотя бы на двух языках — иначе это скорее местная мелочь. */
@@ -48,8 +49,8 @@ public class SightsService {
 			"школа", "больница", "университет", "институт", "колледж", "линия", "аэропорт", "аэродром", "река",
 			"ручей");
 
-	/** Исторические области и государства (Викиданные, P31). */
-	static final Set<String> NOT_SIGHT_KINDS = Set.of("Q1620908", "Q3024240", "Q19953632");
+	/** Исторические области и государства, реки и ручьи (Викиданные, P31). */
+	static final Set<String> NOT_SIGHT_KINDS = Set.of("Q1620908", "Q3024240", "Q19953632", "Q4022", "Q47521");
 
 	private final WikipediaClient wikipedia;
 	private final WikidataClient wikidata;
