@@ -21,6 +21,9 @@ public class CacheConfig {
 
 	public static final String PLACES = "places";
 	public static final String FLIGHT_PRICES = "flight-prices";
+	public static final String CITY_COORDINATES = "city-coordinates";
+	public static final String SIGHTS = "sights";
+	public static final String RESTAURANTS = "restaurants";
 
 	@Bean
 	CacheManager cacheManager() {
@@ -32,6 +35,20 @@ public class CacheConfig {
 		manager.registerCustomCache(FLIGHT_PRICES, Caffeine.newBuilder()
 				.expireAfterWrite(Duration.ofMinutes(30))
 				.maximumSize(500)
+				.build());
+		// города не переезжают, достопримечательности и рестораны меняются редко,
+		// а Википедия и OpenStreetMap отвечают небыстро
+		manager.registerCustomCache(CITY_COORDINATES, Caffeine.newBuilder()
+				.expireAfterWrite(Duration.ofDays(30))
+				.maximumSize(1_000)
+				.build());
+		manager.registerCustomCache(SIGHTS, Caffeine.newBuilder()
+				.expireAfterWrite(Duration.ofDays(7))
+				.maximumSize(200)
+				.build());
+		manager.registerCustomCache(RESTAURANTS, Caffeine.newBuilder()
+				.expireAfterWrite(Duration.ofDays(7))
+				.maximumSize(200)
 				.build());
 		return manager;
 	}

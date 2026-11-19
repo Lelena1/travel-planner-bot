@@ -23,7 +23,7 @@ import io.github.lelena1.travelbot.city.GeoPoint;
 @Component
 public class WikipediaClient {
 
-	static final String API = "https://ru.wikipedia.org/w/api.php";
+	public static final String API = "https://ru.wikipedia.org/w/api.php";
 	/** Не больше 20 описаний за один запрос — ограничение API. */
 	static final int MAX_EXTRACTS = 20;
 

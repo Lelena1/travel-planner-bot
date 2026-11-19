@@ -67,7 +67,7 @@ class WikipediaClientTest {
 				.andExpect(queryParam("prop", "extracts"))
 				.andRespond(json("wiki/extracts-kaliningrad.json"));
 
-		assertThat(client.introductions(List.of("Кёнигсбергский собор", "Кёнигсбергский замок")))
+		assertThat(client.introductions(List.of("Кёнигсбергский собор", "Кёнигсбергский замок", "Калининградский зоопарк")))
 				.containsKeys("Кёнигсбергский собор", "Кёнигсбергский замок")
 				.allSatisfy((title, text) -> assertThat(text).isNotBlank());
 	}

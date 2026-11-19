@@ -71,6 +71,13 @@
       }
      }
     ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
+    ],
     "P1082": [
      {
       "mainsnak": {
@@ -572,6 +579,13 @@
       }
      }
     ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
+    ],
     "P1082": [
      {
       "mainsnak": {
@@ -853,6 +867,13 @@
        }
       }
      }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
     ]
    },
    "sitelinks": {
@@ -943,6 +964,13 @@
    "type": "item",
    "id": "Q4120832",
    "claims": {
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
+    ],
     "P31": [
      {
       "mainsnak": {
@@ -1233,6 +1261,13 @@
        }
       }
      }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
     ]
    },
    "sitelinks": {
@@ -1307,6 +1342,13 @@
        }
       }
      }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
     ]
    },
    "sitelinks": {
@@ -1343,6 +1385,13 @@
         },
         "type": "wikibase-entityid"
        }
+      }
+     }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
       }
      }
     ]
@@ -1417,6 +1466,13 @@
         },
         "type": "wikibase-entityid"
        }
+      }
+     }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
       }
      }
     ]
@@ -1578,6 +1634,13 @@
        }
       }
      }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
     ]
    },
    "sitelinks": {
@@ -1624,6 +1687,13 @@
         },
         "type": "wikibase-entityid"
        }
+      }
+     }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
       }
      }
     ]
@@ -1675,6 +1745,13 @@
         },
         "type": "wikibase-entityid"
        }
+      }
+     }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
       }
      }
     ]
@@ -1843,6 +1920,13 @@
        }
       }
      }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
     ]
    },
    "sitelinks": {
@@ -1892,6 +1976,13 @@
         },
         "type": "wikibase-entityid"
        }
+      }
+     }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
       }
      }
     ]
@@ -2037,6 +2128,13 @@
         },
         "type": "wikibase-entityid"
        }
+      }
+     }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
       }
      }
     ]
@@ -2199,6 +2297,13 @@
        }
       }
      }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
     ]
    },
    "sitelinks": {
@@ -2251,6 +2356,13 @@
         },
         "type": "wikibase-entityid"
        }
+      }
+     }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
       }
      }
     ]
@@ -2403,6 +2515,13 @@
        }
       }
      }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
     ]
    },
    "sitelinks": {
@@ -2521,6 +2640,13 @@
        }
       }
      }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
     ]
    },
    "sitelinks": {
@@ -2583,6 +2709,13 @@
         },
         "type": "wikibase-entityid"
        }
+      }
+     }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
       }
      }
     ]
@@ -2687,6 +2820,13 @@
        }
       }
      }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
     ]
    },
    "sitelinks": {
@@ -2705,6 +2845,13 @@
    "type": "item",
    "id": "Q24934195",
    "claims": {
+    "P1082": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
+    ],
     "P31": [
      {
       "mainsnak": {
@@ -2717,13 +2864,6 @@
         },
         "type": "wikibase-entityid"
        }
-      }
-     }
-    ],
-    "P1082": [
-     {
-      "mainsnak": {
-       "snaktype": "value"
       }
      }
     ]
@@ -2763,6 +2903,13 @@
         },
         "type": "wikibase-entityid"
        }
+      }
+     }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
       }
      }
     ]
@@ -2821,6 +2968,13 @@
        }
       }
      }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
     ]
    },
    "sitelinks": {
@@ -2873,6 +3027,13 @@
         },
         "type": "wikibase-entityid"
        }
+      }
+     }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
       }
      }
     ]
@@ -2939,6 +3100,13 @@
        }
       }
      }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
     ]
    },
    "sitelinks": {
@@ -2988,6 +3156,13 @@
         },
         "type": "wikibase-entityid"
        }
+      }
+     }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
       }
      }
     ]
@@ -3131,6 +3306,13 @@
        }
       }
      }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
     ]
    },
    "sitelinks": {
@@ -3173,6 +3355,13 @@
         },
         "type": "wikibase-entityid"
        }
+      }
+     }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
       }
      }
     ]
@@ -3227,6 +3416,13 @@
        }
       }
      }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
     ]
    },
    "sitelinks": {
@@ -3274,6 +3470,13 @@
    "type": "item",
    "id": "Q127420504",
    "claims": {
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
+      }
+     }
+    ],
     "P31": [
      {
       "mainsnak": {
@@ -3318,6 +3521,13 @@
         },
         "type": "wikibase-entityid"
        }
+      }
+     }
+    ],
+    "P571": [
+     {
+      "mainsnak": {
+       "snaktype": "value"
       }
      }
     ]
