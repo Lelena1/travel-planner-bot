@@ -3,7 +3,9 @@ package io.github.lelena1.travelbot.bot.telegram;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.longpolling.util.LongPollingSingleThreadUpdateConsumer;
+import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -47,6 +49,10 @@ public class TelegramUpdateConsumer implements LongPollingSingleThreadUpdateCons
 
 	@Override
 	public void consume(Update update) {
+		if (update.hasCallbackQuery()) {
+			consumeButton(update.getCallbackQuery());
+			return;
+		}
 		if (!update.hasMessage() || !update.getMessage().hasText()) {
 			return;
 		}
@@ -61,6 +67,31 @@ public class TelegramUpdateConsumer implements LongPollingSingleThreadUpdateCons
 			// записываем только саму команду, без аргументов и без обычного текста пользователя
 			log.info("Команда {} от пользователя {}", incoming.text().split("\\s+", 2)[0], incoming.userId());
 		}
+		handle(incoming);
+	}
+
+	/**
+	 * Нажатие кнопки под сообщением (callback). Данные кнопки обрабатываются как текст,
+	 * а Telegram получает подтверждение, чтобы у пользователя пропали «часики» на кнопке.
+	 */
+	private void consumeButton(CallbackQuery callback) {
+		try {
+			client.execute(AnswerCallbackQuery.builder().callbackQueryId(callback.getId()).build());
+		} catch (TelegramApiException e) {
+			log.warn("Не удалось подтвердить нажатие кнопки", e);
+		}
+		if (callback.getData() == null || callback.getMessage() == null) {
+			return;
+		}
+		log.info("Кнопка {} от пользователя {}", callback.getData().split(":", 2)[0], callback.getFrom().getId());
+		handle(new IncomingMessage(
+				callback.getFrom().getId(),
+				callback.getMessage().getChatId(),
+				callback.getFrom().getFirstName(),
+				callback.getData()));
+	}
+
+	private void handle(IncomingMessage incoming) {
 		try {
 			send(incoming.chatId(), router.handle(incoming));
 		} catch (RuntimeException e) {
@@ -105,12 +136,17 @@ public class TelegramUpdateConsumer implements LongPollingSingleThreadUpdateCons
 			return InlineKeyboardMarkup.builder()
 					.keyboard(links.rows().stream()
 							.map(row -> new InlineKeyboardRow(row.stream()
-									.map(link -> InlineKeyboardButton.builder().text(link.text()).url(link.url()).build())
+									.map(TelegramUpdateConsumer::inlineButton)
 									.toList()))
 							.toList())
 					.build();
 		}
 		return null; // Keyboard.Keep
+	}
+
+	private static InlineKeyboardButton inlineButton(Keyboard.Link link) {
+		InlineKeyboardButton.InlineKeyboardButtonBuilder<?, ?> button = InlineKeyboardButton.builder().text(link.text());
+		return link.isAction() ? button.callbackData(link.callbackData()).build() : button.url(link.url()).build();
 	}
 
 }

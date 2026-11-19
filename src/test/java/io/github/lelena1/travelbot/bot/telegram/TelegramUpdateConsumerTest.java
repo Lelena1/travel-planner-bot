@@ -57,4 +57,23 @@ class TelegramUpdateConsumerTest {
 		assertThat(button.getText()).isEqualTo("Купить");
 		assertThat(button.getUrl()).isEqualTo("https://www.aviasales.ru/search/MOW1205ROM18051");
 	}
+
+	@Test
+	void actionButtonSendsCallbackData() {
+		Keyboard links = Keyboard.links(List.of(List.of(Keyboard.Link.action("🔔 Следить за ценой", "watch:12"))));
+
+		InlineKeyboardButton button = ((InlineKeyboardMarkup) TelegramUpdateConsumer.toMarkup(links))
+				.getKeyboard().get(0).get(0);
+
+		assertThat(button.getCallbackData()).isEqualTo("watch:12");
+		assertThat(button.getUrl()).isNull();
+	}
+
+	@Test
+	void buttonMustBeEitherLinkOrAction() {
+		org.assertj.core.api.Assertions.assertThatThrownBy(() -> new Keyboard.Link("x", "https://a", "b"))
+				.isInstanceOf(IllegalArgumentException.class);
+		org.assertj.core.api.Assertions.assertThatThrownBy(() -> Keyboard.Link.action("x", "a".repeat(65)))
+				.hasMessageContaining("64");
+	}
 }

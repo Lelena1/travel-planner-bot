@@ -39,8 +39,37 @@ public sealed interface Keyboard {
 		}
 	}
 
-	/** Кнопка-ссылка: открывает сайт, боту ничего не отправляет. */
-	record Link(String text, String url) {
+	/**
+	 * Кнопка под сообщением: либо ссылка (открывает сайт), либо действие —
+	 * при нажатии бот получает {@code callbackData}, например «watch:12».
+	 */
+	record Link(String text, String url, String callbackData) {
+
+		/** Telegram ограничивает данные кнопки 64 байтами. */
+		static final int MAX_CALLBACK_BYTES = 64;
+
+		public Link {
+			if ((url == null) == (callbackData == null)) {
+				throw new IllegalArgumentException("Нужна либо ссылка, либо действие");
+			}
+			if (callbackData != null
+					&& callbackData.getBytes(java.nio.charset.StandardCharsets.UTF_8).length > MAX_CALLBACK_BYTES) {
+				throw new IllegalArgumentException("Данные кнопки длиннее 64 байт: " + callbackData);
+			}
+		}
+
+		/** Кнопка-ссылка. */
+		public Link(String text, String url) {
+			this(text, url, null);
+		}
+
+		public static Link action(String text, String callbackData) {
+			return new Link(text, null, callbackData);
+		}
+
+		public boolean isAction() {
+			return callbackData != null;
+		}
 	}
 
 	/** Кнопки-ссылки под сообщением (например, «Купить на Aviasales»). */
