@@ -1,0 +1,28 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: travelbot
+      POSTGRES_USER: ${DB_USER:-travelbot}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-travelbot}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-travelbot} -d travelbot"]
+      interval: 5s
+      retries: 10
+
+  bot:
+    build: .
+    env_file: .env
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/travelbot
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  db-data:

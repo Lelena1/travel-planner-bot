@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: travel-planner-bot
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/travelbot}
+    username: ${DB_USER:travelbot}
+    password: ${DB_PASSWORD:travelbot}
+  jpa:
+    hibernate:
+      ddl-auto: validate   # схему создаёт Flyway, Hibernate только проверяет её
+    open-in-view: false
+
+# Telegram: токен выдаёт @BotFather. Без токена приложение стартует, но к Telegram не подключается.
+bot:
+  token: ${BOT_TOKEN:}
+  username: ${BOT_USERNAME:}
+
+# Начальный белый список (Telegram ID через запятую). Узнать свой ID: команда /myid в боте.
+access:
+  admins: ${ADMIN_IDS:}
+  users: ${USER_IDS:}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
