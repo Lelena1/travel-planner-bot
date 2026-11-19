@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import io.github.lelena1.travelbot.bot.BotReply;
 import io.github.lelena1.travelbot.bot.Keyboard;
@@ -79,5 +80,18 @@ class FlightFormatterTest {
 		assertThat(FlightFormatter.duration(45)).isEqualTo("45 мин");
 		assertThat(FlightFormatter.duration(120)).isEqualTo("2 ч");
 		assertThat(FlightFormatter.transfers(2)).isEqualTo("2 пересадки");
+	}
+
+	@Test
+	void savedTripGetsWatchButton() {
+		Trip trip = FlightSearchServiceTest.trip("Москва", "Рим");
+		ReflectionTestUtils.setField(trip, "id", 7L);
+		FlightSearchService.Found found = new FlightSearchService.Found(FlightSearchServiceTest.MOSCOW,
+				FlightSearchServiceTest.ROME, trip, Passengers.of(trip),
+				List.of(FlightSearchServiceTest.offer(47948)), true, SEARCH_URL);
+
+		List<List<Keyboard.Link>> rows = ((Keyboard.Links) FlightFormatter.toReply(found, offer -> "x").keyboard()).rows();
+
+		assertThat(rows.get(rows.size() - 1).get(0)).isEqualTo(Keyboard.Link.action("🔔 Следить за ценой", "watch:7"));
 	}
 }

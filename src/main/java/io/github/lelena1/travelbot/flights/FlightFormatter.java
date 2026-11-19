@@ -20,6 +20,9 @@ public final class FlightFormatter {
 	private static final DateTimeFormatter DEPARTURE = DateTimeFormatter.ofPattern("d MMMM, HH:mm", RU);
 	private static final DateTimeFormatter MONTH = DateTimeFormatter.ofPattern("LLLL yyyy", RU);
 
+	/** Действие кнопки «🔔 Следить за ценой»: «watch:<id поездки>». */
+	public static final String WATCH_ACTION = "watch:";
+
 	private FlightFormatter() {
 	}
 
@@ -38,7 +41,10 @@ public final class FlightFormatter {
 		if (found.offers().isEmpty()) {
 			text.append("В базе Aviasales пока нет цен на это направление в эти даты. ")
 					.append("Откройте поиск — сайт найдёт актуальные билеты.");
-			return BotReply.withLinks(text.toString(), List.of(List.of(searchAll)));
+			List<List<Link>> buttons = new ArrayList<>();
+			buttons.add(List.of(searchAll));
+			addWatchButton(buttons, found);
+			return BotReply.withLinks(text.toString(), buttons);
 		}
 
 		if (found.exactDates()) {
@@ -58,6 +64,7 @@ public final class FlightFormatter {
 					offerUrl.apply(offer))));
 		}
 		buttons.add(List.of(searchAll));
+		addWatchButton(buttons, found);
 
 		int cheapest = offers.get(0).price();
 		if (found.passengers().total() > 1) {
@@ -67,6 +74,14 @@ public final class FlightFormatter {
 		}
 		text.append("\nℹ️ Цены — из недавних поисков на Aviasales, точную цену покажет сайт.");
 		return BotReply.withLinks(text.toString(), buttons);
+	}
+
+	/** Кнопка подписки — только для сохранённой поездки (у неё есть id). */
+	private static void addWatchButton(List<List<Link>> buttons, FlightSearchService.Found found) {
+		Long tripId = found.trip().getId();
+		if (tripId != null) {
+			buttons.add(List.of(Link.action("🔔 Следить за ценой", WATCH_ACTION + tripId)));
+		}
 	}
 
 	/** «47 948 ₽ · 12 мая, 20:50 · 1 пересадка, 7 ч 55 мин / обратно 18 мая, 11:55 · 1 пересадка». */

@@ -30,6 +30,7 @@ public class CommandRouter {
 			/mytrips — мои поездки
 			/deletetrip <номер> — удалить поездку
 			/flights — авиабилеты для поездки
+			/subscriptions — мои подписки на цены
 			/cancel — отменить заполнение анкеты
 			/help — эта подсказка
 			/myid — показать ваш Telegram ID
@@ -41,7 +42,8 @@ public class CommandRouter {
 			Команды администратора:
 			/allow <ID> — дать доступ пользователю
 			/deny <ID> — забрать доступ
-			/users — список пользователей""";
+			/users — список пользователей
+			/checkprices — проверить цены по всем подпискам сейчас""";
 
 	static final String QUESTIONNAIRE_CLOSED = "ℹ️ Незаконченная анкета новой поездки закрыта.\n\n";
 
@@ -49,14 +51,16 @@ public class CommandRouter {
 	private final NewTripDialog newTripDialog;
 	private final TripService tripService;
 	private final FlightsCommand flights;
+	private final PriceWatchCommand priceWatch;
 	private final String botUsername;
 
 	public CommandRouter(AccessService access, NewTripDialog newTripDialog, TripService tripService,
-			FlightsCommand flights, BotProperties botProperties) {
+			FlightsCommand flights, PriceWatchCommand priceWatch, BotProperties botProperties) {
 		this.access = access;
 		this.newTripDialog = newTripDialog;
 		this.tripService = tripService;
 		this.flights = flights;
+		this.priceWatch = priceWatch;
 		this.botUsername = botProperties.username() == null ? "" : botProperties.username();
 	}
 
@@ -108,6 +112,10 @@ public class CommandRouter {
 						.filter(number -> number <= Integer.MAX_VALUE)
 						.map(number -> flights.forNumber(userId, number.intValue()))
 						.orElseGet(() -> flights.menu(userId));
+			case "/subscriptions":
+				return priceWatch.list(userId);
+			case "/checkprices":
+				return admin ? priceWatch.checkNow() : BotReply.text("Эта команда доступна только администратору.");
 			case "/mytrips":
 				return myTrips(userId);
 			case "/deletetrip":
@@ -134,6 +142,16 @@ public class CommandRouter {
 		}
 		if (menuItem.isPresent() && menuItem.get() == MainMenu.FLIGHTS) {
 			return flights.menu(userId);
+		}
+		if (menuItem.isPresent() && menuItem.get() == MainMenu.SUBSCRIPTIONS) {
+			return priceWatch.list(userId);
+		}
+
+		// Кнопки под сообщениями («Следить за ценой», «Отписаться») — до анкеты,
+		// чтобы нажатие не попало в анкету как ответ.
+		Optional<BotReply> action = priceWatch.handleAction(userId, message.chatId(), text);
+		if (action.isPresent()) {
+			return action.get();
 		}
 
 		// Пользователь заполняет анкету: обычный текст — это ответ на вопрос.

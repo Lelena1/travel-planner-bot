@@ -31,8 +31,8 @@ public class PriceWatchService {
 			Locale.forLanguageTag("ru"));
 	private static final ZoneId MOSCOW = ZoneId.of("Europe/Moscow");
 
-	/** Действие кнопки «Следить за ценой»: «watch:<id поездки>». */
-	public static final String WATCH_ACTION = "watch:";
+	/** Действие кнопки «Следить за ценой»: «watch:<id поездки>» (кнопку рисует {@link FlightFormatter}). */
+	public static final String WATCH_ACTION = FlightFormatter.WATCH_ACTION;
 	/** Действие кнопки «Отписаться»: «unwatch:<id подписки>». */
 	public static final String UNWATCH_ACTION = "unwatch:";
 
@@ -51,11 +51,6 @@ public class PriceWatchService {
 		this.trips = trips;
 		this.flights = flights;
 		this.clock = clock;
-	}
-
-	/** Кнопка «🔔 Следить за ценой» под найденными билетами. */
-	public static Link watchButton(long tripId) {
-		return Link.action("🔔 Следить за ценой", WATCH_ACTION + tripId);
 	}
 
 	public BotReply subscribe(long userId, long chatId, long tripId) {

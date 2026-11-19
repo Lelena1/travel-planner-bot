@@ -1,6 +1,8 @@
 package io.github.lelena1.travelbot.bot;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -31,6 +33,7 @@ class CommandRouterTest {
 	private NewTripDialog dialog;
 	private TripService tripService;
 	private FlightsCommand flights;
+	private PriceWatchCommand priceWatch;
 	private CommandRouter router;
 
 	@BeforeEach
@@ -42,8 +45,11 @@ class CommandRouterTest {
 		dialog = mock(NewTripDialog.class);
 		tripService = mock(TripService.class);
 		flights = mock(FlightsCommand.class);
-		when(flights.parseChoice(org.mockito.ArgumentMatchers.anyString())).thenReturn(Optional.empty());
-		router = new CommandRouter(access, dialog, tripService, flights, new BotProperties("token", "travel_bot"));
+		when(flights.parseChoice(anyString())).thenReturn(Optional.empty());
+		priceWatch = mock(PriceWatchCommand.class);
+		when(priceWatch.handleAction(anyLong(), anyLong(), anyString())).thenReturn(Optional.empty());
+		router = new CommandRouter(access, dialog, tripService, flights, priceWatch,
+				new BotProperties("token", "travel_bot"));
 	}
 
 	private BotReply send(long userId, String text) {
@@ -258,5 +264,32 @@ class CommandRouterTest {
 
 		assertThat(send(USER, "/flights 2")).isSameAs(result);
 		assertThat(send(USER, "✈️ 2. Рим · 12 мая")).isSameAs(result);
+	}
+
+	@Test
+	void subscriptionsButtonAndCommandShowList() {
+		BotReply list = BotReply.text("🔔 Слежу за ценами");
+		when(priceWatch.list(USER)).thenReturn(list);
+
+		assertThat(send(USER, MainMenu.SUBSCRIPTIONS.label())).isSameAs(list);
+		assertThat(send(USER, "/subscriptions")).isSameAs(list);
+	}
+
+	@Test
+	void watchButtonGoesToPriceWatchEvenDuringQuestionnaire() {
+		BotReply subscribed = BotReply.text("🔔 Слежу за ценой");
+		when(dialog.isActive(USER)).thenReturn(true);
+		when(priceWatch.handleAction(USER, USER, "watch:12")).thenReturn(Optional.of(subscribed));
+
+		assertThat(send(USER, "watch:12")).isSameAs(subscribed);
+		verify(dialog, never()).handle(USER, "watch:12");
+	}
+
+	@Test
+	void checkPricesIsAdminOnly() {
+		when(priceWatch.checkNow()).thenReturn(BotReply.text("Проверка цен завершена"));
+
+		assertThat(send(USER, "/checkprices").text()).contains("только администратору");
+		assertThat(send(ADMIN, "/checkprices").text()).contains("Проверка цен завершена");
 	}
 }
