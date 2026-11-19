@@ -6,9 +6,12 @@ import org.telegram.telegrambots.longpolling.util.LongPollingSingleThreadUpdateC
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardRow;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
@@ -96,6 +99,15 @@ public class TelegramUpdateConsumer implements LongPollingSingleThreadUpdateCons
 							.toList())
 					.resizeKeyboard(true)
 					.oneTimeKeyboard(true)
+					.build();
+		}
+		if (keyboard instanceof Keyboard.Links links) {
+			return InlineKeyboardMarkup.builder()
+					.keyboard(links.rows().stream()
+							.map(row -> new InlineKeyboardRow(row.stream()
+									.map(link -> InlineKeyboardButton.builder().text(link.text()).url(link.url()).build())
+									.toList()))
+							.toList())
 					.build();
 		}
 		return null; // Keyboard.Keep

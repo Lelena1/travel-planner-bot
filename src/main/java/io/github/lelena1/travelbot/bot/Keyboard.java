@@ -18,6 +18,10 @@ public sealed interface Keyboard {
 		return new Options(rows);
 	}
 
+	static Keyboard links(List<List<Link>> rows) {
+		return new Links(rows);
+	}
+
 	record Keep() implements Keyboard {
 	}
 
@@ -31,6 +35,18 @@ public sealed interface Keyboard {
 	record Options(List<List<String>> rows) implements Keyboard {
 
 		public Options {
+			rows = rows.stream().map(List::copyOf).toList();
+		}
+	}
+
+	/** Кнопка-ссылка: открывает сайт, боту ничего не отправляет. */
+	record Link(String text, String url) {
+	}
+
+	/** Кнопки-ссылки под сообщением (например, «Купить на Aviasales»). */
+	record Links(List<List<Link>> rows) implements Keyboard {
+
+		public Links {
 			rows = rows.stream().map(List::copyOf).toList();
 		}
 	}

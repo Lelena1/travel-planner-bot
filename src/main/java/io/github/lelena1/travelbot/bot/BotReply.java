@@ -22,6 +22,10 @@ public record BotReply(String text, Keyboard keyboard) {
 		return new BotReply(text, Keyboard.options(rows));
 	}
 
+	public static BotReply withLinks(String text, List<List<Keyboard.Link>> rows) {
+		return new BotReply(text, Keyboard.links(rows));
+	}
+
 	/** Убрать кнопки: ответ пользователь пишет сам. */
 	public static BotReply freeInput(String text) {
 		return new BotReply(text, Keyboard.REMOVE);
