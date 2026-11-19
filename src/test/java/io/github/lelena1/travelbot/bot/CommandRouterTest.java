@@ -1,6 +1,7 @@
 package io.github.lelena1.travelbot.bot;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -35,6 +36,7 @@ class CommandRouterTest {
 	private FlightsCommand flights;
 	private PriceWatchCommand priceWatch;
 	private LodgingCommand lodging;
+	private CityGuideCommand guide;
 	private CommandRouter router;
 
 	@BeforeEach
@@ -51,7 +53,11 @@ class CommandRouterTest {
 		when(priceWatch.handleAction(anyLong(), anyLong(), anyString())).thenReturn(Optional.empty());
 		lodging = mock(LodgingCommand.class);
 		when(lodging.parseChoice(anyString())).thenReturn(Optional.empty());
-		router = new CommandRouter(access, dialog, tripService, flights, priceWatch, lodging,
+		guide = mock(CityGuideCommand.class);
+		when(guide.menu(anyLong(), any())).thenReturn(Optional.empty());
+		when(guide.command(anyLong(), anyString(), any())).thenReturn(Optional.empty());
+		when(guide.choice(anyLong(), anyString())).thenReturn(Optional.empty());
+		router = new CommandRouter(access, dialog, tripService, flights, priceWatch, lodging, guide,
 				new BotProperties("token", "travel_bot"));
 	}
 
@@ -98,9 +104,9 @@ class CommandRouterTest {
 
 	@Test
 	void menuButtonReportsStageInProgress() {
-		BotReply reply = send(USER, MainMenu.TOURS.label());
+		BotReply reply = send(USER, MainMenu.ITINERARY.label());
 
-		assertThat(reply.text()).contains("Экскурсии").contains("этап 6");
+		assertThat(reply.text()).contains("План").contains("этап 7");
 		assertThat(reply.showsMainMenu()).isTrue();
 	}
 
@@ -176,9 +182,9 @@ class CommandRouterTest {
 	void menuButtonDuringQuestionnaireClosesIt() {
 		when(dialog.isActive(USER)).thenReturn(true);
 
-		BotReply reply = send(USER, MainMenu.TOURS.label());
+		BotReply reply = send(USER, MainMenu.ITINERARY.label());
 
-		assertThat(reply.text()).startsWith(CommandRouter.QUESTIONNAIRE_CLOSED).contains("Экскурсии");
+		assertThat(reply.text()).startsWith(CommandRouter.QUESTIONNAIRE_CLOSED).contains("План");
 		assertThat(reply.showsMainMenu()).isTrue();
 		verify(dialog).close(USER);
 	}
@@ -308,5 +314,17 @@ class CommandRouterTest {
 		assertThat(send(USER, "/lodging")).isSameAs(menu);
 		assertThat(send(USER, "/lodging 2")).isSameAs(result);
 		assertThat(send(USER, "🏨 2. Казань · 1 июля")).isSameAs(result);
+	}
+
+	@Test
+	void cityGuideSectionsAreRouted() {
+		BotReply places = BotReply.text("🏛 Что посмотреть: Рим");
+		when(guide.menu(USER, MainMenu.PLACES)).thenReturn(Optional.of(places));
+		when(guide.command(USER, "/tours", Optional.of(2L))).thenReturn(Optional.of(BotReply.text("🎟 Экскурсии")));
+		when(guide.choice(USER, "🍽 1. Рим · 12 мая")).thenReturn(Optional.of(BotReply.text("🍽 Где поесть")));
+
+		assertThat(send(USER, MainMenu.PLACES.label())).isSameAs(places);
+		assertThat(send(USER, "/tours 2").text()).isEqualTo("🎟 Экскурсии");
+		assertThat(send(USER, "🍽 1. Рим · 12 мая").text()).isEqualTo("🍽 Где поесть");
 	}
 }

@@ -32,6 +32,9 @@ public class CommandRouter {
 			/flights — авиабилеты для поездки
 			/subscriptions — мои подписки на цены
 			/lodging — жильё для поездки
+			/places — что посмотреть
+			/restaurants — где поесть
+			/tours — экскурсии
 			/cancel — отменить заполнение анкеты
 			/help — эта подсказка
 			/myid — показать ваш Telegram ID
@@ -54,16 +57,19 @@ public class CommandRouter {
 	private final FlightsCommand flights;
 	private final PriceWatchCommand priceWatch;
 	private final LodgingCommand lodging;
+	private final CityGuideCommand guide;
 	private final String botUsername;
 
 	public CommandRouter(AccessService access, NewTripDialog newTripDialog, TripService tripService,
-			FlightsCommand flights, PriceWatchCommand priceWatch, LodgingCommand lodging, BotProperties botProperties) {
+			FlightsCommand flights, PriceWatchCommand priceWatch, LodgingCommand lodging, CityGuideCommand guide,
+			BotProperties botProperties) {
 		this.access = access;
 		this.newTripDialog = newTripDialog;
 		this.tripService = tripService;
 		this.flights = flights;
 		this.priceWatch = priceWatch;
 		this.lodging = lodging;
+		this.guide = guide;
 		this.botUsername = botProperties.username() == null ? "" : botProperties.username();
 	}
 
@@ -145,6 +151,11 @@ public class CommandRouter {
 				break;
 		}
 
+		Optional<BotReply> guideReply = guide.command(userId, command, parseId(text));
+		if (guideReply.isPresent()) {
+			return guideReply.get();
+		}
+
 		if (menuItem.isPresent() && menuItem.get() == MainMenu.NEW_TRIP) {
 			return newTripDialog.start(userId);
 		}
@@ -156,6 +167,10 @@ public class CommandRouter {
 		}
 		if (menuItem.isPresent() && menuItem.get() == MainMenu.LODGING) {
 			return lodging.menu(userId);
+		}
+		Optional<BotReply> guideMenu = menuItem.flatMap(item -> guide.menu(userId, item));
+		if (guideMenu.isPresent()) {
+			return guideMenu.get();
 		}
 
 		// Кнопки под сообщениями («Следить за ценой», «Отписаться») — до анкеты,
@@ -176,6 +191,10 @@ public class CommandRouter {
 		Optional<Integer> lodgingChoice = lodging.parseChoice(text);
 		if (lodgingChoice.isPresent()) {
 			return lodging.forNumber(userId, lodgingChoice.get());
+		}
+		Optional<BotReply> guideChoice = guide.choice(userId, text);
+		if (guideChoice.isPresent()) {
+			return guideChoice.get();
 		}
 		if (text.equals(NewTripDialog.CANCEL)) {
 			return BotReply.withMenu("Хорошо.");
