@@ -45,14 +45,17 @@ public class NearbyPlacesService {
 		List<NearbyPlace> result = new ArrayList<>();
 		for (String entry : titles) {
 			String title = articleTitle(entry);
+			// «Куршская коса | Танцующий лес»: ищем вокруг Танцующего леса, но сам он — тоже достопримечательность,
+			// а исключается из результатов (и открывается по кнопке) статья о месте целиком — «Куршская коса»
+			String place = entry.contains(DISPLAY_SEPARATOR) ? displayName(entry) : title;
 			try {
 				Optional<GeoPoint> point = locator.locate(title);
 				if (point.isEmpty()) {
 					continue;
 				}
-				List<Sight> top = sights.topSights(title, point.get(), RADIUS_METERS).stream()
+				List<Sight> top = sights.topSights(place, point.get(), RADIUS_METERS).stream()
 						.limit(SIGHTS_PER_PLACE).toList();
-				result.add(new NearbyPlace(displayName(entry), WikipediaClient.articleUrl(title), point.get(),
+				result.add(new NearbyPlace(displayName(entry), WikipediaClient.articleUrl(place), point.get(),
 						(int) Math.round(point.get().distanceTo(cityCenter) / 1000), top));
 			} catch (WikiException e) {
 				// одно недоступное место не должно лишать остальных

@@ -58,7 +58,7 @@ class NearbyPlacesServiceTest {
 		new NearbyPlacesService(new CityDirectory(), locator, sights).forCity("Калининград", KALININGRAD);
 
 		org.mockito.Mockito.verify(sights).topSights("Зеленоградск", ZELENOGRADSK, NearbyPlacesService.RADIUS_METERS);
-		org.mockito.Mockito.verify(sights).topSights("Танцующий лес", ZELENOGRADSK, NearbyPlacesService.RADIUS_METERS);
+		org.mockito.Mockito.verify(sights).topSights("Куршская коса", ZELENOGRADSK, NearbyPlacesService.RADIUS_METERS);
 	}
 
 	@Test
