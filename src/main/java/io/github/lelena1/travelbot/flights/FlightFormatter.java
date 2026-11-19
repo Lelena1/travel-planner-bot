@@ -102,7 +102,7 @@ public final class FlightFormatter {
 	}
 
 	/** 47948 → «47 948». */
-	static String price(long rubles) {
+	public static String price(long rubles) {
 		return String.format(Locale.ROOT, "%,d", rubles).replace(',', ' ');
 	}
 }
