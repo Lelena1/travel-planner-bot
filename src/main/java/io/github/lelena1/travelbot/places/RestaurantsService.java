@@ -2,8 +2,10 @@ package io.github.lelena1.travelbot.places;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -15,6 +17,7 @@ import io.github.lelena1.travelbot.city.GeoPoint;
 import io.github.lelena1.travelbot.config.CacheConfig;
 import io.github.lelena1.travelbot.integration.osm.OsmPlace;
 import io.github.lelena1.travelbot.integration.osm.OverpassClient;
+import io.github.lelena1.travelbot.util.CityNames;
 
 /**
  * Рестораны и кафе в центре города из OpenStreetMap.
@@ -59,10 +62,13 @@ public class RestaurantsService {
 	@Cacheable(cacheNames = CacheConfig.RESTAURANTS, key = "#cityName")
 	public List<Restaurant> top(String cityName, GeoPoint center) {
 		List<OsmPlace> places = overpass.restaurantsAndCafes(center, RADIUS_METERS);
+		Set<String> seenNames = new HashSet<>();
 		List<Restaurant> best = places.stream()
 				.sorted(Comparator.comparingInt(RestaurantsService::infoScore).reversed()
 						.thenComparing(place -> "restaurant".equals(place.amenity()) ? 0 : 1)
 						.thenComparingDouble(place -> place.point().distanceTo(center)))
+				// у сети несколько филиалов с одним названием — показываем один, ближайший к центру
+				.filter(place -> seenNames.add(CityNames.normalize(place.name())))
 				.limit(TOP)
 				.map(RestaurantsService::toRestaurant)
 				.toList();

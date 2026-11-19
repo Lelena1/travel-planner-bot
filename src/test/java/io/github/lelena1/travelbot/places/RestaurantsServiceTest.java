@@ -71,4 +71,20 @@ class RestaurantsServiceTest {
 		assertThat(RestaurantsService.openingHours("24/7")).isEqualTo("круглосуточно");
 		assertThat(RestaurantsService.openingHours(null)).isNull();
 	}
+
+	@Test
+	void chainBranchesAreShownOnce() {
+		OverpassClient overpass = mock(OverpassClient.class);
+		GeoPoint near = new GeoPoint(54.701, 20.5);
+		GeoPoint far = new GeoPoint(54.72, 20.5);
+		when(overpass.restaurantsAndCafes(any(), anyInt())).thenReturn(List.of(
+				new OsmPlace("Фьюжн экспресс", "restaurant", far, Map.of("cuisine", "asian")),
+				new OsmPlace("Фьюжн Экспресс", "restaurant", near, Map.of("cuisine", "asian")),
+				new OsmPlace("Сказка", "restaurant", far, Map.of("cuisine", "italian"))));
+
+		List<Restaurant> top = new RestaurantsService(overpass).top("Калининград", P);
+
+		assertThat(top).extracting(Restaurant::name).containsExactly("Фьюжн Экспресс", "Сказка");
+		assertThat(top.get(0).point()).isEqualTo(near);
+	}
 }
