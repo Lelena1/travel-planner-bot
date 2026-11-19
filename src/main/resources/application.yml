@@ -25,3 +25,7 @@ management:
     web:
       exposure:
         include: health
+
+# Travelpayouts (данные Aviasales): токен из личного кабинета, раздел API token
+travelpayouts:
+  token: ${TRAVELPAYOUTS_TOKEN:}

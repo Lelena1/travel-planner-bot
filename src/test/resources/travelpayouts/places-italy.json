@@ -1,0 +1,50 @@
+[
+  {
+    "id": "4a469205-1259-4b44-b195-3f4ac7394eda",
+    "type": "country",
+    "code": "IT",
+    "name": "Италия",
+    "index_strings": [],
+    "weight": 267391,
+    "cases": {
+      "vi": "в Италию",
+      "tv": "Италией",
+      "su": "Италия",
+      "ro": "Италии",
+      "pr": "Италии",
+      "da": "Италии"
+    }
+  },
+  {
+    "id": "51a30173-2ad1-4060-bd72-0ae7cff176c2",
+    "type": "city",
+    "code": "MIL",
+    "name": "Милан",
+    "country_code": "IT",
+    "country_name": "Италия",
+    "state_code": null,
+    "coordinates": {
+      "lon": 9.1881714,
+      "lat": 45.463681
+    },
+    "index_strings": [],
+    "weight": 116207,
+    "cases": {
+      "vi": "в Милан",
+      "tv": "Миланом",
+      "su": "Милан",
+      "ro": "Милана",
+      "pr": "Милане",
+      "da": "Милану"
+    },
+    "country_cases": {
+      "vi": "в Италию",
+      "tv": "Италией",
+      "su": "Италия",
+      "ro": "Италии",
+      "pr": "Италии",
+      "da": "Италии"
+    },
+    "main_airport_name": null
+  }
+]

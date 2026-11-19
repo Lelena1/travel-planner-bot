@@ -1,0 +1,66 @@
+[
+  {
+    "id": "5c2b38ca-f38f-44ee-8f65-301361987d79",
+    "type": "city",
+    "code": "ROM",
+    "name": "Рим",
+    "country_code": "IT",
+    "country_name": "Италия",
+    "state_code": null,
+    "coordinates": {
+      "lon": 12.4942486,
+      "lat": 41.8905198
+    },
+    "index_strings": [],
+    "weight": 134024,
+    "cases": {
+      "vi": "в Рим",
+      "tv": "Римом",
+      "su": "Рим",
+      "ro": "Рима",
+      "pr": "Риме",
+      "da": "Риму"
+    },
+    "country_cases": {
+      "vi": "в Италию",
+      "tv": "Италией",
+      "su": "Италия",
+      "ro": "Италии",
+      "pr": "Италии",
+      "da": "Италии"
+    },
+    "main_airport_name": null
+  },
+  {
+    "id": "6e59db93-cafd-4d90-bf79-ab2e4de6a6b8",
+    "type": "city",
+    "code": "RMI",
+    "name": "Римини",
+    "country_code": "IT",
+    "country_name": "Италия",
+    "state_code": null,
+    "coordinates": {
+      "lon": 12.5695158,
+      "lat": 44.0678288
+    },
+    "index_strings": [],
+    "weight": 648,
+    "cases": {
+      "vi": "в Римини",
+      "tv": "Римини",
+      "su": "Римини",
+      "ro": "Римини",
+      "pr": "Римини",
+      "da": "Римини"
+    },
+    "country_cases": {
+      "vi": "в Италию",
+      "tv": "Италией",
+      "su": "Италия",
+      "ro": "Италии",
+      "pr": "Италии",
+      "da": "Италии"
+    },
+    "main_airport_name": "Римини"
+  }
+]
