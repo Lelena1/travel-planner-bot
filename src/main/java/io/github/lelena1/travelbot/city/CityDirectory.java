@@ -15,7 +15,7 @@ import org.yaml.snakeyaml.Yaml;
 import io.github.lelena1.travelbot.util.CityNames;
 
 /**
- * Справочник городов для поиска жилья (src/main/resources/cities.yml).
+ * Справочник популярных городов (src/main/resources/cities.yml): как их называют сайты с жильём и экскурсиями.
  * Данные отделены от кода: чтобы добавить город, достаточно дописать его в файл.
  */
 @Component
