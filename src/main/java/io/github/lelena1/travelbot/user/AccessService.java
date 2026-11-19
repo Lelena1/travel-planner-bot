@@ -64,6 +64,7 @@ public class AccessService {
 			return false;
 		}
 		repository.save(new AppUser(telegramId, Role.USER));
+		log.info("Доступ: пользователь {} добавлен в белый список", telegramId);
 		return true;
 	}
 
@@ -74,6 +75,7 @@ public class AccessService {
 				return DenyResult.IS_ADMIN;
 			}
 			repository.delete(user);
+			log.info("Доступ: пользователь {} удалён из белого списка", telegramId);
 			return DenyResult.REMOVED;
 		}).orElse(DenyResult.NOT_FOUND);
 	}

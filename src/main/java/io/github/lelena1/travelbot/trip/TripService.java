@@ -3,12 +3,16 @@ package io.github.lelena1.travelbot.trip;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /** Сохранённые поездки пользователя. */
 @Service
 public class TripService {
+
+	private static final Logger log = LoggerFactory.getLogger(TripService.class);
 
 	private final TripRepository trips;
 
@@ -35,6 +39,7 @@ public class TripService {
 		}
 		Trip trip = list.get(number - 1);
 		trips.delete(trip);
+		log.info("Поездки: пользователь {} удалил поездку #{} ({})", userId, trip.getId(), trip.getDestination());
 		return Optional.of(trip);
 	}
 }

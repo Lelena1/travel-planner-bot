@@ -54,6 +54,10 @@ public class TelegramUpdateConsumer implements LongPollingSingleThreadUpdateCons
 				message.getFrom().getFirstName(),
 				message.getText());
 
+		if (incoming.text().startsWith("/")) {
+			// записываем только саму команду, без аргументов и без обычного текста пользователя
+			log.info("Команда {} от пользователя {}", incoming.text().split("\s+", 2)[0], incoming.userId());
+		}
 		try {
 			send(incoming.chatId(), router.handle(incoming));
 		} catch (RuntimeException e) {

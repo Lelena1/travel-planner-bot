@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,8 @@ import io.github.lelena1.travelbot.trip.TripRepository;
  */
 @Service
 public class NewTripDialog {
+
+	private static final Logger log = LoggerFactory.getLogger(NewTripDialog.class);
 
 	public static final String CANCEL = "❌ Отмена";
 	static final String SAVE = "✅ Сохранить";
@@ -56,12 +60,14 @@ public class NewTripDialog {
 		discardDraft(userId);
 		Trip draft = trips.save(Trip.draftFor(userId));
 		conversations.save(new Conversation(userId, draft.getId()));
+		log.info("Анкета: пользователь {} начал новую поездку (черновик #{})", userId, draft.getId());
 		return ask(DialogStep.DESTINATION, draft);
 	}
 
 	@Transactional
 	public BotReply cancel(long userId) {
 		discardDraft(userId);
+		log.info("Анкета: пользователь {} отменил заполнение", userId);
 		return BotReply.withMenu("Хорошо, создание поездки отменено.");
 	}
 
@@ -174,6 +180,7 @@ public class NewTripDialog {
 
 	private BotReply onConfirm(Conversation conversation, Trip trip, String text) {
 		if (text.equals(RESTART)) {
+			log.info("Анкета: пользователь {} начал заполнение заново", conversation.getUserId());
 			return start(conversation.getUserId());
 		}
 		if (!text.equals(SAVE)) {
@@ -181,6 +188,8 @@ public class NewTripDialog {
 		}
 		trip.activate();
 		conversations.delete(conversation);
+		log.info("Анкета: пользователь {} сохранил поездку #{} ({}, {} – {})", conversation.getUserId(),
+				trip.getId(), trip.getDestination(), trip.getDateFrom(), trip.getDateTo());
 		return BotReply.withMenu("""
 				🎉 Поездка сохранена!
 
@@ -198,6 +207,7 @@ public class NewTripDialog {
 	}
 
 	private BotReply retry(String hint, DialogStep step, Trip trip) {
+		log.info("Анкета: пользователь {} дал неподходящий ответ на шаге {}", trip.getUserId(), step);
 		BotReply question = ask(step, trip);
 		return new BotReply("⚠️ " + hint + "\n\n" + question.text(), question.keyboard());
 	}
