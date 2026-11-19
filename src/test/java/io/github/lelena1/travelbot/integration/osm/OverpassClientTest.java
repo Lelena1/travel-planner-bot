@@ -54,8 +54,19 @@ class OverpassClientTest {
 	}
 
 	@Test
-	void serverErrorBecomesOverpassException() {
+	void mirrorIsUsedWhenMainServerFails() {
 		server.expect(requestTo(OverpassClient.API)).andRespond(withServerError());
+		server.expect(requestTo(OverpassClient.MIRROR))
+				.andRespond(withSuccess(new ClassPathResource("osm/food-kaliningrad.json"), MediaType.APPLICATION_JSON));
+
+		assertThat(client.restaurantsAndCafes(new GeoPoint(54.7, 20.5), 1500)).hasSize(40);
+		server.verify();
+	}
+
+	@Test
+	void allServersDownBecomesOverpassException() {
+		server.expect(requestTo(OverpassClient.API)).andRespond(withServerError());
+		server.expect(requestTo(OverpassClient.MIRROR)).andRespond(withServerError());
 
 		assertThatThrownBy(() -> client.restaurantsAndCafes(new GeoPoint(54.7, 20.5), 1500))
 				.isInstanceOf(OverpassClient.OverpassException.class);

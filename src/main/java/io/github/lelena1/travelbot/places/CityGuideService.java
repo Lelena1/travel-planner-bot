@@ -83,9 +83,21 @@ public class CityGuideService {
 			if (center.isEmpty()) {
 				return cityNotFound(city);
 			}
-			List<Restaurant> found = restaurants.top(city, center.get());
 			Link allOnMap = new Link("🍽 Все рестораны рядом на Яндекс Картах",
 					center.get().yandexMapsSearchUrl("рестораны"));
+			List<Restaurant> found;
+			try {
+				found = restaurants.top(city, center.get());
+			} catch (OverpassException e) {
+				// публичные серверы OpenStreetMap иногда перегружены — тогда хотя бы карта
+				log.warn("Рестораны: OpenStreetMap недоступен: {}", e.getMessage());
+				return BotReply.withLinks("""
+						🍽 Где поесть: %s
+						Список из OpenStreetMap сейчас не загрузился, но рестораны и кафе рядом с центром \
+						можно посмотреть на карте — с рейтингами и отзывами."""
+						.formatted(city), List.of(List.of(allOnMap),
+						List.of(new Link("☕ Кафе рядом на Яндекс Картах", center.get().yandexMapsSearchUrl("кафе")))));
+			}
 			if (found.isEmpty()) {
 				return BotReply.withLinks("🍽 В OpenStreetMap не нашлось ресторанов в центре «%s». Посмотрите на карте:"
 						.formatted(city), List.of(List.of(allOnMap)));
@@ -107,9 +119,9 @@ public class CityGuideService {
 			buttons.add(List.of(allOnMap));
 			text.append("\n\nДанные — из OpenStreetMap. Рейтинги и отзывы смотрите на Яндекс Картах.");
 			return BotReply.withLinks(text.toString(), buttons);
-		} catch (WikiException | OverpassException e) {
-			log.warn("Рестораны: сервис недоступен: {}", e.getMessage());
-			return unavailable("OpenStreetMap");
+		} catch (WikiException e) {
+			log.warn("Рестораны: Википедия недоступна: {}", e.getMessage());
+			return unavailable("Википедия");
 		}
 	}
 

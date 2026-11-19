@@ -118,4 +118,16 @@ class CityGuideServiceTest {
 		trip.setDates(LocalDate.of(2027, 5, 12), LocalDate.of(2027, 5, 18));
 		return trip;
 	}
+
+	@Test
+	void openStreetMapDownStillGivesMapLinks() {
+		when(restaurants.top("Калининград", CENTER))
+				.thenThrow(new io.github.lelena1.travelbot.integration.osm.OverpassClient.OverpassException("down", null));
+
+		BotReply reply = guide.restaurants(trip("Калининград"));
+
+		assertThat(reply.text()).contains("не загрузился");
+		assertThat(((Keyboard.Links) reply.keyboard()).rows()).extracting(row -> row.get(0).text())
+				.containsExactly("🍽 Все рестораны рядом на Яндекс Картах", "☕ Кафе рядом на Яндекс Картах");
+	}
 }

@@ -5,6 +5,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
@@ -25,13 +27,18 @@ import io.github.lelena1.travelbot.city.GeoPoint;
 @Component
 public class OverpassClient {
 
+	private static final Logger log = LoggerFactory.getLogger(OverpassClient.class);
+
 	public static final String API = "https://overpass-api.de/api/interpreter";
+	/** Запасной сервер: публичные серверы Overpass иногда перегружены или недоступны. */
+	public static final String MIRROR = "https://overpass.private.coffee/api/interpreter";
+	static final List<String> SERVERS = List.of(API, MIRROR);
 	static final int MAX_RESULTS = 300;
 
 	private final RestClient http;
 
 	public OverpassClient(RestClient.Builder builder) {
-		this.http = builder.baseUrl(API).build();
+		this.http = builder.build();
 	}
 
 	/** Рестораны и кафе с названием в радиусе {@code radiusMeters} от точки. */
@@ -45,20 +52,25 @@ public class OverpassClient {
 
 		MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
 		form.add("data", query);
-		Response response;
-		try {
-			response = http.post()
-					.contentType(MediaType.APPLICATION_FORM_URLENCODED)
-					.body(form)
-					.retrieve()
-					.body(Response.class);
-		} catch (RestClientException e) {
-			throw new OverpassException("OpenStreetMap (Overpass) не ответил", e);
+		RestClientException last = null;
+		for (String server : SERVERS) {
+			try {
+				Response response = http.post()
+						.uri(server)
+						.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+						.body(form)
+						.retrieve()
+						.body(Response.class);
+				if (response == null || response.elements() == null) {
+					return List.of();
+				}
+				return response.elements().stream().map(Element::toPlace).filter(Objects::nonNull).toList();
+			} catch (RestClientException e) {
+				log.warn("Overpass {} не ответил: {}", server, e.getMessage());
+				last = e;
+			}
 		}
-		if (response == null || response.elements() == null) {
-			return List.of();
-		}
-		return response.elements().stream().map(Element::toPlace).filter(Objects::nonNull).toList();
+		throw new OverpassException("Ни один сервер OpenStreetMap (Overpass) не ответил", last);
 	}
 
 	@JsonIgnoreProperties(ignoreUnknown = true)
