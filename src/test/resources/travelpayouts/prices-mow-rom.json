@@ -1,0 +1,60 @@
+{
+  "data": [
+    {
+      "flight_number": "785",
+      "link": "/search/MOW1205ROM18051?t=W418101550001810220700001155VKOEVNFCO18106413001810735200001505FCOSAWVKO_1ee0b8a2441ed2c216805d568b6690c1_47947&search_date=13112026&expected_price_uuid=01a1d708-9f72-8031-26b6-007f604888e7&static_fare_key=TY%7CP1%7CH0%7CL0%7CCH0%7CR0%7CTBC0&itinerary_key=FgH-9UV518GGwpzF1WIUtA&expected_price_source=share&expected_price_currency=rub&expected_price=47948",
+      "origin_airport": "VKO",
+      "destination_airport": "FCO",
+      "departure_at": "2027-05-12T20:50:00+03:00",
+      "airline": "UT",
+      "destination": "ROM",
+      "return_at": "2027-05-18T11:55:00+02:00",
+      "origin": "MOW",
+      "price": 47948,
+      "gate": "Kupi.com",
+      "return_transfers": 1,
+      "duration": 2660,
+      "duration_to": 475,
+      "duration_back": 415,
+      "transfers": 1
+    },
+    {
+      "flight_number": "3314",
+      "link": "/search/MOW1205ROM18051?t=W418100860001810134300000865DMEEVNFCO18106413001810735200001505FCOSAWVKO_bd4007e14c581dc3d74a042a189cf8de_48451&search_date=13112026&expected_price_uuid=01a1d708-9f72-8031-26b6-007f604888e7&static_fare_key=TY%7CP1%7CH0%7CL0%7CCH0%7CR0%7CTBC0&itinerary_key=plc-39rYwBOBqMD-V2G3nA&expected_price_source=share&expected_price_currency=rub&expected_price=48452",
+      "origin_airport": "DME",
+      "destination_airport": "FCO",
+      "departure_at": "2027-05-12T01:40:00+03:00",
+      "airline": "3F",
+      "destination": "ROM",
+      "return_at": "2027-05-18T11:55:00+02:00",
+      "origin": "MOW",
+      "price": 48452,
+      "gate": "Kupi.com",
+      "return_transfers": 1,
+      "duration": 2370,
+      "duration_to": 450,
+      "duration_back": 415,
+      "transfers": 1
+    },
+    {
+      "flight_number": "387",
+      "link": "/search/MOW1205ROM18051?t=PC18100944001810129500000645VKOSAWFCO18106209001810659600000585FCOEVNVKO_677c995626b44e21745e205077901fc6_50409&search_date=13112026&expected_price_uuid=01a1d708-9f72-8031-26b6-007f604888e7&static_fare_key=TY%7CP1%7CH0%7CL0%7CCH0%7CR0%7CTBC0&itinerary_key=dIZs70Rl7Hmp1UHpGfFsFQ&expected_price_source=share&expected_price_currency=rub&expected_price=50410",
+      "origin_airport": "VKO",
+      "destination_airport": "FCO",
+      "departure_at": "2027-05-12T04:00:00+03:00",
+      "airline": "PC",
+      "destination": "ROM",
+      "return_at": "2027-05-18T06:15:00+02:00",
+      "origin": "MOW",
+      "price": 50410,
+      "gate": "Kupi.com",
+      "return_transfers": 1,
+      "duration": 1230,
+      "duration_to": 415,
+      "duration_back": 425,
+      "transfers": 1
+    }
+  ],
+  "currency": "rub",
+  "success": true
+}
