@@ -22,7 +22,7 @@ class FlightFormatterTest {
 		PriceOffer cheap = FlightSearchServiceTest.offer(47948);
 		PriceOffer expensive = FlightSearchServiceTest.offer(52100);
 		FlightSearchService.Found found = new FlightSearchService.Found(FlightSearchServiceTest.MOSCOW,
-				FlightSearchServiceTest.ROME, trip, Passengers.of(trip), List.of(cheap, expensive), true, SEARCH_URL);
+				FlightSearchServiceTest.ROME, trip, Passengers.of(trip), List.of(cheap, expensive), true, SEARCH_URL, "Москва → Рим");
 
 		BotReply reply = FlightFormatter.toReply(found, offer -> "https://www.aviasales.ru" + offer.link());
 
@@ -46,7 +46,7 @@ class FlightFormatterTest {
 		Trip trip = FlightSearchServiceTest.trip("Москва", "Рим");
 		FlightSearchService.Found found = new FlightSearchService.Found(FlightSearchServiceTest.MOSCOW,
 				FlightSearchServiceTest.ROME, trip, Passengers.of(trip),
-				List.of(FlightSearchServiceTest.offer(21000)), false, SEARCH_URL);
+				List.of(FlightSearchServiceTest.offer(21000)), false, SEARCH_URL, "Москва → Рим");
 
 		assertThat(FlightFormatter.toReply(found, offer -> "x").text())
 				.contains("На точные даты цен в базе пока нет")
@@ -57,7 +57,7 @@ class FlightFormatterTest {
 	void noOffersStillGivesSearchLink() {
 		Trip trip = FlightSearchServiceTest.trip("Москва", "Рим");
 		FlightSearchService.Found found = new FlightSearchService.Found(FlightSearchServiceTest.MOSCOW,
-				FlightSearchServiceTest.ROME, trip, Passengers.of(trip), List.of(), false, SEARCH_URL);
+				FlightSearchServiceTest.ROME, trip, Passengers.of(trip), List.of(), false, SEARCH_URL, "Москва → Рим");
 
 		BotReply reply = FlightFormatter.toReply(found, offer -> "x");
 
@@ -88,7 +88,7 @@ class FlightFormatterTest {
 		ReflectionTestUtils.setField(trip, "id", 7L);
 		FlightSearchService.Found found = new FlightSearchService.Found(FlightSearchServiceTest.MOSCOW,
 				FlightSearchServiceTest.ROME, trip, Passengers.of(trip),
-				List.of(FlightSearchServiceTest.offer(47948)), true, SEARCH_URL);
+				List.of(FlightSearchServiceTest.offer(47948)), true, SEARCH_URL, "Москва → Рим");
 
 		List<List<Keyboard.Link>> rows = ((Keyboard.Links) FlightFormatter.toReply(found, offer -> "x").keyboard()).rows();
 

@@ -38,8 +38,11 @@ public class FlightSearchService {
 
 	public Result search(Trip trip) {
 		try {
-			Place from = city(trip.getOrigin(), "откуда");
-			Place to = city(trip.getDestination(), "куда");
+			CityResolver.Found origin = city(trip.getOrigin(), "откуда");
+			CityResolver.Found destination = city(trip.getDestination(), "куда");
+			Place from = origin.city();
+			Place to = destination.city();
+			String routeTitle = origin.describe() + " → " + destination.describe();
 			if (from.code().equals(to.code())) {
 				return new Problem("Город вылета и назначения совпадают (%s). Создайте поездку заново."
 						.formatted(from.name()));
@@ -52,7 +55,7 @@ public class FlightSearchService {
 					FlightQuery.roundTrip(from.code(), to.code(), trip.getDateFrom(), trip.getDateTo()), OFFERS_LIMIT);
 			if (!exact.isEmpty()) {
 				log.info("Билеты: {} → {} на даты поездки — {} вариантов", from.code(), to.code(), exact.size());
-				return new Found(from, to, trip, passengers, exact, true, searchUrl);
+				return new Found(from, to, trip, passengers, exact, true, searchUrl, routeTitle);
 			}
 
 			YearMonth month = YearMonth.from(trip.getDateFrom());
@@ -60,7 +63,7 @@ public class FlightSearchService {
 					OFFERS_LIMIT);
 			log.info("Билеты: {} → {} на даты поездки нет, в {} — {} вариантов", from.code(), to.code(), month,
 					monthly.size());
-			return new Found(from, to, trip, passengers, monthly, false, searchUrl);
+			return new Found(from, to, trip, passengers, monthly, false, searchUrl, routeTitle);
 		} catch (CityProblem e) {
 			return new Problem(e.getMessage());
 		} catch (TravelpayoutsException e) {
@@ -79,20 +82,20 @@ public class FlightSearchService {
 		return aviasales.offerUrl(offer);
 	}
 
-	private Place city(String text, String role) {
+	private CityResolver.Found city(String text, String role) {
 		if (text == null || text.isBlank()) {
 			throw new CityProblem("В поездке не указано, " + role + " лететь. Создайте поездку заново.");
 		}
 		CityResolver.Result result = cities.resolve(text);
 		if (result instanceof CityResolver.Found found) {
-			return found.city();
+			return found;
 		}
 		if (result instanceof CityResolver.CountryOnly country) {
 			throw new CityProblem("«%s» — это страна, а билеты продаются до конкретного города. Создайте поездку и укажите город, например: %s, Рим"
 					.formatted(country.country(), country.country()));
 		}
-		throw new CityProblem("Не нашла аэропорт для «%s». Проверьте название города и создайте поездку заново."
-				.formatted(text));
+		throw new CityProblem("""
+				Не нашла аэропорт для «%s». Проверьте название города. Если в городе нет аэропорта, 				создайте поездку, указав ближайший город с аэропортом.""".formatted(text));
 	}
 
 	private static final class CityProblem extends RuntimeException {
@@ -107,9 +110,10 @@ public class FlightSearchService {
 	/**
 	 * @param exactDates true — варианты на даты поездки; false — самые дешёвые вылеты в том же месяце
 	 * @param searchUrl  поиск на Aviasales с датами поездки и всеми пассажирами
+	 * @param routeTitle «Москва → Рим»; если в городе нет аэропорта, указан ближайший
 	 */
 	public record Found(Place from, Place to, Trip trip, Passengers passengers, List<PriceOffer> offers,
-			boolean exactDates, String searchUrl) implements Result {
+			boolean exactDates, String searchUrl, String routeTitle) implements Result {
 	}
 
 	public record Problem(String message) implements Result {

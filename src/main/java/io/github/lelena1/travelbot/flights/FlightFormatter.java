@@ -32,7 +32,7 @@ public final class FlightFormatter {
 		}
 		FlightSearchService.Found found = (FlightSearchService.Found) result;
 		StringBuilder text = new StringBuilder();
-		text.append("✈️ ").append(found.from().name()).append(" → ").append(found.to().name()).append('\n');
+		text.append("✈️ ").append(found.routeTitle()).append('\n');
 		text.append("🗓 ").append(TripFormatter.summaryDates(found.trip())).append('\n');
 		text.append("👥 ").append(RussianPlural.format(found.passengers().total(), "пассажир", "пассажира", "пассажиров"))
 				.append("\n\n");

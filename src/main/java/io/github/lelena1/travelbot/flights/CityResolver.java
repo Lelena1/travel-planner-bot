@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -35,24 +37,49 @@ public class CityResolver {
 		Place country = null;
 		for (String part : parts) {
 			List<Place> found = places.search(part);
-			if (found.isEmpty()) {
+			Optional<Place> exact = found.stream()
+					.filter(place -> normalize(place.name()).equals(normalize(part)))
+					.findFirst();
+			if (exact.isPresent() && exact.get().isCity()) {
+				return new Found(exact.get(), part, true);
+			}
+			if (exact.isPresent() && exact.get().isCountry()) {
+				country = country == null ? exact.get() : country;
 				continue;
 			}
-			Place best = found.get(0);
-			if (best.isCity()) {
-				return new Found(best);
-			}
-			if (best.isCountry() && country == null) {
-				country = best;
+			// Названия нет в справочнике, но вариант единственный — это ближайший аэропорт
+			// (Кисловодск → Минеральные Воды). Если вариантов несколько, справочник просто
+			// угадывает по буквам (Тверь → Тель-Авив), и такому ответу верить нельзя.
+			if (found.size() == 1 && found.get(0).isCity()) {
+				return new Found(found.get(0), part, false);
 			}
 		}
 		return country != null ? new CountryOnly(country.name()) : new NotFound(text);
 	}
 
+	/** «Ростов-на-Дону» = «ростов на дону», «Орёл» = «Орел». */
+	static String normalize(String name) {
+		return name.toLowerCase(Locale.ROOT)
+				.replace('ё', 'е')
+				.replace('-', ' ')
+				.replaceAll("\\s+", " ")
+				.trim();
+	}
+
 	public sealed interface Result permits Found, CountryOnly, NotFound {
 	}
 
-	public record Found(Place city) implements Result {
+	/**
+	 * @param city       город с аэропортом
+	 * @param requested  как город был назван в поездке
+	 * @param exactMatch false — в названном городе аэропорта нет, это ближайший
+	 */
+	public record Found(Place city, String requested, boolean exactMatch) implements Result {
+
+		/** «Минеральные Воды (ближайший аэропорт к «Кисловодск»)» или просто «Сочи». */
+		public String describe() {
+			return exactMatch ? city.name() : "%s (ближайший аэропорт к «%s»)".formatted(city.name(), requested);
+		}
 	}
 
 	/** Указана только страна, например «Италия». */

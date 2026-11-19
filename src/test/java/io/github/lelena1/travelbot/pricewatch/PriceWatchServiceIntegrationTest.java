@@ -176,6 +176,6 @@ class PriceWatchServiceIntegrationTest {
 				OffsetDateTime.parse("2027-05-18T11:55:00+02:00"), "SU", "2400", price, 0, 0, 230, 240,
 				"/search/MOW1205ROM18051?t=abc");
 		return new FlightSearchService.Found(MOSCOW, ROME, trip, Passengers.of(trip), List.of(offer), exactDates,
-				"https://www.aviasales.ru/search/MOW1205ROM18052");
+				"https://www.aviasales.ru/search/MOW1205ROM18052", "Москва → Рим");
 	}
 }

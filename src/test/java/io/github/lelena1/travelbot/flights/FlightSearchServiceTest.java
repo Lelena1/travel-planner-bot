@@ -42,8 +42,8 @@ class FlightSearchServiceTest {
 		aviasales = mock(AviasalesClient.class);
 		service = new FlightSearchService(cities, aviasales, TestProperties.TRAVELPAYOUTS);
 		trip = trip("Москва", "Италия, Рим");
-		when(cities.resolve("Москва")).thenReturn(new CityResolver.Found(MOSCOW));
-		when(cities.resolve("Италия, Рим")).thenReturn(new CityResolver.Found(ROME));
+		when(cities.resolve("Москва")).thenReturn(new CityResolver.Found(MOSCOW, "Москва", true));
+		when(cities.resolve("Италия, Рим")).thenReturn(new CityResolver.Found(ROME, "Рим", true));
 	}
 
 	@Test
@@ -99,6 +99,19 @@ class FlightSearchServiceTest {
 		when(aviasales.cheapest(any(), anyInt())).thenThrow(new TravelpayoutsException("timeout"));
 
 		assertThat(((Problem) service.search(trip)).message()).contains("не отвечает");
+	}
+
+	@Test
+	void nearestAirportIsNamedInRouteTitle() {
+		trip = trip("Москва", "Кисловодск");
+		Place mineralnyeVody = new Place("MRV", "Минеральные Воды", "city", "Россия", null);
+		when(cities.resolve("Кисловодск")).thenReturn(new CityResolver.Found(mineralnyeVody, "Кисловодск", false));
+		when(aviasales.cheapest(any(), anyInt())).thenReturn(List.of(offer(9000)));
+
+		Found found = (Found) service.search(trip);
+
+		assertThat(found.routeTitle()).isEqualTo("Москва → Минеральные Воды (ближайший аэропорт к «Кисловодск»)");
+		assertThat(found.searchUrl()).contains("/search/MOW1205MRV1805");
 	}
 
 	static Trip trip(String origin, String destination) {

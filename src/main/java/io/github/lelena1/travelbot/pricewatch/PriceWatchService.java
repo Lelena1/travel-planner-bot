@@ -80,7 +80,7 @@ public class PriceWatchService {
 		FlightSearchService.Found prices = (FlightSearchService.Found) result;
 		Integer price = cheapestOnTripDates(prices);
 		PriceWatch watch = watches.save(new PriceWatch(userId, chatId, tripId, prices.from().code(),
-				prices.to().code(), prices.from().name() + " → " + prices.to().name(), price, clock.instant()));
+				prices.to().code(), prices.routeTitle(), price, clock.instant()));
 		snapshots.save(new PriceSnapshot(watch.getId(), price, clock.instant()));
 		log.info("Цены: пользователь {} подписался на {} (поездка #{}, цена {})", userId, watch.getRouteTitle(),
 				tripId, price);
