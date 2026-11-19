@@ -41,7 +41,7 @@ public class TelegramSender implements Notifier {
 	public boolean send(long chatId, BotReply reply) {
 		SendMessage.SendMessageBuilder<?, ?> builder = SendMessage.builder()
 				.chatId(chatId)
-				.text(reply.text());
+				.text(fitToTelegram(reply.text()));
 		ReplyKeyboard markup = toMarkup(reply.keyboard());
 		if (markup != null) {
 			builder.replyMarkup(markup);
@@ -60,6 +60,18 @@ public class TelegramSender implements Notifier {
 				pause(RETRY_PAUSE_MILLIS * attempt);
 			}
 		}
+	}
+
+	/** Telegram не принимает сообщения длиннее 4096 символов — лучше обрезать, чем потерять ответ. */
+	static final int MAX_MESSAGE_LENGTH = 4096;
+
+	static String fitToTelegram(String text) {
+		if (text.length() <= MAX_MESSAGE_LENGTH) {
+			return text;
+		}
+		log.warn("Сообщение длиной {} символов обрезано до {}", text.length(), MAX_MESSAGE_LENGTH);
+		int cut = text.lastIndexOf('\n', MAX_MESSAGE_LENGTH - 2);
+		return text.substring(0, cut > 0 ? cut : MAX_MESSAGE_LENGTH - 1) + "\n…";
 	}
 
 	static final int MAX_ATTEMPTS = 3;

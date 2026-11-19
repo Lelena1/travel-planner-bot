@@ -65,6 +65,8 @@ class SightsServiceTest {
 		assertThat(SightsService.looksLikeSight(new WikiArticle("Кёнигсбергский собор", "собор", p, "landmark", "Q4"), "Калининград")).isTrue();
 		// так выглядели «достопримечательности» Зеленоградска с радиусом 10 км
 		assertThat(SightsService.looksLikeSight(new WikiArticle("Храброво (аэропорт)", null, p, null, "Q5"), "Зеленоградск")).isFalse();
+		assertThat(SightsService.looksLikeSight(new WikiArticle("Исторический центр Санкт-Петербурга и связанные с ним группы памятников",
+				null, p, null, "Q7"), "Санкт-Петербург")).isFalse();
 		assertThat(SightsService.looksLikeSight(new WikiArticle("Тростянка (река, впадает в Балтийское море)", null, p, null, "Q6"), "Зеленоградск")).isFalse();
 	}
 

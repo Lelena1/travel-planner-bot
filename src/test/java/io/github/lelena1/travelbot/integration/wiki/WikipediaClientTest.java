@@ -97,6 +97,7 @@ class WikipediaClientTest {
 		assertThat(WikipediaClient.cleanIntro(raw)).isEqualTo("Колизей, или амфитеатр Флавиев…");
 		assertThat(WikipediaClient.cleanIntro("Кёнигсбергский замок (нем. Königsberger Schloss) — замок Тевтонского ордена."))
 				.isEqualTo("Кёнигсбергский замок — замок Тевтонского ордена.");
+		assertThat(WikipediaClient.cleanIntro("Эрмитаж — музей.\nГлавный комплекс…")).isEqualTo("Эрмитаж — музей. Главный комплекс…");
 	}
 
 	@Test

@@ -34,6 +34,8 @@ public class SightsService {
 	static final int RADIUS_METERS = 10_000;
 	/** Максимум API. В плотном центре Петербурга 200 статей умещаются в 1,4 км — мимо Эрмитажа. */
 	static final int ARTICLES_TO_CHECK = 500;
+	/** Для небольших мест рядом с городом хватает меньшего числа статей — и ответ в разы быстрее. */
+	static final int ARTICLES_TO_CHECK_NEARBY = 150;
 	/** С запасом для плана поездки по дням; в разделе «Места» показываются первые {@link CityGuideService#SIGHTS_SHOWN}. */
 	static final int TOP = 12;
 	/** Статья хотя бы на двух языках — иначе это скорее местная мелочь. */
@@ -47,7 +49,7 @@ public class SightsService {
 	static final List<String> NOT_SIGHT_WORDS = List.of("улица", "район", "станция", "завод", "микрорайон",
 			"проспект", "переулок", "шоссе", "округ", "деревня", "село", "посёлок", "поселок", "квартал", "компания",
 			"школа", "больница", "университет", "институт", "колледж", "линия", "аэропорт", "аэродром", "река",
-			"ручей");
+			"ручей", "исторический центр");
 
 	/** Исторические области и государства, реки и ручьи (Викиданные, P31). */
 	static final Set<String> NOT_SIGHT_KINDS = Set.of("Q1620908", "Q3024240", "Q19953632", "Q4022", "Q47521");
@@ -72,7 +74,8 @@ public class SightsService {
 	 */
 	@Cacheable(cacheNames = CacheConfig.SIGHTS, key = "#cityName + '|' + #radiusMeters")
 	public List<Sight> topSights(String cityName, GeoPoint center, int radiusMeters) {
-		List<WikiArticle> articles = wikipedia.nearby(center, radiusMeters, ARTICLES_TO_CHECK).stream()
+		int articlesToCheck = radiusMeters >= RADIUS_METERS ? ARTICLES_TO_CHECK : ARTICLES_TO_CHECK_NEARBY;
+		List<WikiArticle> articles = wikipedia.nearby(center, radiusMeters, articlesToCheck).stream()
 				.filter(article -> looksLikeSight(article, cityName))
 				.toList();
 		Map<String, WikidataFacts> facts = wikidata.facts(articles.stream().map(WikiArticle::wikidataId).toList());

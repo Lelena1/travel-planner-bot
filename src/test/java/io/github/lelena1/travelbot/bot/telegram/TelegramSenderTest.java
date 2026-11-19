@@ -104,6 +104,17 @@ class TelegramSenderTest {
 	}
 
 	@Test
+	void tooLongMessageIsCutOnLineBoundary() {
+		String longText = "строка текста\n".repeat(400);   // 5600 символов
+
+		String fitted = TelegramSender.fitToTelegram(longText);
+
+		org.assertj.core.api.Assertions.assertThat(fitted).hasSizeLessThanOrEqualTo(TelegramSender.MAX_MESSAGE_LENGTH)
+				.endsWith("строка текста\n…");
+		org.assertj.core.api.Assertions.assertThat(TelegramSender.fitToTelegram("коротко")).isEqualTo("коротко");
+	}
+
+	@Test
 	void networkTimeoutIsRetried() throws Exception {
 		TelegramClient client = mock(TelegramClient.class);
 		when(client.execute(any(SendMessage.class)))

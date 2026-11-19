@@ -86,8 +86,11 @@ public class WikipediaClient {
 	 * Википедия режет текст по «предложениям» и иногда ошибается на сокращениях вроде «лат.»,
 	 * оставляя незакрытую скобку, — такой хвост отбрасываем.
 	 */
+	/** Знак ударения (combining acute accent), которым Википедия размечает произношение: «Колизе́й». */
+	static final String STRESS_MARK = String.valueOf((char) 0x0301);
+
 	static String cleanIntro(String extract) {
-		String text = extract.replace("́", "").strip();
+		String text = extract.replace(STRESS_MARK, "").replace('\n', ' ').strip();
 		String previous;
 		do {
 			previous = text;
