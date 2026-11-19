@@ -34,9 +34,16 @@ public class TelegramBotConfig {
 		return new TelegramSender(client);
 	}
 
+	/** Сообщения до 4 чатов обрабатываются одновременно — для личного бота с запасом. */
+	@Bean(destroyMethod = "close")
+	ChatDispatcher chatDispatcher() {
+		return new ChatDispatcher(4);
+	}
+
 	@Bean
-	TelegramUpdateConsumer telegramUpdateConsumer(TelegramClient client, TelegramSender sender, CommandRouter router) {
-		return new TelegramUpdateConsumer(client, sender, router);
+	TelegramUpdateConsumer telegramUpdateConsumer(TelegramClient client, TelegramSender sender, CommandRouter router,
+			ChatDispatcher dispatcher) {
+		return new TelegramUpdateConsumer(client, sender, router, dispatcher);
 	}
 
 	@Bean(destroyMethod = "close")

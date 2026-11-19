@@ -25,15 +25,39 @@ public class TelegramUpdateConsumer implements LongPollingSingleThreadUpdateCons
 	private final TelegramClient client;
 	private final TelegramSender sender;
 	private final CommandRouter router;
+	private final ChatDispatcher dispatcher;
 
-	public TelegramUpdateConsumer(TelegramClient client, TelegramSender sender, CommandRouter router) {
+	public TelegramUpdateConsumer(TelegramClient client, TelegramSender sender, CommandRouter router,
+			ChatDispatcher dispatcher) {
 		this.client = client;
 		this.sender = sender;
 		this.router = router;
+		this.dispatcher = dispatcher;
 	}
 
+	/**
+	 * Поток опроса Telegram только раскладывает сообщения по очередям чатов и сразу берёт следующие:
+	 * медленный ответ одному пользователю не задерживает остальных.
+	 */
 	@Override
 	public void consume(Update update) {
+		Long chatId = chatId(update);
+		if (chatId != null) {
+			dispatcher.submit(chatId, () -> process(update));
+		}
+	}
+
+	static Long chatId(Update update) {
+		if (update.hasCallbackQuery() && update.getCallbackQuery().getMessage() != null) {
+			return update.getCallbackQuery().getMessage().getChatId();
+		}
+		if (update.hasMessage()) {
+			return update.getMessage().getChatId();
+		}
+		return null;
+	}
+
+	void process(Update update) {
 		if (update.hasCallbackQuery()) {
 			consumeButton(update.getCallbackQuery());
 			return;
